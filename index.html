@@ -167,14 +167,17 @@
     /* ============ NAV ============ */
     .top-nav{
       width:100%;display:flex;justify-content:center;
-      margin-top:6px;overflow-x:auto;
-      scrollbar-width:none;-ms-overflow-style:none;
+      margin-top:6px;
+      overflow:visible;
+      position:relative;
+      z-index:200;
     }
-    .top-nav::-webkit-scrollbar{display:none;}
 
     .top-nav ul{
       display:flex;align-items:center;gap:8px;
-      flex-wrap:nowrap;padding-bottom:2px;
+      flex-wrap:wrap;justify-content:center;
+      padding-bottom:2px;
+      overflow:visible;
     }
 
     .top-nav li{position:relative;}
