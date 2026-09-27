@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DG Sistemas — Gestão de Futebol</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+
+  :root {
+    --dourado: #d4af37;
+    --dourado-claro: #f4d03f;
+    --preto: #0a0a0a;
+    --preto-card: #141414;
+    --cinza: #888;
+  }
+
+  body {
+    background: var(--preto);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #f4d03f, #b8860b);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 20px;
+    color: #0a0a0a;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    letter-spacing: -1px;
+  }
+
+  .logo-text h1 {
+    font-size: 18px;
+    color: var(--dourado);
+    letter-spacing: 2px;
+    font-weight: 800;
+  }
+
+  .logo-text p {
+    font-size: 11px;
+    color: var(--cinza);
+    letter-spacing: 1px;
+  }
+
+  .user-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--preto-card);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 8px 16px;
+    border-radius: 30px;
+  }
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #f4d03f, #b8860b);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0a0a0a;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .user-info strong {
+    display: block;
+    font-size: 13px;
+    color: var(--dourado);
+  }
+
+  .user-info span {
+    font-size: 11px;
+    color: var(--cinza);
+  }
+
+  /* ===== MENU ===== */
+  nav {
+    background: rgba(10, 10, 10, 0.9);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    padding: 0 24px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    color: #ccc;
+    text-decoration: none;
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+
+  nav a:hover, nav a.ativo {
+    color: var(--dourado);
+    border-bottom-color: var(--dourado);
+  }
+
+  /* ===== HERO / BANNER ===== */
+  .hero {
+    position: relative;
+    min-height: 480px;
+    background:
+      linear-gradient(135deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.7) 50%, rgba(10,10,10,0.95) 100%),
+      radial-gradient(ellipse at top, rgba(212,175,55,0.25), transparent 60%),
+      linear-gradient(180deg, #0d1a0d 0%, #050a05 100%);
+    display: flex;
+    align-items: center;
+    padding: 60px 40px;
+    overflow: hidden;
+  }
+
+  /* luzes do estádio */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: 15%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid var(--dourado);
+    color: var(--dourado);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  .hero h2 {
+    font-size: 52px;
+    line-height: 1.1;
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
+
+  .hero h2 span {
+    background: linear-gradient(135deg, #f4d03f, #b8860b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #f4d03f, #b8860b);
+    color: #0a0a0a;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--dourado);
+    border: 2px solid var(--dourado);
+  }
+
+  .btn-outline:hover {
+    background: rgba(212, 175, 55, 0.1);
+  }
+
+  /* taça decorativa */
+  .hero-trophy {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 220px;
+    opacity: 0.15;
+    z-index: 1;
+    filter: drop-shadow(0 0 40px rgba(212,175,55,0.5));
+  }
+
+  /* ===== CARDS DE RECURSOS ===== */
+  .features {
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 12px;
+  }
+
+  .section-title span {
+    color: var(--dourado);
+  }
+
+  .section-sub {
+    text-align: center;
+    color: var(--cinza);
+    margin-bottom: 45px;
+    font-size: 15px;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  .card {
+    background: var(--preto-card);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 12px;
+    padding: 28px 22px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    border-color: var(--dourado);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+  }
+
+  .card-icon {
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, #f4d03f, #b8860b);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
+
+  .card h3 {
+    color: var(--dourado);
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .card p {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #050505;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 30px 20px;
+    text-align: center;
+    color: var(--cinza);
+    font-size: 13px;
+  }
+
+  footer strong {
+    color: var(--dourado);
+  }
+
+  /* ===== RESPONSIVO ===== */
+  @media (max-width: 768px) {
+    header { padding: 10px 14px; }
+    .logo-text h1 { font-size: 15px; }
+    .user-info { display: none; }
+    .hero { padding: 40px 20px; min-height: 380px; }
+    .hero h2 { font-size: 32px; }
+    .hero p { font-size: 14px; }
+    .hero-trophy { font-size: 120px; right: 10px; opacity: 0.1; }
+    nav a { padding: 12px 10px; font-size: 12px; }
+    .features { padding: 40px 20px; }
+    .section-title { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-area">
+      <div class="logo-icon">DG</div>
+      <div class="logo-text">
+        <h1>DG SISTEMAS</h1>
+        <p>Gestão de Futebol</p>
+      </div>
+    </div>
+    <div class="user-card">
+      <div class="user-avatar">DG</div>
+      <div class="user-info">
+        <strong>DGram SMITH</strong>
+        <span>Árbitro</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MENU -->
+  <nav>
+    <a href="#" class="ativo">Início</a>
+    <a href="#">Súmula</a>
+    <a href="#">Times</a>
+    <a href="#">Árbitros</a>
+    <a href="#">Sobre</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-trophy">🏆</div>
+    <div class="hero-content">
+      <span class="badge">⚽ SISTEMA OFICIAL</span>
+      <h2>Bem-vindo à <span>DG Sistemas</span></h2>
+      <p>A plataforma completa para gestão de partidas, súmulas digitais e organização de campeonatos. Feita por árbitro, para árbitros.</p>
+      <div class="btn-group">
+        <a href="#" class="btn btn-primary">📋 Criar Súmula</a>
+        <a href="#" class="btn btn-outline">Ver Times</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECURSOS -->
+  <section class="features">
+    <h2 class="section-title">Tudo que você <span>precisa</span></h2>
+    <p class="section-sub">Sistema completo e profissional para o futebol</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>Súmula Digital</h3>
+        <p>Crie súmulas completas em segundos, com gols, cartões e observações.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">⚽</div>
+        <h3>Gestão de Times</h3>
+        <p>Cadastre equipes, jogadores e comissão técnica de forma organizada.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🏆</div>
+        <h3>Campeonatos</h3>
+        <p>Organize campeonatos com tabelas, classificações e estatísticas.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">👨‍⚖️</div>
+        <h3>Árbitros</h3>
+        <p>Escala de arbitragem, histórico de jogos e relatórios individuais.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 <strong>DG Sistemas</strong> — Todos os direitos reservados.
+  </footer>
+
+</body>
+</html>
