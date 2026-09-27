@@ -586,7 +586,7 @@
       <div class="side-menu">
         <a href="#"><span class="side-icon"><i class="fa-solid fa-ranking-star"></i></span>Classificação</a>
         <a href="#"><span class="side-icon"><i class="fa-solid fa-calendar-days"></i></span>Jogos</a>
-        <a href="#"><span class="side-icon"><i class="fa-solid fa-file-signature"></i></span>Súmula</a>
+        <a href="sumulas.html"><span class="side-icon"><i class="fa-solid fa-file-signature"></i></span>Súmula</a>
         <a href="#"><span class="side-icon"><i class="fa-solid fa-futbol"></i></span>Artilharia</a>
         <a href="#"><span class="side-icon"><i class="fa-solid fa-users"></i></span>Jogadores</a>
         <a href="#"><span class="side-icon"><i class="fa-solid fa-whistle"></i></span>Árbitros</a>
@@ -668,7 +668,7 @@
             </div>
           </li>
 
-          <li><a href="#">Súmula</a></li>
+          <li><a href="sumulas.html">Súmula</a></li>
         </ul>
       </nav>
     </div>
@@ -698,8 +698,8 @@
                 <a href="login.html" class="btn-primary">
                   <i class="fa-solid fa-right-to-bracket"></i> Começar agora
                 </a>
-                <a href="#" class="btn-secondary">
-                  <i class="fa-solid fa-circle-info"></i> Saber mais
+                <a href="sumulas.html" class="btn-secondary">
+                  <i class="fa-solid fa-file-signature"></i> Ver Súmulas
                 </a>
               </div>
             </div>
@@ -744,13 +744,14 @@
           <section class="panel">
             <div class="panel-head">
               <div class="panel-head-title">
-                <div class="panel-head-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                <h2>Próximos Jogos</h2>
+                <div class="panel-head-icon"><i class="fa-solid fa-file-signature"></i></div>
+                <h2>Súmulas Publicadas</h2>
               </div>
+              <a href="sumulas.html">Ver todas <i class="fa-solid fa-arrow-right"></i></a>
             </div>
             <div class="empty-box">
-              Nenhum jogo cadastrado ainda.<br>
-              Faça login para começar a usar o sistema.
+              Nenhuma súmula publicada ainda.<br>
+              <a href="sumulas.html" style="color:var(--gold);font-weight:700;">Clique aqui para ver</a> quando houver.
             </div>
           </section>
 
@@ -805,9 +806,9 @@
         <div class="footer-card">
           <h4>Acesso Rápido</h4>
           <a href="index.html">Início</a>
+          <a href="sumulas.html">Súmulas</a>
           <a href="#">Campeonatos</a>
           <a href="#">Equipes</a>
-          <a href="#">Resultados</a>
           <a href="#">Árbitros</a>
           <a href="#">Contato</a>
         </div>
@@ -870,7 +871,6 @@
     closeBtn.addEventListener('click', closeSidebar);
     overlay.addEventListener('click', closeSidebar);
 
-    // Dropdowns do menu de cima
     document.querySelectorAll('.dropdown-toggle').forEach(btn=>{
       btn.addEventListener('click', function(e){
         e.preventDefault();
