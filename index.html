@@ -3,523 +3,782 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DG Sistemas - Súmulas</title>
+<title>DG Sistemas - Súmula Oficial</title>
 <link rel="icon" href="logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root{
-  --gold:#ffd400;
-  --gold-2:#ffe600;
-  --gold-soft:rgba(255,212,0,.12);
-  --gold-line:rgba(255,212,0,.3);
-  --white:#fff;
-  --muted:#d8e1ef;
-  --text-soft:#a8b6cf;
-  --azul:#061d44;
-  --azul2:#08285c;
-  --verde:#069447;
-  --vermelho:#e30613;
-  --shadow:0 12px 30px rgba(0,0,0,.4);
-  --transition:.25s ease;
-  --max:1200px;
+  --azul:#061d44;--azul2:#08285c;--verde:#069447;--dourado:#f7c600;
+  --linha:#cfd7e3;--texto:#071833;--muted:#4b5563;--bg:#dfe6ef;
 }
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;min-height:100%;overflow-x:hidden}
+body{font-family:Arial,Helvetica,sans-serif;background:#061d44;color:var(--texto)}
+button{font-family:inherit;cursor:pointer;border:none;transition:.2s}
+input,select,textarea{font-family:inherit;outline:none}
+img{display:block;max-width:100%}
 
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{width:100%;overflow-x:hidden;}
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:
-    linear-gradient(rgba(1,7,18,.5), rgba(1,7,18,.7)),
-    url("fundo.png") center center / cover no-repeat fixed;
-  color:var(--white);
+/* ===== TELA INICIAL ===== */
+#telaInicial{
   min-height:100vh;
+  background:
+    linear-gradient(rgba(1,7,18,.75), rgba(1,7,18,.9)),
+    url("fundo.png") center center / cover no-repeat fixed;
+  padding:20px;
 }
+.wrap-inicial{max-width:1200px;margin:0 auto}
+.topo-inicial{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;flex-wrap:wrap;margin-bottom:30px;
+  background:rgba(6,29,68,.9);border:2px solid var(--dourado);
+  border-radius:16px;padding:16px 20px;
+  box-shadow:0 14px 34px rgba(0,0,0,.4);
+}
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{width:60px;height:60px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(247,198,0,.4))}
+.brand-text strong{display:block;color:var(--dourado);font-size:20px;font-weight:900;letter-spacing:1.2px;line-height:1.1}
+.brand-text span{display:block;color:#cbd6ea;font-size:12px;margin-top:4px}
 
-a{color:inherit;text-decoration:none;}
-button{font-family:inherit;cursor:pointer;border:none;transition:var(--transition);}
-img{max-width:100%;display:block;}
-
-.wrap{width:min(100% - 32px, var(--max));margin:0 auto;}
-
-/* ===== HEADER ===== */
-.header{
-  background:rgba(2,6,15,.9);
-  border-bottom:2px solid var(--gold);
-  padding:14px 0;
-  position:sticky;top:0;z-index:100;
-  backdrop-filter:blur(8px);
-}
-.header-inner{
-  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
-}
-.brand{display:flex;align-items:center;gap:12px;}
-.brand img{
-  width:56px;height:56px;object-fit:contain;
-  filter:drop-shadow(0 4px 10px rgba(255,212,0,.35));
-}
-.brand-text strong{
-  display:block;color:var(--gold);font-size:18px;
-  letter-spacing:1.5px;font-weight:900;line-height:1.1;
-}
-.brand-text span{
-  display:block;color:var(--muted);font-size:11px;margin-top:3px;
-}
 .btn-nova{
-  display:inline-flex;align-items:center;gap:9px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-2));
-  color:#08172c;padding:12px 22px;border-radius:12px;
-  font-weight:900;font-size:14px;
-  box-shadow:0 8px 20px rgba(255,212,0,.3);
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--dourado),#ffe45c);
+  color:#111;padding:14px 24px;border-radius:12px;
+  font-weight:900;font-size:15px;
+  box-shadow:0 10px 24px rgba(247,198,0,.35);
 }
-.btn-nova:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(255,212,0,.45);}
+.btn-nova:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(247,198,0,.5)}
 
-/* ===== CONTAINER ===== */
-.container{padding:28px 0 40px;}
-.page-title{
-  display:flex;align-items:center;gap:12px;
-  margin-bottom:22px;flex-wrap:wrap;
+.titulo-lista{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px;
 }
-.page-title h1{
-  font-size:26px;font-weight:900;color:#fff;
-}
-.page-title .badge{
-  background:var(--gold-soft);border:1px solid var(--gold-line);
-  color:var(--gold);padding:5px 12px;border-radius:999px;
-  font-size:12px;font-weight:900;
+.titulo-lista h2{color:#fff;font-size:22px;font-weight:900}
+.titulo-lista .badge{
+  background:rgba(247,198,0,.15);color:var(--dourado);
+  border:1px solid rgba(247,198,0,.35);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:900;
 }
 
-/* ===== LISTA ===== */
-.lista{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
-  gap:14px;
+.lista-simples{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;
 }
-.card{
-  background:linear-gradient(180deg, rgba(7,24,59,.95), rgba(3,17,45,.97));
-  border:1px solid rgba(255,212,0,.2);
-  border-radius:16px;padding:16px;
-  box-shadow:var(--shadow);transition:var(--transition);
-  cursor:pointer;position:relative;overflow:hidden;
+.card-salva{
+  background:linear-gradient(180deg,rgba(16,42,82,.96),rgba(8,23,44,.97));
+  border:1px solid rgba(247,198,0,.22);
+  border-radius:14px;padding:16px;cursor:pointer;
+  transition:.25s;position:relative;
 }
-.card:hover{
-  border-color:var(--gold);
-  transform:translateY(-3px);
-  box-shadow:0 15px 35px rgba(255,212,0,.15);
-}
-.card-status{
+.card-salva:hover{border-color:var(--dourado);transform:translateY(-3px);box-shadow:0 12px 26px rgba(247,198,0,.2)}
+.card-salva .status{
   position:absolute;top:12px;right:12px;
-  background:var(--verde);color:#fff;
-  font-size:10px;font-weight:900;
-  padding:4px 9px;border-radius:999px;
+  background:var(--verde);color:#fff;font-size:10px;font-weight:900;
+  padding:4px 10px;border-radius:999px;
 }
-.card-times{
-  display:grid;grid-template-columns:1fr auto 1fr;
-  gap:10px;align-items:center;margin:14px 0;
+.times-linha{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:10px;
+  align-items:center;margin:14px 0;
 }
-.card-time{
-  text-align:center;
+.time-nome{color:#fff;font-size:14px;font-weight:900;text-align:center;line-height:1.2;word-break:break-word}
+.placar-mini{
+  background:var(--azul);border:1px solid var(--dourado);
+  color:var(--dourado);padding:8px 14px;border-radius:10px;
+  font-size:17px;font-weight:900;white-space:nowrap;
 }
-.card-time strong{
-  display:block;color:#fff;font-size:14px;font-weight:900;
-  line-height:1.2;word-break:break-word;
-}
-.card-placar{
-  background:var(--azul);color:var(--gold);
-  padding:8px 14px;border-radius:10px;
-  font-size:18px;font-weight:900;white-space:nowrap;
-  border:1px solid var(--gold-line);
-}
-.card-info{
-  font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;
-}
-.card-info strong{color:#fff;}
-.card-info i{color:var(--gold);width:14px;}
-
-.card-actions{
-  display:grid;grid-template-columns:1fr 1fr;gap:8px;
-}
-.btn-ver,.btn-wpp{
+.info-card{color:#cbd6ea;font-size:12px;line-height:1.7;margin-bottom:12px}
+.info-card i{color:var(--dourado);width:14px}
+.botoes-card{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.botoes-card button{
+  padding:9px 8px;border-radius:9px;font-weight:900;font-size:12px;
   display:flex;align-items:center;justify-content:center;gap:6px;
-  padding:9px 8px;border-radius:9px;
-  font-weight:900;font-size:12px;
 }
-.btn-ver{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#08172c;}
-.btn-ver:hover{transform:translateY(-2px);}
-.btn-wpp{background:#25d366;color:#fff;}
-.btn-wpp:hover{background:#1ebe5b;}
+.btn-ver{background:linear-gradient(135deg,var(--dourado),#ffe45c);color:#111}
+.btn-wpp{background:#25d366;color:#fff}
 
 .vazio{
-  grid-column:1/-1;
-  text-align:center;padding:60px 20px;
-  background:rgba(7,24,59,.7);
-  border:2px dashed rgba(255,212,0,.25);
-  border-radius:20px;
+  grid-column:1/-1;text-align:center;padding:60px 20px;
+  background:rgba(6,29,68,.7);
+  border:2px dashed rgba(247,198,0,.3);border-radius:20px;
 }
-.vazio i{font-size:56px;color:var(--gold);opacity:.5;margin-bottom:16px;}
-.vazio h2{font-size:22px;color:#fff;margin-bottom:8px;font-weight:900;}
-.vazio p{color:var(--muted);font-size:14px;margin-bottom:20px;}
+.vazio i{font-size:60px;color:var(--dourado);opacity:.6;margin-bottom:16px}
+.vazio h3{color:#fff;font-size:20px;font-weight:900;margin-bottom:8px}
+.vazio p{color:#cbd6ea;font-size:14px;margin-bottom:20px}
 
 /* ===== FORMULÁRIO SÚMULA ===== */
-.form-sumula{display:none;}
-.form-sumula.on{display:block;}
-.lista.on{display:none;}
+#telaSumula{display:none;background:var(--bg);min-height:100vh}
 
-.form-topo{
-  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-  margin-bottom:20px;
+.topbar{
+  background:#fff;border-bottom:2px solid var(--azul);
+  padding:10px;position:sticky;top:0;z-index:100;
 }
-.btn-voltar{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
-  color:#fff;padding:10px 16px;border-radius:10px;
-  font-weight:800;font-size:13px;
+.topbar-inner{
+  max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;
 }
-.btn-voltar:hover{background:rgba(255,255,255,.15);}
+.btn-top{
+  padding:10px 16px;border-radius:8px;font-weight:900;font-size:13px;
+  display:inline-flex;align-items:center;gap:7px;
+}
+.btn-azul{background:var(--azul);color:#fff}
+.btn-dourado{background:linear-gradient(135deg,var(--dourado),#ffe45c);color:#111}
+.btn-verde{background:var(--verde);color:#fff}
+.btn-cinza{background:#475569;color:#fff}
+#statusMsg{font-size:13px;font-weight:900;color:var(--azul);text-align:center}
 
-.card-form{
-  background:linear-gradient(180deg, rgba(7,24,59,.95), rgba(3,17,45,.97));
-  border:1px solid rgba(255,212,0,.2);
-  border-radius:16px;padding:20px;margin-bottom:16px;
-  box-shadow:var(--shadow);
-}
-.card-form h3{
-  display:flex;align-items:center;gap:10px;
-  color:var(--gold);font-size:16px;font-weight:900;
-  text-transform:uppercase;letter-spacing:.8px;
-  margin-bottom:16px;padding-bottom:12px;
-  border-bottom:1px solid rgba(255,212,0,.15);
-}
-.card-form h3 i{
-  width:32px;height:32px;border-radius:9px;
-  background:var(--gold-soft);border:1px solid var(--gold-line);
-  display:flex;align-items:center;justify-content:center;
-  font-size:15px;
+.sumula-viewport{width:100%;overflow:hidden;display:flex;justify-content:center;padding:14px 8px}
+.sumula-scale{width:1120px;max-width:1120px;transform-origin:top center}
+.sumula-page{
+  width:1120px;max-width:1120px;margin:0 auto;background:#fff;
+  border:1px solid #b9c4d4;border-radius:7px;overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,.16);
 }
 
-.grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+.header{
+  display:grid;grid-template-columns:145px 1.35fr 145px 260px;
+  align-items:center;gap:14px;padding:16px 22px 18px;
+  background:radial-gradient(circle at top left,rgba(255,255,255,.10),transparent 32%),
+    linear-gradient(135deg,#041b40 0%,#06265a 55%,#061d44 100%);
+  color:#fff;border-bottom:4px solid var(--dourado);position:relative;overflow:hidden;
 }
-.grid.g3{grid-template-columns:1fr 1fr 1fr;}
-.grid.full{grid-template-columns:1fr;}
-.campo{display:flex;flex-direction:column;}
-.campo label{
-  color:var(--muted);font-size:11px;font-weight:800;
-  text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;
+.header:after{
+  content:"";position:absolute;right:-70px;bottom:-28px;width:310px;height:70px;
+  border-top:5px solid var(--dourado);transform:rotate(-12deg);opacity:.95;
 }
-.campo input,.campo select,.campo textarea{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.12);
-  color:#fff;padding:11px 13px;border-radius:9px;
-  font-size:14px;font-family:inherit;outline:none;
-  transition:var(--transition);
+.header-logo,.header-campeonato-logo{display:flex;justify-content:center;align-items:center;position:relative;z-index:1}
+.header-logo img{width:105px;height:105px;object-fit:contain}
+.header-campeonato-logo img{width:104px;height:104px;object-fit:contain;border-radius:16px}
+.header-title{text-align:left;position:relative;z-index:1}
+.header-title h1{
+  color:#fff;font-size:54px;white-space:nowrap;font-weight:900;
+  letter-spacing:1px;line-height:.95;text-transform:uppercase;
 }
-.campo input:focus,.campo select:focus,.campo textarea:focus{
-  border-color:var(--gold);
-  background:rgba(255,212,0,.06);
-  box-shadow:0 0 0 3px rgba(255,212,0,.1);
+.header-title p{margin-top:8px;color:var(--dourado);font-size:20px;font-weight:900;text-transform:uppercase}
+.header-title span{display:block;margin-top:6px;color:#fff;font-size:14px;font-weight:900;text-transform:uppercase}
+.header-right{
+  text-align:left;color:#fff;font-weight:900;line-height:1.12;
+  text-transform:uppercase;position:relative;z-index:1;
 }
-.campo input::placeholder,.campo textarea::placeholder{color:var(--text-soft);}
-.campo textarea{min-height:80px;resize:vertical;font-family:inherit;}
+.header-right .liga-nome{font-size:20px}
+.header-right .liga-slogan{margin-top:8px;color:var(--dourado);font-size:16px;font-weight:900}
 
-/* tabelas de jogadores */
-.tabela-jogadores{width:100%;border-collapse:collapse;margin-top:10px;}
-.tabela-jogadores th{
-  background:rgba(255,212,0,.08);color:var(--gold);
-  font-size:11px;text-transform:uppercase;
-  padding:8px 6px;text-align:left;font-weight:900;
-  border-bottom:1px solid var(--gold-line);
+.info-strip{
+  margin:10px 16px 12px;display:grid;
+  grid-template-columns:1.1fr 1.45fr .86fr .72fr 1.05fr;
+  border:1px solid var(--linha);border-radius:5px;overflow:hidden;
 }
-.tabela-jogadores td{
-  padding:5px 4px;border-bottom:1px solid rgba(255,255,255,.06);
+.info-box{
+  min-height:70px;display:flex;align-items:center;gap:12px;
+  padding:9px 12px;border-right:1px solid var(--linha);background:#fff;
 }
-.tabela-jogadores input{
-  width:100%;padding:7px 8px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.1);
-  color:#fff;border-radius:7px;font-size:13px;
+.info-box:last-child{border-right:none}
+.info-box i{width:36px;color:var(--azul);font-size:30px;text-align:center;flex-shrink:0}
+.info-box small{display:block;font-size:12px;font-weight:900;text-transform:uppercase;color:#111;margin-bottom:4px}
+.info-box input,.info-box strong{
+  display:block;color:var(--azul);font-size:15px;font-weight:900;
+  border:none;background:transparent;padding:0;width:100%;
 }
-.tabela-jogadores .num{width:52px;}
-.tabela-jogadores .pos{width:120px;}
-.tabela-jogadores .acao{width:36px;text-align:center;}
+.info-box input{font-size:15px}
 
-.btn-add-linha,.btn-remover{
-  padding:7px 11px;border-radius:8px;font-weight:900;font-size:12px;
+.status-badge{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  background:#7a5a00;color:#fff;padding:8px 15px;border-radius:8px;
+  font-size:15px;font-weight:900;text-transform:uppercase;
 }
-.btn-add-linha{
-  background:rgba(255,212,0,.15);color:var(--gold);
-  border:1px solid var(--gold-line);margin-top:10px;
-  display:inline-flex;align-items:center;gap:6px;
-}
-.btn-add-linha:hover{background:var(--gold);color:#08172c;}
-.btn-remover{background:rgba(227,6,19,.2);color:#ff6b6b;}
-.btn-remover:hover{background:var(--vermelho);color:#fff;}
+.status-badge.final{background:var(--verde)}
 
-/* ===== BOTÕES DE AÇÃO FINAL ===== */
+.score-card{
+  margin:0 16px 12px;display:grid;grid-template-columns:1fr 250px 1fr;
+  min-height:132px;border:1px solid var(--linha);border-radius:5px;overflow:hidden;
+}
+.team-score{
+  display:flex;align-items:center;justify-content:center;gap:18px;
+  padding:13px;background:#fff;
+}
+.team-score.away{flex-direction:row-reverse}
+.team-score img{width:104px;height:104px;object-fit:contain}
+.team-name{text-align:center;flex:1}
+.team-name input{
+  width:100%;color:var(--azul);font-size:31px;font-weight:900;
+  text-transform:uppercase;text-align:center;border:none;
+  background:transparent;padding:4px;
+}
+.team-name input:focus{background:#f5f7fb;border-radius:8px}
+.score-center{
+  background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border-left:1px solid var(--linha);border-right:1px solid var(--linha);
+}
+.score-number{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:70px;font-weight:900;
+}
+.score-valor{min-width:72px;text-align:center;color:var(--dourado)}
+.score-center span{margin-top:8px;text-transform:uppercase;font-size:14px;font-weight:900}
+
+.match-strip{
+  margin:0 16px 12px;display:grid;
+  grid-template-columns:1fr 1fr 1.35fr 1.1fr;
+  border:1px solid var(--linha);border-radius:5px;overflow:hidden;
+}
+.match-box{
+  display:flex;align-items:center;gap:12px;min-height:64px;
+  padding:10px 12px;border-right:1px solid var(--linha);background:#fff;
+}
+.match-box:last-child{border-right:none}
+.match-box i{width:34px;color:var(--azul);font-size:30px;text-align:center}
+.match-box small{display:block;color:var(--azul);text-transform:uppercase;font-weight:900;font-size:12px;margin-bottom:3px}
+.match-box input{display:block;color:#111;font-size:15px;font-weight:900;border:none;background:transparent;padding:0;width:100%}
+
+.section{
+  margin:0 16px 12px;border:1px solid var(--linha);border-radius:6px;overflow:hidden;background:#fff;
+}
+.section-title{
+  background:var(--azul);color:#fff;text-align:center;padding:8px 10px;
+  font-size:20px;font-weight:900;text-transform:uppercase;
+}
+.section-body{padding:12px}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+
+.lineup-head{
+  min-height:42px;display:flex;align-items:center;justify-content:center;gap:10px;
+  color:var(--azul);font-size:20px;font-weight:900;text-transform:uppercase;
+  border:1px solid var(--linha);border-bottom:none;background:#fff;
+  padding:6px;
+}
+.lineup-head input{
+  border:none;background:transparent;color:var(--azul);
+  font-size:20px;font-weight:900;text-transform:uppercase;
+  text-align:center;width:100%;padding:4px;
+}
+
+.table-wrap{overflow:hidden}
+table.jogadores{width:100%;border-collapse:collapse;table-layout:fixed}
+table.jogadores th{
+  background:#f5f7fb;color:var(--azul);font-size:11px;
+  text-transform:uppercase;padding:6px 5px;border:1px solid var(--linha);text-align:left;
+}
+table.jogadores td{
+  color:#111;font-size:12px;padding:4px 4px;border:1px solid #e5eaf1;
+}
+table.jogadores input,table.jogadores select{
+  border:none;padding:5px;width:100%;font-size:12px;background:transparent;
+}
+table.jogadores select{cursor:pointer;font-weight:700;color:var(--azul)}
+table.jogadores .num{width:44px;text-align:center}
+table.jogadores .pos{width:110px}
+table.jogadores .acao{width:36px;text-align:center}
+table.jogadores .sub-row td{
+  background:#f8fafc;color:var(--azul);text-align:center;
+  font-weight:900;text-transform:uppercase;padding:6px;
+}
+
+.add-row{
+  display:grid;grid-template-columns:60px 1fr 120px 100px auto;
+  gap:6px;margin-top:8px;
+}
+.add-row input,.add-row select{
+  padding:8px;border:1px solid var(--linha);border-radius:7px;font-size:12px;
+  background:#fff;color:#111;
+}
+.add-row button{
+  padding:8px 14px;border-radius:7px;font-weight:900;
+  background:var(--azul);color:#fff;font-size:14px;
+}
+.add-row button:hover{background:var(--azul2)}
+
+.btn-remover{
+  background:#dc3545;color:#fff;border-radius:6px;padding:4px 7px;
+  font-weight:900;font-size:11px;cursor:pointer;border:none;
+}
+
+.comissao-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.comissao-card{border:1px solid var(--linha);border-radius:8px;overflow:hidden;background:#fff}
+.comissao-head{
+  background:#f5f7fb;color:var(--azul);text-align:center;
+  padding:8px;font-size:15px;font-weight:900;text-transform:uppercase;
+  border-bottom:1px solid var(--linha);
+}
+.comissao-head input{
+  border:none;background:transparent;color:var(--azul);
+  font-size:15px;font-weight:900;text-transform:uppercase;
+  text-align:center;width:100%;padding:4px;
+}
+.comissao-lista{padding:10px;display:grid;gap:8px;min-height:80px}
+.comissao-item{
+  display:grid;grid-template-columns:60px 1fr;gap:8px;align-items:center;
+  padding:8px;border:1px solid #dbe3ef;border-radius:8px;background:#f8fafc;
+}
+.comissao-item input{
+  border:none;background:transparent;font-size:12px;color:#111;
+  width:100%;padding:3px;
+}
+.comissao-item select{
+  border:none;background:transparent;font-size:11px;color:var(--azul);
+  font-weight:900;text-transform:uppercase;width:100%;
+}
+.comissao-add{
+  display:grid;grid-template-columns:1fr 1fr auto;gap:6px;
+  padding:10px;border-top:1px solid var(--linha);background:#fff;
+}
+.comissao-add input{
+  padding:8px;border:1px solid var(--linha);border-radius:7px;font-size:12px;
+}
+.comissao-add button{
+  padding:8px 12px;border-radius:7px;background:var(--azul);color:#fff;
+  font-weight:900;font-size:13px;
+}
+
+.event-box{border:1px solid var(--linha);border-radius:6px;overflow:hidden}
+.event-box h3{
+  color:#fff;background:var(--azul);text-align:center;padding:8px;
+  font-size:18px;font-weight:900;text-transform:uppercase;
+}
+.event-box.away h3{background:#8b0000}
+.event-box h3 input{
+  border:none;background:transparent;color:#fff;
+  font-size:18px;font-weight:900;text-transform:uppercase;
+  text-align:center;width:100%;padding:4px;
+}
+.event-columns{display:grid;grid-template-columns:1fr 1fr}
+.event-col{min-height:130px;padding:12px;border-right:1px solid var(--linha)}
+.event-col:last-child{border-right:none}
+.event-col h4{
+  color:var(--azul);text-align:center;font-size:16px;
+  font-weight:900;text-transform:uppercase;margin-bottom:10px;
+}
+.event-form{display:grid;grid-template-columns:1fr 60px 90px auto;gap:6px;margin-bottom:8px}
+.event-form.cartao-form{grid-template-columns:1fr 55px 90px 80px auto}
+.event-form input,.event-form select{
+  padding:7px;border:1px solid var(--linha);border-radius:7px;font-size:12px;
+  background:#fff;color:#111;
+}
+.event-form button{
+  padding:7px 10px;border-radius:7px;background:var(--azul);color:#fff;
+  font-weight:900;font-size:14px;
+}
+.event-item{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:7px 8px;border:1px solid var(--linha);border-radius:8px;
+  background:#f8fafc;margin-bottom:6px;font-size:12px;color:#111;
+}
+.event-item button{
+  background:#dc3545;color:#fff;border-radius:5px;padding:4px 7px;
+  font-weight:900;font-size:11px;
+}
+
+.lower-grid{margin:0 16px 12px;display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}
+.panel{border:1px solid var(--linha);border-radius:6px;overflow:hidden;background:#fff}
+.panel h3{
+  background:var(--azul);color:#fff;text-align:center;padding:8px;
+  font-size:17px;font-weight:900;text-transform:uppercase;
+}
+.panel-body{padding:12px}
+.arb-grid{display:grid;gap:8px}
+.arb-grid input{
+  padding:9px;border:1px solid var(--linha);border-radius:7px;font-size:13px;
+}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--linha)}
+.summary-box{text-align:center;padding:12px 8px;border-right:1px solid var(--linha)}
+.summary-box:last-child{border-right:none}
+.summary-box span{display:block;color:var(--azul);font-size:11px;font-weight:900;text-transform:uppercase}
+.summary-box strong{display:block;color:var(--azul);font-size:28px;font-weight:900;margin-top:4px}
+
+.obs-box{margin:0 16px 12px}
+.obs-box textarea{
+  width:100%;min-height:90px;padding:10px;border:1px solid var(--linha);
+  border-radius:7px;font-size:13px;resize:vertical;background:#fff;
+}
+
 .botoes-final{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
-  margin-top:24px;
+  margin:0 16px 16px;display:grid;
+  grid-template-columns:repeat(4,1fr);gap:10px;
 }
 .btn-final{
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  padding:18px 10px;border-radius:14px;
-  font-weight:900;font-size:13px;text-align:center;
-  box-shadow:0 8px 20px rgba(0,0,0,.3);
+  padding:14px 12px;border-radius:10px;font-weight:900;font-size:13px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.btn-final i{font-size:24px;}
-.btn-final:hover{transform:translateY(-3px);}
-.btn-salvar{background:linear-gradient(135deg,var(--verde),#0aa956);color:#fff;}
-.btn-pdf{background:linear-gradient(135deg,var(--vermelho),#c4121e);color:#fff;}
-.btn-whats{background:linear-gradient(135deg,#25d366,#1ebe5b);color:#fff;}
+.btn-final i{font-size:16px}
+.btn-salvar{background:var(--azul);color:#fff}
+.btn-pdf{background:#dc2626;color:#fff}
+.btn-whats{background:#25d366;color:#fff}
+.btn-fechar{background:var(--verde);color:#fff}
 
-/* ===== ALERTA ===== */
-.alerta{
-  position:fixed;top:20px;left:50%;transform:translateX(-50%);
-  background:var(--verde);color:#fff;padding:14px 24px;
-  border-radius:12px;font-weight:900;font-size:14px;
-  box-shadow:0 10px 30px rgba(0,0,0,.4);
-  z-index:9999;opacity:0;pointer-events:none;
-  transition:var(--transition);
+.final-footer{
+  margin-top:12px;background:linear-gradient(135deg,var(--azul),var(--azul2));
+  color:#fff;text-align:center;padding:9px;font-size:12px;line-height:1.4;
 }
-.alerta.show{opacity:1;}
-.alerta.erro{background:var(--vermelho);}
 
-@media (max-width:700px){
-  .grid,.grid.g3{grid-template-columns:1fr;}
-  .botoes-final{grid-template-columns:1fr;}
-  .brand img{width:44px;height:44px;}
-  .brand-text strong{font-size:14px;}
-  .brand-text span{font-size:10px;}
-  .btn-nova{padding:10px 16px;font-size:12px;}
-  .page-title h1{font-size:20px;}
-  .card-placar{font-size:16px;padding:6px 10px;}
+@media(max-width:900px){
+  .sumula-viewport{justify-content:flex-start;padding:8px 0}
+  .sumula-scale{transform:scale(var(--escala-mobile,1));transform-origin:top left}
+  .grid2,.comissao-grid,.lower-grid,.event-columns{grid-template-columns:1fr}
+  .botoes-final{grid-template-columns:1fr 1fr}
+  .topbar-inner{grid-template-columns:auto 1fr auto;gap:6px}
+  .btn-top{padding:8px 10px;font-size:11px}
+  .btn-top i{font-size:12px}
+  #statusMsg{display:none}
+}
+@media print{
+  @page{size:A4 portrait;margin:5mm}
+  body{background:#fff!important}
+  .topbar,.botoes-final{display:none!important}
+  .sumula-viewport{display:block;padding:0}
+  .sumula-scale{transform:none!important;width:100%!important}
 }
 </style>
 </head>
-
 <body>
 
-<header class="header">
-  <div class="wrap header-inner">
-    <div class="brand">
-      <img src="logo.png" alt="DG Sistemas">
-      <div class="brand-text">
-        <strong>DG SISTEMAS</strong>
-        <span>Súmula digital</span>
+<!-- ===== TELA INICIAL ===== -->
+<div id="telaInicial">
+  <div class="wrap-inicial">
+
+    <div class="topo-inicial">
+      <div class="brand">
+        <img src="logo.png" alt="DG Sistemas">
+        <div class="brand-text">
+          <strong>DG SISTEMAS</strong>
+          <span>Súmula digital</span>
+        </div>
       </div>
+      <button class="btn-nova" onclick="novaSumula()">
+        <i class="fa-solid fa-plus"></i> Nova Súmula
+      </button>
     </div>
-    <button class="btn-nova" onclick="novaSumula()">
-      <i class="fa-solid fa-plus"></i> Nova Súmula
-    </button>
-  </div>
-</header>
 
-<main class="wrap container">
-
-  <!-- ===== LISTA DE SÚMULAS ===== -->
-  <div id="lista" class="lista-area">
-    <div class="page-title">
-      <h1>Minhas Súmulas</h1>
+    <div class="titulo-lista">
+      <h2><i class="fa-solid fa-file-signature" style="color:var(--dourado);"></i> Minhas Súmulas</h2>
       <span class="badge" id="contador">0 salvas</span>
     </div>
-    <div id="listaCards" class="lista"></div>
-  </div>
 
-  <!-- ===== FORMULÁRIO ===== -->
-  <div id="form" class="form-sumula">
-    <div class="form-topo">
-      <button class="btn-voltar" onclick="voltarLista()">
+    <div id="listaCards" class="lista-simples"></div>
+
+  </div>
+</div>
+
+<!-- ===== TELA SÚMULA ===== -->
+<div id="telaSumula">
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <button class="btn-top btn-cinza" onclick="voltarLista()">
         <i class="fa-solid fa-arrow-left"></i> Voltar
       </button>
-      <h2 style="color:#fff;font-size:20px;font-weight:900;">Nova Súmula</h2>
-    </div>
-
-    <!-- Dados do jogo -->
-    <div class="card-form">
-      <h3><i class="fa-solid fa-calendar"></i> Dados do Jogo</h3>
-      <div class="grid">
-        <div class="campo">
-          <label>Competição</label>
-          <input id="competicao" placeholder="Ex: Campeonato Goiano">
-        </div>
-        <div class="campo">
-          <label>Categoria</label>
-          <input id="categoria" placeholder="Ex: Sub-15">
-        </div>
-        <div class="campo">
-          <label>Data</label>
-          <input id="data" type="date">
-        </div>
-        <div class="campo">
-          <label>Hora</label>
-          <input id="hora" type="time">
-        </div>
-        <div class="campo" style="grid-column:1/-1;">
-          <label>Local / Campo</label>
-          <input id="local" placeholder="Ex: Estádio Municipal">
-        </div>
-      </div>
-    </div>
-
-    <!-- Times -->
-    <div class="card-form">
-      <h3><i class="fa-solid fa-shield-halved"></i> Times e Placar</h3>
-      <div class="grid g3">
-        <div class="campo">
-          <label>Time da Casa</label>
-          <input id="timeA" placeholder="Nome do time">
-        </div>
-        <div class="campo">
-          <label>Placar</label>
-          <input id="placar" placeholder="Ex: 2 x 1">
-        </div>
-        <div class="campo">
-          <label>Time Visitante</label>
-          <input id="timeB" placeholder="Nome do time">
-        </div>
-      </div>
-    </div>
-
-    <!-- Arbitragem -->
-    <div class="card-form">
-      <h3><i class="fa-solid fa-whistle"></i> Arbitragem</h3>
-      <div class="grid g3">
-        <div class="campo">
-          <label>Árbitro</label>
-          <input id="arbitro" placeholder="Seu nome">
-        </div>
-        <div class="campo">
-          <label>Assistente 1</label>
-          <input id="ass1" placeholder="Nome">
-        </div>
-        <div class="campo">
-          <label>Assistente 2</label>
-          <input id="ass2" placeholder="Nome">
-        </div>
-      </div>
-    </div>
-
-    <!-- Gols -->
-    <div class="card-form">
-      <h3><i class="fa-solid fa-futbol"></i> Gols</h3>
-      <table class="tabela-jogadores" id="tabelaGols">
-        <thead>
-          <tr>
-            <th class="num">Min</th>
-            <th>Jogador</th>
-            <th class="pos">Time</th>
-            <th class="acao"></th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <button class="btn-add-linha" onclick="addGol()">
-        <i class="fa-solid fa-plus"></i> Adicionar gol
-      </button>
-    </div>
-
-    <!-- Cartões -->
-    <div class="card-form">
-      <h3><i class="fa-solid fa-id-card"></i> Cartões</h3>
-      <table class="tabela-jogadores" id="tabelaCartoes">
-        <thead>
-          <tr>
-            <th class="num">Min</th>
-            <th>Jogador</th>
-            <th class="pos">Time</th>
-            <th class="pos">Tipo</th>
-            <th class="acao"></th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <button class="btn-add-linha" onclick="addCartao()">
-        <i class="fa-solid fa-plus"></i> Adicionar cartão
-      </button>
-    </div>
-
-    <!-- Observações -->
-    <div class="card-form">
-      <h3><i class="fa-solid fa-pen"></i> Observações</h3>
-      <div class="campo">
-        <textarea id="observacoes" placeholder="Ocorrências, lesões, etc."></textarea>
-      </div>
-    </div>
-
-    <!-- Botões finais -->
-    <div class="botoes-final">
-      <button class="btn-final btn-salvar" onclick="salvarSumula()">
-        <i class="fa-solid fa-floppy-disk"></i> Salvar Súmula
-      </button>
-      <button class="btn-final btn-pdf" onclick="gerarPDF()">
-        <i class="fa-solid fa-file-pdf"></i> Salvar PDF
-      </button>
-      <button class="btn-final btn-whats" onclick="enviarWhats()">
-        <i class="fa-brands fa-whatsapp"></i> Enviar WhatsApp
+      <span id="statusMsg">Rascunho</span>
+      <button class="btn-top btn-dourado" onclick="baixarPDF()">
+        <i class="fa-solid fa-file-pdf"></i> PDF
       </button>
     </div>
   </div>
 
-</main>
+  <div class="sumula-viewport">
+    <div class="sumula-scale">
+      <div class="sumula-page" id="paginaSumula">
 
-<div id="alerta" class="alerta"></div>
+        <header class="header">
+          <div class="header-logo"><img src="logo.png" alt="DG Sistemas"></div>
+          <div class="header-title">
+            <h1>SÚMULA OFICIAL</h1>
+            <p>DG Sistemas</p>
+            <span>Onde o talento encontra o futuro</span>
+          </div>
+          <div class="header-campeonato-logo"><img src="logo.png" alt="DG"></div>
+          <div class="header-right">
+            <div class="liga-nome" id="campeonatoTopo">CAMPEONATO</div>
+            <div class="liga-slogan" id="categoriaTopo">CATEGORIA</div>
+          </div>
+        </header>
+
+        <section class="info-strip">
+          <div class="info-box"><i class="fa-regular fa-file-lines"></i><div><small>Súmula Nº</small><input id="numeroSumula"></div></div>
+          <div class="info-box"><i class="fa-solid fa-barcode"></i><div><small>Código</small><input id="codigoSumula"></div></div>
+          <div class="info-box"><i class="fa-solid fa-trophy"></i><div><small>Competição</small><input id="competicao"></div></div>
+          <div class="info-box"><i class="fa-solid fa-list-ol"></i><div><small>Categoria</small><input id="categoria"></div></div>
+          <div class="info-box"><div><small>Status</small><strong class="status-badge" id="statusOficial">RASCUNHO</strong></div></div>
+        </section>
+
+        <section class="score-card">
+          <div class="team-score">
+            <img id="logoA" src="logo.png" alt="">
+            <div class="team-name">
+              <input id="timeA" placeholder="TIME A">
+            </div>
+          </div>
+          <div class="score-center">
+            <div class="score-number">
+              <strong class="score-valor" id="golsA">0</strong>
+              <span>x</span>
+              <strong class="score-valor" id="golsB">0</strong>
+            </div>
+            <span>Placar</span>
+          </div>
+          <div class="team-score away">
+            <img id="logoB" src="logo.png" alt="">
+            <div class="team-name">
+              <input id="timeB" placeholder="TIME B">
+            </div>
+          </div>
+        </section>
+
+        <section class="match-strip">
+          <div class="match-box"><i class="fa-regular fa-calendar-days"></i><div><small>Data</small><input id="dataJogo" type="date"></div></div>
+          <div class="match-box"><i class="fa-regular fa-clock"></i><div><small>Horário</small><input id="horaJogo" type="time"></div></div>
+          <div class="match-box"><i class="fa-solid fa-diamond"></i><div><small>Local</small><input id="localJogo" placeholder="Estádio"></div></div>
+          <div class="match-box"><i class="fa-solid fa-whistle"></i><div><small>Árbitro</small><input id="arbitroTopo" placeholder="Seu nome"></div></div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Escalações</div>
+          <div class="section-body grid2">
+            <div>
+              <div class="lineup-head"><input id="tituloA" placeholder="TIME A"></div>
+              <div class="table-wrap">
+                <table class="jogadores">
+                  <thead>
+                    <tr>
+                      <th class="num">Nº</th>
+                      <th>Jogador</th>
+                      <th class="pos">Posição</th>
+                      <th class="acao"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="escA"></tbody>
+                </table>
+              </div>
+              <div class="add-row">
+                <input id="novoNumA" placeholder="Nº">
+                <input id="novoNomeA" placeholder="Nome do jogador">
+                <select id="novaPosA">
+                  <option value="">Posição</option>
+                  <option>Goleiro</option><option>Zagueiro</option>
+                  <option>Lateral Direito</option><option>Lateral Esquerdo</option>
+                  <option>Volante</option><option>Meia</option><option>Atacante</option>
+                </select>
+                <select id="novoTipoA"><option value="titular">Titular</option><option value="suplente">Suplente</option></select>
+                <button onclick="addJogador('A')">+</button>
+              </div>
+            </div>
+
+            <div>
+              <div class="lineup-head"><input id="tituloB" placeholder="TIME B"></div>
+              <div class="table-wrap">
+                <table class="jogadores">
+                  <thead>
+                    <tr>
+                      <th class="num">Nº</th>
+                      <th>Jogador</th>
+                      <th class="pos">Posição</th>
+                      <th class="acao"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="escB"></tbody>
+                </table>
+              </div>
+              <div class="add-row">
+                <input id="novoNumB" placeholder="Nº">
+                <input id="novoNomeB" placeholder="Nome do jogador">
+                <select id="novaPosB">
+                  <option value="">Posição</option>
+                  <option>Goleiro</option><option>Zagueiro</option>
+                  <option>Lateral Direito</option><option>Lateral Esquerdo</option>
+                  <option>Volante</option><option>Meia</option><option>Atacante</option>
+                </select>
+                <select id="novoTipoB"><option value="titular">Titular</option><option value="suplente">Suplente</option></select>
+                <button onclick="addJogador('B')">+</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Comissão Técnica</div>
+          <div class="section-body comissao-grid">
+            <div class="comissao-card">
+              <div class="comissao-head"><input id="comissaoTituloA" placeholder="TIME A"></div>
+              <div class="comissao-lista" id="comissaoA"></div>
+              <div class="comissao-add">
+                <input id="novoTecNomeA" placeholder="Nome do técnico">
+                <input id="novoTecFuncaoA" placeholder="Função" value="Técnico">
+                <button onclick="addTecnico('A')">+</button>
+              </div>
+            </div>
+            <div class="comissao-card">
+              <div class="comissao-head"><input id="comissaoTituloB" placeholder="TIME B"></div>
+              <div class="comissao-lista" id="comissaoB"></div>
+              <div class="comissao-add">
+                <input id="novoTecNomeB" placeholder="Nome do técnico">
+                <input id="novoTecFuncaoB" placeholder="Função" value="Técnico">
+                <button onclick="addTecnico('B')">+</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Gols e Cartões</div>
+          <div class="section-body grid2">
+            <div class="event-box">
+              <h3><input id="eventoTituloA" placeholder="TIME A" readonly></h3>
+              <div class="event-columns">
+                <div class="event-col">
+                  <h4>Gols</h4>
+                  <div class="event-form">
+                    <select id="golJogadorA"></select>
+                    <input id="golMinutoA" placeholder="Min">
+                    <input id="golNumeroA" placeholder="Nº">
+                    <button onclick="addGol('A')">⚽</button>
+                  </div>
+                  <div id="listaGolsA"></div>
+                </div>
+                <div class="event-col">
+                  <h4>Cartões</h4>
+                  <div class="event-form cartao-form">
+                    <select id="cartaoJogadorA"></select>
+                    <input id="cartaoMinutoA" placeholder="Min">
+                    <input id="cartaoNumeroA" placeholder="Nº">
+                    <select id="cartaoTipoA">
+                      <option value="amarelo">🟨 Amarelo</option>
+                      <option value="vermelho">🟥 Vermelho</option>
+                    </select>
+                    <button onclick="addCartao('A')">+</button>
+                  </div>
+                  <div id="listaCartoesA"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-box away">
+              <h3><input id="eventoTituloB" placeholder="TIME B" readonly></h3>
+              <div class="event-columns">
+                <div class="event-col">
+                  <h4>Gols</h4>
+                  <div class="event-form">
+                    <select id="golJogadorB"></select>
+                    <input id="golMinutoB" placeholder="Min">
+                    <input id="golNumeroB" placeholder="Nº">
+                    <button onclick="addGol('B')">⚽</button>
+                  </div>
+                  <div id="listaGolsB"></div>
+                </div>
+                <div class="event-col">
+                  <h4>Cartões</h4>
+                  <div class="event-form cartao-form">
+                    <select id="cartaoJogadorB"></select>
+                    <input id="cartaoMinutoB" placeholder="Min">
+                    <input id="cartaoNumeroB" placeholder="Nº">
+                    <select id="cartaoTipoB">
+                      <option value="amarelo">🟨 Amarelo</option>
+                      <option value="vermelho">🟥 Vermelho</option>
+                    </select>
+                    <button onclick="addCartao('B')">+</button>
+                  </div>
+                  <div id="listaCartoesB"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="lower-grid">
+          <div class="panel">
+            <h3>Arbitragem</h3>
+            <div class="panel-body arb-grid">
+              <input id="arbitro" placeholder="Árbitro">
+              <input id="assistente1" placeholder="Assistente 1">
+              <input id="assistente2" placeholder="Assistente 2">
+              <input id="observador" placeholder="Observador">
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Resumo</h3>
+            <div class="summary-grid">
+              <div class="summary-box"><span>Gols</span><strong id="totalGols">0</strong></div>
+              <div class="summary-box"><span>Amarelos</span><strong id="totalAmarelos">0</strong></div>
+              <div class="summary-box"><span>Vermelhos</span><strong id="totalVermelhos">0</strong></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="obs-box">
+          <textarea id="observacoes" placeholder="Observações do árbitro..."></textarea>
+        </section>
+
+        <div class="botoes-final">
+          <button class="btn-final btn-salvar" onclick="salvarSumula()">
+            <i class="fa-solid fa-floppy-disk"></i> Salvar
+          </button>
+          <button class="btn-final btn-pdf" onclick="baixarPDF()">
+            <i class="fa-solid fa-file-pdf"></i> PDF
+          </button>
+          <button class="btn-final btn-whats" onclick="enviarWhats()">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+          </button>
+          <button class="btn-final btn-fechar" onclick="finalizarSumula()">
+            <i class="fa-solid fa-lock"></i> Finalizar
+          </button>
+        </div>
+
+        <footer class="final-footer">
+          Documento gerado pelo sistema DG Sistemas<br>
+          © 2026 DG Sistemas
+        </footer>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-const STORAGE_KEY = "dg_sumulas";
-let sumulaAtual = null;
+const KEY = "dg_sumulas_v3";
+let sumulaAtual = { id:null, criadoEm:null };
+let jogadoresA = [], jogadoresB = [];
+let comissaoA = [], comissaoB = [];
+let golsA = [], golsB = [];
+let cartoesA = [], cartoesB = [];
 
-function $(id){ return document.getElementById(id); }
+const $ = id => document.getElementById(id);
 
-function mostrarAlerta(msg, tipo){
-  const a = $("alerta");
-  a.textContent = msg;
-  a.className = "alerta show" + (tipo === "erro" ? " erro" : "");
-  setTimeout(()=>{ a.className = "alerta"; }, 3000);
+function getSumulas(){
+  try{ return JSON.parse(localStorage.getItem(KEY) || "[]"); }catch(e){ return []; }
+}
+function setSumulas(l){
+  localStorage.setItem(KEY, JSON.stringify(l));
 }
 
 /* ===== LISTA ===== */
-function getSumulas(){
-  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
-  catch(e){ return []; }
-}
-function setSumulas(lista){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
-}
-
 function renderLista(){
-  const lista = getSumulas().sort((a,b) => (b.criadoEm||0) - (a.criadoEm||0));
+  const lista = getSumulas().sort((a,b)=>(b.criadoEm||0)-(a.criadoEm||0));
   $("contador").textContent = lista.length + " salva" + (lista.length === 1 ? "" : "s");
 
   if(!lista.length){
     $("listaCards").innerHTML = `
       <div class="vazio">
         <i class="fa-solid fa-file-signature"></i>
-        <h2>Nenhuma súmula salva ainda</h2>
-        <p>Clique em <strong>Nova Súmula</strong> pra começar.</p>
+        <h3>Nenhuma súmula ainda</h3>
+        <p>Clique em "Nova Súmula" pra começar</p>
         <button class="btn-nova" onclick="novaSumula()">
           <i class="fa-solid fa-plus"></i> Nova Súmula
         </button>
-      </div>
-    `;
+      </div>`;
     return;
   }
 
   $("listaCards").innerHTML = lista.map(s => {
-    const dataBR = s.data ? s.data.split("-").reverse().join("/") : "-";
+    const dt = s.dataJogo ? s.dataJogo.split("-").reverse().join("/") : "-";
     return `
-      <div class="card" onclick="abrirSumula('${s.id}')">
-        <div class="card-status">Finalizada</div>
-        <div class="card-times">
-          <div class="card-time"><strong>${s.timeA || "Time A"}</strong></div>
-          <div class="card-placar">${s.placar || "0 x 0"}</div>
-          <div class="card-time"><strong>${s.timeB || "Time B"}</strong></div>
+      <div class="card-salva" onclick="abrirSumula('${s.id}')">
+        <div class="status">${s.finalizada ? "Finalizada" : "Rascunho"}</div>
+        <div class="times-linha">
+          <div class="time-nome">${s.timeA || "Time A"}</div>
+          <div class="placar-mini">${golsA_count(s)} x ${golsB_count(s)}</div>
+          <div class="time-nome">${s.timeB || "Time B"}</div>
         </div>
-        <div class="card-info">
-          <i class="fa-solid fa-trophy"></i> <strong>${s.competicao || "Competição"}</strong><br>
-          <i class="fa-solid fa-calendar"></i> ${dataBR} ${s.hora || ""}<br>
-          <i class="fa-solid fa-location-dot"></i> ${s.local || "-"}
+        <div class="info-card">
+          <i class="fa-solid fa-trophy"></i> ${s.competicao || "Sem competição"}<br>
+          <i class="fa-solid fa-calendar"></i> ${dt} ${s.horaJogo || ""}<br>
+          <i class="fa-solid fa-location-dot"></i> ${s.localJogo || "-"}
         </div>
-        <div class="card-actions">
+        <div class="botoes-card">
           <button class="btn-ver" onclick="event.stopPropagation();abrirSumula('${s.id}')">
             <i class="fa-solid fa-eye"></i> Ver
           </button>
@@ -527,320 +786,446 @@ function renderLista(){
             <i class="fa-brands fa-whatsapp"></i> Enviar
           </button>
         </div>
-      </div>
-    `;
+      </div>`;
   }).join("");
 }
+function golsA_count(s){ return (s.golsA||[]).length; }
+function golsB_count(s){ return (s.golsB||[]).length; }
 
 /* ===== NAVEGAÇÃO ===== */
 function novaSumula(){
-  sumulaAtual = { id: "sum_" + Date.now(), criadoEm: Date.now(), gols: [], cartoes: [] };
-  limparFormulario();
-  $("lista").style.display = "none";
-  $("form").classList.add("on");
-}
-
-function voltarLista(){
-  $("form").classList.remove("on");
-  $("lista").style.display = "block";
-  renderLista();
+  sumulaAtual = { id:"sum_"+Date.now(), criadoEm:Date.now(), finalizada:false };
+  jogadoresA=[]; jogadoresB=[]; comissaoA=[]; comissaoB=[];
+  golsA=[]; golsB=[]; cartoesA=[]; cartoesB=[];
+  limpar();
+  $("numeroSumula").value = "DG-" + String(Date.now()).slice(-5);
+  $("codigoSumula").value = sumulaAtual.id.slice(-8).toUpperCase();
+  $("telaInicial").style.display = "none";
+  $("telaSumula").style.display = "block";
+  $("statusMsg").textContent = "Rascunho";
 }
 
 function abrirSumula(id){
   const s = getSumulas().find(x => x.id === id);
   if(!s) return;
   sumulaAtual = JSON.parse(JSON.stringify(s));
-  preencherFormulario(s);
-  $("lista").style.display = "none";
-  $("form").classList.add("on");
+  jogadoresA = s.jogadoresA || [];
+  jogadoresB = s.jogadoresB || [];
+  comissaoA = s.comissaoA || [];
+  comissaoB = s.comissaoB || [];
+  golsA = s.golsA || [];
+  golsB = s.golsB || [];
+  cartoesA = s.cartoesA || [];
+  cartoesB = s.cartoesB || [];
+  preencher(s);
+  $("telaInicial").style.display = "none";
+  $("telaSumula").style.display = "block";
+  $("statusMsg").textContent = s.finalizada ? "Finalizada" : "Rascunho";
+}
+
+function voltarLista(){
+  $("telaSumula").style.display = "none";
+  $("telaInicial").style.display = "block";
+  renderLista();
 }
 
 /* ===== FORMULÁRIO ===== */
-function limparFormulario(){
-  ["competicao","categoria","data","hora","local","timeA","placar","timeB","arbitro","ass1","ass2","observacoes"]
+function limpar(){
+  ["numeroSumula","codigoSumula","competicao","categoria","timeA","timeB","dataJogo","horaJogo","localJogo","arbitroTopo","arbitro","assistente1","assistente2","observador","observacoes"]
     .forEach(id => $(id).value = "");
-  $("tabelaGols").querySelector("tbody").innerHTML = "";
-  $("tabelaCartoes").querySelector("tbody").innerHTML = "";
+  $("tituloA").value = ""; $("tituloB").value = "";
+  $("comissaoTituloA").value = ""; $("comissaoTituloB").value = "";
+  $("eventoTituloA").value = ""; $("eventoTituloB").value = "";
+  $("golsA").textContent = "0"; $("golsB").textContent = "0";
+  $("totalGols").textContent = "0";
+  $("totalAmarelos").textContent = "0";
+  $("totalVermelhos").textContent = "0";
+  $("escA").innerHTML = ""; $("escB").innerHTML = "";
+  $("comissaoA").innerHTML = ""; $("comissaoB").innerHTML = "";
+  $("listaGolsA").innerHTML = ""; $("listaGolsB").innerHTML = "";
+  $("listaCartoesA").innerHTML = ""; $("listaCartoesB").innerHTML = "";
 }
 
-function preencherFormulario(s){
+function preencher(s){
+  $("numeroSumula").value = s.numeroSumula || "";
+  $("codigoSumula").value = s.codigoSumula || "";
   $("competicao").value = s.competicao || "";
   $("categoria").value = s.categoria || "";
-  $("data").value = s.data || "";
-  $("hora").value = s.hora || "";
-  $("local").value = s.local || "";
   $("timeA").value = s.timeA || "";
-  $("placar").value = s.placar || "";
   $("timeB").value = s.timeB || "";
+  $("dataJogo").value = s.dataJogo || "";
+  $("horaJogo").value = s.horaJogo || "";
+  $("localJogo").value = s.localJogo || "";
+  $("arbitroTopo").value = s.arbitro || "";
   $("arbitro").value = s.arbitro || "";
-  $("ass1").value = s.ass1 || "";
-  $("ass2").value = s.ass2 || "";
+  $("assistente1").value = s.assistente1 || "";
+  $("assistente2").value = s.assistente2 || "";
+  $("observador").value = s.observador || "";
   $("observacoes").value = s.observacoes || "";
-
-  const tbodyG = $("tabelaGols").querySelector("tbody");
-  tbodyG.innerHTML = "";
-  (s.gols || []).forEach(g => addLinhaGol(g));
-
-  const tbodyC = $("tabelaCartoes").querySelector("tbody");
-  tbodyC.innerHTML = "";
-  (s.cartoes || []).forEach(c => addLinhaCartao(c));
+  $("tituloA").value = s.timeA || "";
+  $("tituloB").value = s.timeB || "";
+  $("comissaoTituloA").value = s.timeA || "";
+  $("comissaoTituloB").value = s.timeB || "";
+  $("eventoTituloA").value = s.timeA || "";
+  $("eventoTituloB").value = s.timeB || "";
+  $("campeonatoTopo").textContent = s.competicao || "CAMPEONATO";
+  $("categoriaTopo").textContent = s.categoria || "";
+  renderEscalacoes();
+  renderComissao();
+  renderEventos();
+  atualizarResumo();
+  atualizarPlacar();
+  atualizarTitulos();
+  atualizarSelects();
 }
 
-/* ===== GOLS E CARTÕES ===== */
-function addGol(dados){
-  dados = dados || {};
-  const tr = document.createElement("tr");
-  tr.innerHTML = `
-    <td class="num"><input value="${dados.min || ''}" placeholder="12"></td>
-    <td><input value="${dados.jogador || ''}" placeholder="Nome do jogador"></td>
-    <td class="pos">
-      <select style="width:100%;padding:7px 8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:7px;font-size:13px;">
-        <option value="Casa" ${dados.time === 'Casa' ? 'selected' : ''}>Casa</option>
-        <option value="Visitante" ${dados.time === 'Visitante' ? 'selected' : ''}>Visitante</option>
-      </select>
-    </td>
-    <td class="acao"><button class="btn-remover" onclick="this.closest('tr').remove()">×</button></td>
-  `;
-  $("tabelaGols").querySelector("tbody").appendChild(tr);
+/* ===== TITULOS DINÂMICOS ===== */
+function atualizarTitulos(){
+  const a = $("timeA").value || "TIME A";
+  const b = $("timeB").value || "TIME B";
+  $("tituloA").value = a;
+  $("tituloB").value = b;
+  $("comissaoTituloA").value = a;
+  $("comissaoTituloB").value = b;
+  $("eventoTituloA").value = a;
+  $("eventoTituloB").value = b;
 }
 
-function addCartao(dados){
-  dados = dados || {};
-  const tr = document.createElement("tr");
-  tr.innerHTML = `
-    <td class="num"><input value="${dados.min || ''}" placeholder="18"></td>
-    <td><input value="${dados.jogador || ''}" placeholder="Nome do jogador"></td>
-    <td class="pos">
-      <select style="width:100%;padding:7px 8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:7px;font-size:13px;">
-        <option value="Casa" ${dados.time === 'Casa' ? 'selected' : ''}>Casa</option>
-        <option value="Visitante" ${dados.time === 'Visitante' ? 'selected' : ''}>Visitante</option>
-      </select>
-    </td>
-    <td class="pos">
-      <select style="width:100%;padding:7px 8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:7px;font-size:13px;">
-        <option value="🟨 Amarelo" ${dados.tipo === '🟨 Amarelo' ? 'selected' : ''}>🟨 Amarelo</option>
-        <option value="🟥 Vermelho" ${dados.tipo === '🟥 Vermelho' ? 'selected' : ''}>🟥 Vermelho</option>
-      </select>
-    </td>
-    <td class="acao"><button class="btn-remover" onclick="this.closest('tr').remove()">×</button></td>
-  `;
-  $("tabelaCartoes").querySelector("tbody").appendChild(tr);
-}
+document.addEventListener("input", e => {
+  if(e.target.id === "timeA" || e.target.id === "timeB"){
+    atualizarTitulos();
+  }
+  if(e.target.id === "competicao"){
+    $("campeonatoTopo").textContent = e.target.value || "CAMPEONATO";
+  }
+  if(e.target.id === "categoria"){
+    $("categoriaTopo").textContent = e.target.value || "";
+  }
+});
 
-function coletarTabela(tabelaId){
-  const linhas = [];
-  document.querySelectorAll(`#${tabelaId} tbody tr`).forEach(tr => {
-    const inputs = tr.querySelectorAll("input");
-    const selects = tr.querySelectorAll("select");
-    linhas.push({
-      min: inputs[0].value,
-      jogador: inputs[1].value,
-      time: selects[0] ? selects[0].value : "",
-      tipo: selects[1] ? selects[1].value : ""
-    });
+/* ===== JOGADORES ===== */
+function addJogador(time){
+  const num = $("novoNum"+time).value.trim();
+  const nome = $("novoNome"+time).value.trim();
+  const pos = $("novaPos"+time).value;
+  const tipo = $("novoTipo"+time).value;
+  if(!nome){ alert("Informe o nome do jogador."); return; }
+  const lista = time === "A" ? jogadoresA : jogadoresB;
+  lista.push({ num, nome, pos, tipo });
+  $("novoNum"+time).value = ""; $("novoNome"+time).value = ""; $("novaPos"+time).value = "";
+  renderEscalacoes(); atualizarSelects();
+}
+window.addJogador = addJogador;
+
+function removerJogador(time, i){
+  const lista = time === "A" ? jogadoresA : jogadoresB;
+  lista.splice(i, 1);
+  renderEscalacoes(); atualizarSelects();
+}
+window.removerJogador = removerJogador;
+
+function renderEscalacoes(){
+  ["A","B"].forEach(time => {
+    const lista = time === "A" ? jogadoresA : jogadoresB;
+    const titulares = lista.filter(j => j.tipo !== "suplente");
+    const suplentes = lista.filter(j => j.tipo === "suplente");
+    const html = `
+      <tr class="sub-row"><td colspan="4">Titulares</td></tr>
+      ${titulares.map((j, i) => linhaJogador(j, time, lista.indexOf(j))).join("") || `<tr><td colspan="4" style="text-align:center;color:#999;">Nenhum titular</td></tr>`}
+      <tr class="sub-row"><td colspan="4">Suplentes</td></tr>
+      ${suplentes.map((j, i) => linhaJogador(j, time, lista.indexOf(j))).join("") || `<tr><td colspan="4" style="text-align:center;color:#999;">Nenhum suplente</td></tr>`}
+    `;
+    $("esc"+time).innerHTML = html;
   });
-  return linhas.filter(l => l.jogador || l.min);
 }
 
-/* ===== COLETAR DADOS ===== */
-function coletarDados(){
+function linhaJogador(j, time, idx){
+  return `
+    <tr>
+      <td><input value="${j.num||''}" onchange="editJog('${time}',${idx},'num',this.value)"></td>
+      <td><input value="${j.nome||''}" onchange="editJog('${time}',${idx},'nome',this.value)"></td>
+      <td>
+        <select onchange="editJog('${time}',${idx},'pos',this.value)">
+          ${opcoesPos(j.pos)}
+        </select>
+      </td>
+      <td><button class="btn-remover" onclick="removerJogador('${time}',${idx})">×</button></td>
+    </tr>`;
+}
+
+function opcoesPos(atual){
+  const opts = ["Goleiro","Zagueiro","Lateral Direito","Lateral Esquerdo","Volante","Meia","Atacante"];
+  return `<option value="">-</option>` + opts.map(p =>
+    `<option value="${p}" ${p === atual ? "selected" : ""}>${p}</option>`
+  ).join("");
+}
+
+function editJog(time, i, campo, valor){
+  const lista = time === "A" ? jogadoresA : jogadoresB;
+  if(lista[i]) lista[i][campo] = valor;
+  if(campo === "nome") atualizarSelects();
+}
+window.editJog = editJog;
+
+/* ===== COMISSÃO ===== */
+function addTecnico(time){
+  const nome = $("novoTecNome"+time).value.trim();
+  const funcao = $("novoTecFuncao"+time).value.trim() || "Técnico";
+  if(!nome){ alert("Informe o nome."); return; }
+  const lista = time === "A" ? comissaoA : comissaoB;
+  lista.push({ nome, funcao });
+  $("novoTecNome"+time).value = "";
+  $("novoTecFuncao"+time).value = "Técnico";
+  renderComissao();
+}
+window.addTecnico = addTecnico;
+
+function removerTecnico(time, i){
+  const lista = time === "A" ? comissaoA : comissaoB;
+  lista.splice(i, 1);
+  renderComissao();
+}
+window.removerTecnico = removerTecnico;
+
+function renderComissao(){
+  ["A","B"].forEach(time => {
+    const lista = time === "A" ? comissaoA : comissaoB;
+    $("comissao"+time).innerHTML = lista.length
+      ? lista.map((t, i) => `
+        <div class="comissao-item">
+          <select onchange="editTec('${time}',${i},'funcao',this.value)">
+            ${["Técnico","Auxiliar Técnico","Preparador","Médico","Massagista","Outro"].map(f =>
+              `<option value="${f}" ${f === t.funcao ? "selected" : ""}>${f}</option>`
+            ).join("")}
+          </select>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <input value="${t.nome||''}" onchange="editTec('${time}',${i},'nome',this.value)" style="flex:1;">
+            <button class="btn-remover" onclick="removerTecnico('${time}',${i})">×</button>
+          </div>
+        </div>`).join("")
+      : `<div style="color:#999;text-align:center;padding:12px;font-size:12px;">Nenhum</div>`;
+  });
+}
+
+function editTec(time, i, campo, valor){
+  const lista = time === "A" ? comissaoA : comissaoB;
+  if(lista[i]) lista[i][campo] = valor;
+}
+window.editTec = editTec;
+
+/* ===== SELECTS DE JOGADORES PRA GOLS/CARTÕES ===== */
+function atualizarSelects(){
+  ["A","B"].forEach(time => {
+    const lista = time === "A" ? jogadoresA : jogadoresB;
+    const opts = lista.map(j => `<option value="${j.nome}" data-num="${j.num||''}">${j.num ? j.num + " - " : ""}${j.nome}</option>`).join("");
+    $("golJogador"+time).innerHTML = opts || `<option value="">--</option>`;
+    $("cartaoJogador"+time).innerHTML = opts || `<option value="">--</option>`;
+  });
+}
+
+/* ===== GOLS ===== */
+function addGol(time){
+  const sel = $("golJogador"+time);
+  const jog = sel.value;
+  const num = $("golNumero"+time).value.trim() || sel.selectedOptions[0]?.dataset?.num || "";
+  const min = $("golMinuto"+time).value.trim();
+  if(!jog){ alert("Selecione o jogador."); return; }
+  const obj = { jog, num, min };
+  if(time === "A") golsA.push(obj); else golsB.push(obj);
+  $("golMinuto"+time).value = ""; $("golNumero"+time).value = "";
+  renderEventos();
+  atualizarResumo();
+  atualizarPlacar();
+}
+window.addGol = addGol;
+
+function removerGol(time, i){
+  const lista = time === "A" ? golsA : golsB;
+  lista.splice(i, 1);
+  renderEventos();
+  atualizarResumo();
+  atualizarPlacar();
+}
+window.removerGol = removerGol;
+
+/* ===== CARTÕES ===== */
+function addCartao(time){
+  const sel = $("cartaoJogador"+time);
+  const jog = sel.value;
+  const num = $("cartaoNumero"+time).value.trim() || sel.selectedOptions[0]?.dataset?.num || "";
+  const min = $("cartaoMinuto"+time).value.trim();
+  const tipo = $("cartaoTipo"+time).value;
+  if(!jog){ alert("Selecione o jogador."); return; }
+  const obj = { jog, num, min, tipo };
+  if(time === "A") cartoesA.push(obj); else cartoesB.push(obj);
+  $("cartaoMinuto"+time).value = ""; $("cartaoNumero"+time).value = "";
+  renderEventos();
+  atualizarResumo();
+}
+window.addCartao = addCartao;
+
+function removerCartao(time, i){
+  const lista = time === "A" ? cartoesA : cartoesB;
+  lista.splice(i, 1);
+  renderEventos();
+  atualizarResumo();
+}
+window.removerCartao = removerCartao;
+
+/* ===== RENDER EVENTOS ===== */
+function renderEventos(){
+  ["A","B"].forEach(time => {
+    const gols = time === "A" ? golsA : golsB;
+    const cartoes = time === "A" ? cartoesA : cartoesB;
+    $("listaGols"+time).innerHTML = gols.length
+      ? gols.map((g, i) => `<div class="event-item"><span>⚽ ${g.min||"-"}' ${g.num ? '#'+g.num+' ' : ''}${g.jog}</span><button onclick="removerGol('${time}',${i})">×</button></div>`).join("")
+      : "";
+    $("listaCartoes"+time).innerHTML = cartoes.length
+      ? cartoes.map((c, i) => `<div class="event-item"><span>${c.tipo === 'amarelo' ? '🟨' : '🟥'} ${c.min||"-"}' ${c.num ? '#'+c.num+' ' : ''}${c.jog}</span><button onclick="removerCartao('${time}',${i})">×</button></div>`).join("")
+      : "";
+  });
+}
+
+function atualizarResumo(){
+  $("totalGols").textContent = golsA.length + golsB.length;
+  const todos = [...cartoesA, ...cartoesB];
+  $("totalAmarelos").textContent = todos.filter(c => c.tipo === "amarelo").length;
+  $("totalVermelhos").textContent = todos.filter(c => c.tipo === "vermelho").length;
+}
+
+function atualizarPlacar(){
+  $("golsA").textContent = golsA.length;
+  $("golsB").textContent = golsB.length;
+}
+
+/* ===== COLETAR ===== */
+function coletar(){
   return {
     id: sumulaAtual.id,
     criadoEm: sumulaAtual.criadoEm,
-    competicao: $("competicao").value.trim(),
-    categoria: $("categoria").value.trim(),
-    data: $("data").value,
-    hora: $("hora").value,
-    local: $("local").value.trim(),
-    timeA: $("timeA").value.trim(),
-    placar: $("placar").value.trim(),
-    timeB: $("timeB").value.trim(),
-    arbitro: $("arbitro").value.trim(),
-    ass1: $("ass1").value.trim(),
-    ass2: $("ass2").value.trim(),
-    gols: coletarTabela("tabelaGols"),
-    cartoes: coletarTabela("tabelaCartoes"),
-    observacoes: $("observacoes").value.trim()
+    finalizada: sumulaAtual.finalizada || false,
+    numeroSumula: $("numeroSumula").value,
+    codigoSumula: $("codigoSumula").value,
+    competicao: $("competicao").value,
+    categoria: $("categoria").value,
+    timeA: $("timeA").value,
+    timeB: $("timeB").value,
+    dataJogo: $("dataJogo").value,
+    horaJogo: $("horaJogo").value,
+    localJogo: $("localJogo").value,
+    arbitro: $("arbitro").value,
+    assistente1: $("assistente1").value,
+    assistente2: $("assistente2").value,
+    observador: $("observador").value,
+    observacoes: $("observacoes").value,
+    jogadoresA, jogadoresB,
+    comissaoA, comissaoB,
+    golsA, golsB,
+    cartoesA, cartoesB
   };
 }
 
 /* ===== SALVAR ===== */
 function salvarSumula(){
-  const dados = coletarDados();
-  if(!dados.timeA || !dados.timeB){
-    mostrarAlerta("Preencha o nome dos dois times.", "erro");
+  if(!$("timeA").value || !$("timeB").value){
+    alert("Preencha o nome dos dois times.");
     return;
   }
+  const dados = coletar();
   const lista = getSumulas();
   const idx = lista.findIndex(s => s.id === dados.id);
   if(idx >= 0) lista[idx] = dados;
   else lista.push(dados);
   setSumulas(lista);
-  sumulaAtual = dados;
-  mostrarAlerta("Súmula salva com sucesso!");
+  $("statusMsg").textContent = "Salvo ✓";
+  setTimeout(() => $("statusMsg").textContent = dados.finalizada ? "Finalizada" : "Rascunho", 1500);
 }
+window.salvarSumula = salvarSumula;
+
+function finalizarSumula(){
+  if(!confirm("Finalizar essa súmula? Ela ficará marcada como finalizada.")) return;
+  salvarSumula();
+  sumulaAtual.finalizada = true;
+  const dados = coletar();
+  dados.finalizada = true;
+  const lista = getSumulas();
+  const idx = lista.findIndex(s => s.id === dados.id);
+  if(idx >= 0) lista[idx] = dados;
+  setSumulas(lista);
+  $("statusOficial").textContent = "FINALIZADA";
+  $("statusOficial").classList.add("final");
+  $("statusMsg").textContent = "Finalizada";
+}
+window.finalizarSumula = finalizarSumula;
 
 /* ===== PDF ===== */
-function gerarPDF(){
-  const dados = coletarDados();
-  if(!dados.timeA || !dados.timeB){
-    mostrarAlerta("Preencha o nome dos dois times.", "erro");
-    return;
-  }
+function baixarPDF(){
   salvarSumula();
-
-  const dataBR = dados.data ? dados.data.split("-").reverse().join("/") : "___/___/_____";
-
-  const golsHtml = dados.gols.length
-    ? dados.gols.map(g => `<tr><td>${g.min}'</td><td>${g.jogador}</td><td>${g.time}</td></tr>`).join("")
-    : `<tr><td colspan="3" style="text-align:center;color:#888;">Nenhum gol registrado</td></tr>`;
-
-  const cartoesHtml = dados.cartoes.length
-    ? dados.cartoes.map(c => `<tr><td>${c.min}'</td><td>${c.jogador}</td><td>${c.time}</td><td>${c.tipo}</td></tr>`).join("")
-    : `<tr><td colspan="4" style="text-align:center;color:#888;">Nenhum cartão registrado</td></tr>`;
-
-  const html = `
-    <div style="font-family:Arial,sans-serif;padding:30px;color:#000;background:#fff;">
-      <div style="text-align:center;border-bottom:3px solid #061d44;padding-bottom:16px;margin-bottom:20px;">
-        <h1 style="color:#061d44;font-size:26px;margin:0;">SÚMULA OFICIAL</h1>
-        <p style="color:#f7c600;font-weight:900;margin:6px 0 0;">DG Sistemas</p>
-        <p style="font-size:12px;color:#666;margin:4px 0 0;">Onde o talento encontra o futuro</p>
-      </div>
-
-      <table style="width:100%;font-size:13px;margin-bottom:20px;">
-        <tr><td style="padding:6px 0;width:130px;"><strong>Competição:</strong></td><td>${dados.competicao || "-"}</td></tr>
-        <tr><td style="padding:6px 0;"><strong>Categoria:</strong></td><td>${dados.categoria || "-"}</td></tr>
-        <tr><td style="padding:6px 0;"><strong>Data:</strong></td><td>${dataBR} às ${dados.hora || "--:--"}</td></tr>
-        <tr><td style="padding:6px 0;"><strong>Local:</strong></td><td>${dados.local || "-"}</td></tr>
-      </table>
-
-      <div style="display:flex;justify-content:space-between;align-items:center;background:#061d44;color:#fff;padding:18px 24px;border-radius:10px;margin-bottom:20px;">
-        <div style="text-align:center;flex:1;">
-          <div style="font-size:18px;font-weight:900;text-transform:uppercase;">${dados.timeA}</div>
-        </div>
-        <div style="font-size:34px;font-weight:900;color:#f7c600;padding:0 20px;white-space:nowrap;">${dados.placar || "0 x 0"}</div>
-        <div style="text-align:center;flex:1;">
-          <div style="font-size:18px;font-weight:900;text-transform:uppercase;">${dados.timeB}</div>
-        </div>
-      </div>
-
-      <h2 style="font-size:16px;color:#061d44;border-bottom:2px solid #061d44;padding-bottom:6px;margin-bottom:10px;">⚽ GOLS</h2>
-      <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:24px;">
-        <thead>
-          <tr style="background:#f0f0f0;">
-            <th style="padding:8px;text-align:left;border:1px solid #ddd;width:70px;">Min</th>
-            <th style="padding:8px;text-align:left;border:1px solid #ddd;">Jogador</th>
-            <th style="padding:8px;text-align:left;border:1px solid #ddd;width:130px;">Time</th>
-          </tr>
-        </thead>
-        <tbody>${golsHtml}</tbody>
-      </table>
-
-      <h2 style="font-size:16px;color:#061d44;border-bottom:2px solid #061d44;padding-bottom:6px;margin-bottom:10px;">🟨🟥 CARTÕES</h2>
-      <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:24px;">
-        <thead>
-          <tr style="background:#f0f0f0;">
-            <th style="padding:8px;text-align:left;border:1px solid #ddd;width:70px;">Min</th>
-            <th style="padding:8px;text-align:left;border:1px solid #ddd;">Jogador</th>
-            <th style="padding:8px;text-align:left;border:1px solid #ddd;width:130px;">Time</th>
-            <th style="padding:8px;text-align:left;border:1px solid #ddd;width:140px;">Tipo</th>
-          </tr>
-        </thead>
-        <tbody>${cartoesHtml}</tbody>
-      </table>
-
-      <h2 style="font-size:16px;color:#061d44;border-bottom:2px solid #061d44;padding-bottom:6px;margin-bottom:10px;">👨‍⚖️ ARBITRAGEM</h2>
-      <table style="width:100%;font-size:13px;margin-bottom:24px;">
-        <tr><td style="padding:6px 0;width:130px;"><strong>Árbitro:</strong></td><td>${dados.arbitro || "-"}</td></tr>
-        <tr><td style="padding:6px 0;"><strong>Assistente 1:</strong></td><td>${dados.ass1 || "-"}</td></tr>
-        <tr><td style="padding:6px 0;"><strong>Assistente 2:</strong></td><td>${dados.ass2 || "-"}</td></tr>
-      </table>
-
-      ${dados.observacoes ? `
-      <h2 style="font-size:16px;color:#061d44;border-bottom:2px solid #061d44;padding-bottom:6px;margin-bottom:10px;">📝 OBSERVAÇÕES</h2>
-      <p style="font-size:13px;line-height:1.5;margin-bottom:24px;">${dados.observacoes}</p>
-      ` : ""}
-
-      <div style="text-align:center;border-top:2px solid #061d44;padding-top:14px;margin-top:30px;font-size:11px;color:#666;">
-        Documento gerado pelo sistema DG Sistemas<br>
-        © 2026 DG Sistemas
-      </div>
-    </div>
-  `;
-
-  const opt = {
+  const elem = $("paginaSumula");
+  const nome = `sumula-${$("timeA").value || 'A'}-x-${$("timeB").value || 'B'}.pdf`
+    .replace(/\s+/g, "-").toLowerCase();
+  html2pdf().set({
     margin: 0,
-    filename: `sumula-${dados.timeA}-x-${dados.timeB}.pdf`.replace(/\s+/g,"-").toLowerCase(),
+    filename: nome,
     image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true },
+    html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-  };
-
-  html2pdf().set(opt).from(html).save().then(()=>{
-    mostrarAlerta("PDF gerado!");
-  });
+  }).from(elem).save();
 }
+window.baixarPDF = baixarPDF;
 
 /* ===== WHATSAPP ===== */
-function textoWhats(dados){
-  const dataBR = dados.data ? dados.data.split("-").reverse().join("/") : "-";
-  let t = `*📋 SÚMULA OFICIAL*\n`;
-  t += `_DG Sistemas_\n\n`;
-  t += `🏆 *${dados.competicao || "Competição"}*\n`;
-  t += `📂 ${dados.categoria || "-"}\n`;
-  t += `📅 ${dataBR} às ${dados.hora || "--:--"}\n`;
-  t += `📍 ${dados.local || "-"}\n\n`;
-  t += `⚽ *${dados.timeA}* ${dados.placar || "0 x 0"} *${dados.timeB}*\n\n`;
+function textoWhats(s){
+  const dt = s.dataJogo ? s.dataJogo.split("-").reverse().join("/") : "-";
+  let t = `*📋 SÚMULA OFICIAL*\n_DG Sistemas_\n\n`;
+  t += `🏆 *${s.competicao || "-"}*\n`;
+  t += `📂 ${s.categoria || "-"}\n`;
+  t += `📅 ${dt} ${s.horaJogo || ""}\n`;
+  t += `📍 ${s.localJogo || "-"}\n\n`;
+  t += `⚽ *${s.timeA}* ${s.golsA.length} x ${s.golsB.length} *${s.timeB}*\n\n`;
 
-  if(dados.gols.length){
-    t += `*GOLS*\n`;
-    dados.gols.forEach(g => {
-      t += `⚽ ${g.min}' - ${g.jogador} (${g.time})\n`;
-    });
+  if(s.golsA.length){
+    t += `*GOLS - ${s.timeA}*\n`;
+    s.golsA.forEach(g => t += `⚽ ${g.min||'-'}' ${g.num ? '#'+g.num+' ' : ''}${g.jog}\n`);
     t += `\n`;
   }
-
-  if(dados.cartoes.length){
+  if(s.golsB.length){
+    t += `*GOLS - ${s.timeB}*\n`;
+    s.golsB.forEach(g => t += `⚽ ${g.min||'-'}' ${g.num ? '#'+g.num+' ' : ''}${g.jog}\n`);
+    t += `\n`;
+  }
+  const todos = [...s.cartoesA, ...s.cartoesB];
+  if(todos.length){
     t += `*CARTÕES*\n`;
-    dados.cartoes.forEach(c => {
-      t += `${c.tipo} ${c.min}' - ${c.jogador} (${c.time})\n`;
-    });
+    s.cartoesA.forEach(c => t += `${c.tipo==='amarelo'?'🟨':'🟥'} ${c.min||'-'}' ${c.jog} (${s.timeA})\n`);
+    s.cartoesB.forEach(c => t += `${c.tipo==='amarelo'?'🟨':'🟥'} ${c.min||'-'}' ${c.jog} (${s.timeB})\n`);
     t += `\n`;
   }
-
   t += `*ARBITRAGEM*\n`;
-  t += `👨‍⚖️ ${dados.arbitro || "-"}\n`;
-  t += `🚩 ${dados.ass1 || "-"}\n`;
-  t += `🚩 ${dados.ass2 || "-"}\n`;
-
-  if(dados.observacoes){
-    t += `\n*OBSERVAÇÕES*\n${dados.observacoes}\n`;
-  }
-
+  t += `👨‍⚖️ ${s.arbitro || "-"}\n`;
+  if(s.assistente1) t += `🚩 ${s.assistente1}\n`;
+  if(s.assistente2) t += `🚩 ${s.assistente2}\n`;
+  if(s.observacoes) t += `\n*OBS:* ${s.observacoes}\n`;
   return t;
 }
 
 function enviarWhats(){
-  const dados = coletarDados();
-  if(!dados.timeA || !dados.timeB){
-    mostrarAlerta("Preencha o nome dos dois times.", "erro");
-    return;
-  }
   salvarSumula();
-  const texto = encodeURIComponent(textoWhats(dados));
-  window.open("https://wa.me/?text=" + texto, "_blank");
+  const s = coletar();
+  if(!s.timeA || !s.timeB){ alert("Preencha os times."); return; }
+  window.open("https://wa.me/?text=" + encodeURIComponent(textoWhats(s)), "_blank");
 }
+window.enviarWhats = enviarWhats;
 
 function wppRapido(id){
   const s = getSumulas().find(x => x.id === id);
   if(!s) return;
-  const texto = encodeURIComponent(textoWhats(s));
-  window.open("https://wa.me/?text=" + texto, "_blank");
+  window.open("https://wa.me/?text=" + encodeURIComponent(textoWhats(s)), "_blank");
 }
+window.wppRapido = wppRapido;
 
 /* ===== INICIAR ===== */
 renderLista();
 </script>
-
 </body>
 </html>
