@@ -38,9 +38,11 @@
       font-family:Arial, Helvetica, sans-serif;
       background:
         linear-gradient(rgba(1,7,18,.42), rgba(1,7,18,.62)),
-        url("fundo.png") center top / cover no-repeat;
+        url("fundo.png") center center / cover no-repeat;
+      background-attachment:fixed;
       color:var(--white);
       overflow-x:hidden;
+      min-height:100vh;
     }
 
     a{text-decoration:none;color:inherit;transition:var(--transition);}
@@ -558,8 +560,6 @@
 
       .btn-primary,
       .btn-secondary{width:100%;}
-
-      .home-team-logo{width:100px;height:100px;}
     }
   </style>
 </head>
