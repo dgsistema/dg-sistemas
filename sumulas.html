@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Súmulas - DG Sistemas</title>
+<link rel="icon" href="logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --azul:#061d44;--azul2:#08285c;--verde:#069447;--dourado:#f7c600;
+  --linha:#cfd7e3;--texto:#071833;--muted:#4b5563;--bg:#dfe6ef;
+  --gold:#ffd400;--gold-soft:rgba(255,212,0,.12);--gold-line:rgba(255,212,0,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;overflow-x:hidden}
+body{font-family:Arial,Helvetica,sans-serif;background:#02060f;color:#fff}
+button{font-family:inherit;cursor:pointer;border:none;transition:.2s}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+.wrap{width:min(100% - 32px, 1280px);margin:0 auto}
+
+/* MENU DE CIMA */
+.topbar{position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);background:rgba(2,6,15,.9);border-bottom:2px solid var(--dourado);padding:12px 0}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.menu-toggle-cima{width:44px;height:44px;border-radius:12px;background:rgba(247,198,0,.1);border:1px solid rgba(247,198,0,.3);color:var(--dourado);font-size:18px;display:flex;align-items:center;justify-content:center}
+.menu-toggle-cima:hover{background:var(--dourado);color:#061d44}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:52px;height:52px;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(247,198,0,.35))}
+.brand-text strong{display:block;color:var(--dourado);font-size:18px;letter-spacing:1.5px;font-weight:900;line-height:1.1}
+.brand-text span{display:block;color:#cbd6ea;font-size:11px;margin-top:3px}
+.top-nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.top-nav a{padding:10px 18px;border-radius:10px;color:#cbd6ea;font-size:14px;font-weight:700;border:1px solid transparent}
+.top-nav a:hover,.top-nav a.ativo{color:var(--dourado);background:rgba(247,198,0,.1);border-color:rgba(247,198,0,.25)}
+.btn-nova-topo{background:linear-gradient(135deg,var(--dourado),#ffe45c);color:#061d44;padding:11px 22px;border-radius:11px;font-weight:900;font-size:14px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 8px 20px rgba(247,198,0,.3)}
+.btn-nova-topo:hover{transform:translateY(-2px)}
+
+/* MENU LATERAL */
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:.25s;z-index:998}
+.sidebar-overlay.show{opacity:1;visibility:visible}
+.sidebar{position:fixed;top:0;left:0;width:320px;max-width:88%;height:100vh;background:linear-gradient(180deg,#061d44 0%,#021022 100%);border-right:1px solid var(--gold-line);box-shadow:0 12px 30px rgba(0,0,0,.4);padding:22px 18px 28px;overflow-y:auto;transform:translateX(-105%);transition:.25s;z-index:999}
+.sidebar.open{transform:translateX(0)}
+.sidebar-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sidebar-brand{display:flex;gap:12px;align-items:center}
+.sidebar-brand img{width:56px;height:56px;object-fit:contain}
+.sidebar-brand-text strong{display:block;color:var(--dourado);font-size:15px;letter-spacing:1.2px;font-weight:900;line-height:1.2}
+.sidebar-brand-text span{display:block;color:#cbd6ea;font-size:11px;margin-top:4px}
+.sidebar-close{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font-size:22px}
+.sidebar-close:hover{background:var(--dourado);color:#061d44}
+.sidebar-block{margin-bottom:20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px}
+.sidebar-title{color:var(--dourado);font-size:12px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:12px}
+.side-menu{display:flex;flex-direction:column;gap:6px}
+.side-menu a{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:11px;color:#cbd6ea;font-size:14px;border:1px solid transparent}
+.side-menu a:hover{background:var(--gold-soft);color:var(--dourado);border-color:var(--gold-line);transform:translateX(3px)}
+.side-icon{width:20px;text-align:center;color:var(--dourado);flex-shrink:0}
+
+/* CONTAINER */
+.container{padding:30px 0 50px;min-height:calc(100vh - 80px);background:linear-gradient(rgba(1,7,18,.6), rgba(1,7,18,.8)), url("fundo.png") center center / cover no-repeat fixed}
+
+/* HERO */
+.hero-simples{
+  background:radial-gradient(circle at top left, rgba(247,198,0,.15), transparent 40%),
+    linear-gradient(135deg, rgba(16,42,82,.95), rgba(8,23,44,.97));
+  border:1px solid rgba(247,198,0,.25);border-radius:18px;
+  padding:26px 26px;margin-bottom:24px;
+  box-shadow:0 15px 35px rgba(0,0,0,.4);
+}
+.hero-simples h1{color:var(--dourado);font-size:28px;font-weight:900;margin-bottom:8px;letter-spacing:.5px}
+.hero-simples p{color:#cbd6ea;font-size:14px;line-height:1.6;max-width:760px}
+
+/* FILTROS */
+.filtros{
+  display:grid;grid-template-columns:1fr 220px 220px;
+  gap:10px;margin-bottom:22px;
+}
+.filtros input,.filtros select{
+  padding:12px 14px;border-radius:10px;
+  border:1px solid rgba(247,198,0,.25);
+  background:rgba(2,10,24,.7);color:#fff;
+  font-size:14px;font-family:inherit;outline:none;
+  transition:.2s;
+}
+.filtros input:focus,.filtros select:focus{
+  border-color:var(--dourado);box-shadow:0 0 0 3px rgba(247,198,0,.15);
+}
+.filtros input::placeholder{color:#9aa9c2}
+.filtros select option{background:#061d44;color:#fff}
+
+/* CONTADOR */
+.contador{
+  display:flex;align-items:center;gap:12px;margin-bottom:18px;
+  color:#cbd6ea;font-size:13px;font-weight:700;
+}
+.contador .badge{
+  background:rgba(247,198,0,.15);color:var(--dourado);
+  border:1px solid rgba(247,198,0,.35);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:900;
+}
+
+/* CARDS */
+.lista-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:18px;
+}
+.card-sumula{
+  background:radial-gradient(circle at top right, rgba(247,198,0,.1), transparent 40%),
+    linear-gradient(180deg, rgba(16,42,82,.96), rgba(8,23,44,.98));
+  border:1px solid rgba(247,198,0,.25);
+  border-radius:16px;padding:18px;
+  transition:.25s;position:relative;
+  display:flex;flex-direction:column;
+}
+.card-sumula:hover{
+  border-color:var(--dourado);transform:translateY(-3px);
+  box-shadow:0 14px 30px rgba(247,198,0,.2);
+}
+.card-topo{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:10px;margin-bottom:16px;
+}
+.card-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg,var(--dourado),#ffe45c);
+  color:#061d44;display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+}
+.card-status{
+  background:var(--verde);color:#fff;
+  font-size:11px;font-weight:900;
+  padding:5px 12px;border-radius:999px;
+  letter-spacing:.5px;text-transform:uppercase;
+}
+.card-placar{
+  display:inline-block;
+  background:rgba(2,10,24,.7);
+  border:2px solid var(--dourado);
+  color:var(--dourado);
+  padding:10px 22px;border-radius:12px;
+  font-size:24px;font-weight:900;
+  letter-spacing:2px;white-space:nowrap;
+  margin:0 auto 10px;
+}
+.card-placar-wrap{text-align:center;margin-bottom:10px}
+.card-times{
+  color:#fff;font-size:14px;font-weight:900;
+  text-transform:uppercase;line-height:1.3;
+  text-align:center;margin-bottom:14px;
+  padding:0 4px;
+}
+.card-times b{color:#fff}
+.card-times i{color:var(--dourado);font-style:normal;margin:0 6px}
+.card-info{
+  text-align:center;color:#cbd6ea;
+  font-size:13px;line-height:1.7;margin-bottom:12px;
+}
+.card-info strong{color:#fff;font-size:14px;font-weight:900;display:block;margin-bottom:4px}
+.card-tag-arbitro{
+  display:block;text-align:center;
+  background:rgba(37,99,235,.4);
+  color:#cbd6ea;
+  padding:7px 14px;border-radius:999px;
+  font-size:12px;font-weight:800;
+  margin:0 auto 14px;
+}
+.card-acoes{
+  display:grid;grid-template-columns:1fr 48px;gap:8px;
+  margin-top:auto;
+}
+.btn-ver-card{
+  background:linear-gradient(135deg,var(--dourado),#ffe45c);
+  color:#061d44;padding:12px 14px;border-radius:10px;
+  font-weight:900;font-size:14px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-ver-card:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(247,198,0,.3)}
+.btn-wpp-card{
+  background:#25d366;color:#fff;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;padding:12px;
+}
+.btn-wpp-card:hover{background:#1ebe5b;transform:translateY(-2px)}
+
+/* VAZIO */
+.vazio{
+  grid-column:1/-1;text-align:center;padding:70px 20px;
+  background:rgba(6,29,68,.7);
+  border:2px dashed rgba(247,198,0,.3);border-radius:20px;
+}
+.vazio i{font-size:60px;color:var(--dourado);opacity:.6;margin-bottom:18px}
+.vazio h3{color:#fff;font-size:22px;font-weight:900;margin-bottom:10px}
+.vazio p{color:#cbd6ea;font-size:14px;margin-bottom:20px}
+
+/* CARREGANDO */
+.carregando{
+  grid-column:1/-1;text-align:center;padding:70px 20px;
+  color:#cbd6ea;font-size:14px;
+}
+.carregando i{font-size:32px;color:var(--dourado);margin-bottom:14px;display:block}
+
+@media(max-width:900px){
+  .top-nav{display:none}
+  .filtros{grid-template-columns:1fr}
+  .hero-simples h1{font-size:22px}
+}
+@media(max-width:600px){
+  .lista-cards{grid-template-columns:1fr}
+  .brand img{width:42px;height:42px}
+  .brand-text strong{font-size:14px}
+  .btn-nova-topo{padding:9px 14px;font-size:12px}
+  .hero-simples{padding:20px}
+  .hero-simples h1{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- MENU LATERAL -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="fecharSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">
+      <img src="logo.png" alt="DG Sistemas">
+      <div class="sidebar-brand-text">
+        <strong>DG SISTEMAS</strong>
+        <span>Súmula digital</span>
+      </div>
+    </div>
+    <button class="sidebar-close" onclick="fecharSidebar()">×</button>
+  </div>
+  <div class="sidebar-block">
+    <div class="sidebar-title">Navegação</div>
+    <div class="side-menu">
+      <a href="index.html"><span class="side-icon"><i class="fa-solid fa-house"></i></span>Início</a>
+      <a href="jogos.html"><span class="side-icon"><i class="fa-solid fa-futbol"></i></span>Jogos</a>
+      <a href="sumulas.html"><span class="side-icon"><i class="fa-solid fa-file-signature"></i></span>Súmula</a>
+      <a href="sumula-offline.html"><span class="side-icon"><i class="fa-solid fa-plus"></i></span>Nova Súmula</a>
+    </div>
+  </div>
+  <div class="sidebar-block">
+    <div class="sidebar-title">Informações</div>
+    <div class="side-menu">
+      <a href="https://wa.me/5562984284785" target="_blank"><span class="side-icon"><i class="fa-solid fa-phone"></i></span>Contato</a>
+    </div>
+  </div>
+</aside>
+
+<!-- MENU DE CIMA -->
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <button class="menu-toggle-cima" onclick="abrirSidebar()">☰</button>
+      <a href="index.html" class="brand">
+        <img src="logo.png" alt="DG Sistemas">
+        <div class="brand-text">
+          <strong>DG SISTEMAS</strong>
+          <span>Súmula digital oficial</span>
+        </div>
+      </a>
+    </div>
+    <nav class="top-nav">
+      <a href="index.html">Início</a>
+      <a href="jogos.html">Jogos</a>
+      <a href="sumulas.html" class="ativo">Súmula</a>
+      <a href="sumula-offline.html">Nova Súmula</a>
+    </nav>
+    <a href="sumula-offline.html" class="btn-nova-topo">
+      <i class="fa-solid fa-plus"></i> Nova Súmula
+    </a>
+  </div>
+</header>
+
+<main class="container">
+  <div class="wrap">
+
+    <section class="hero-simples">
+      <h1><i class="fa-solid fa-file-signature"></i> Súmulas Publicadas</h1>
+      <p>Todas as súmulas oficiais registradas no sistema. Clique em "Ver Súmula" para consultar, imprimir ou compartilhar.</p>
+    </section>
+
+    <section class="filtros">
+      <input id="busca" placeholder="Pesquisar por time, campeonato, árbitro...">
+      <select id="filtroCampeonato"><option value="">Todos os campeonatos</option></select>
+      <select id="filtroCategoria"><option value="">Todas as categorias</option></select>
+    </section>
+
+    <div class="contador">
+      <span class="badge" id="contador">0 súmulas</span>
+      <span>atualizadas em tempo real</span>
+    </div>
+
+    <section class="lista-cards" id="listaCards">
+      <div class="carregando">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Carregando súmulas...
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script type="module">
+import { db } from "./firebase.js";
+import { collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+const $=id=>document.getElementById(id);
+const normalizar=v=>String(v||"").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+
+let todasSumulas=[];
+
+function abrirSidebar(){ $("sidebar").classList.add("open"); $("sidebarOverlay").classList.add("show"); }
+function fecharSidebar(){ $("sidebar").classList.remove("open"); $("sidebarOverlay").classList.remove("show"); }
+window.abrirSidebar=abrirSidebar;
+window.fecharSidebar=fecharSidebar;
+
+function dataBR(v){
+  if(!v)return"-";
+  const p=String(v).split("-");
+  if(p.length===3)return p[2]+"/"+p[1]+"/"+p[0];
+  return v;
+}
+
+function horaBR(v){
+  return v||"--:--";
+}
+
+function finalizadas(){
+  return todasSumulas.filter(s=>s.sumulaFinalizada===true||s.publica===true||s.publico===true||s.status==="finalizado");
+}
+
+function preencherFiltros(){
+  const lista=finalizadas();
+  const campAtual=$("filtroCampeonato").value;
+  const catAtual=$("filtroCategoria").value;
+
+  const camps=[...new Set(lista.map(s=>s.campeonato).filter(Boolean))].sort();
+  $("filtroCampeonato").innerHTML='<option value="">Todos os campeonatos</option>'+
+    camps.map(c=>`<option value="${c}">${c}</option>`).join("");
+  if(camps.includes(campAtual))$("filtroCampeonato").value=campAtual;
+
+  const cats=[...new Set(lista.filter(s=>!$("filtroCampeonato").value||s.campeonato===$("filtroCampeonato").value).map(s=>s.categoria).filter(Boolean))].sort();
+  $("filtroCategoria").innerHTML='<option value="">Todas as categorias</option>'+
+    cats.map(c=>`<option value="${c}">${c}</option>`).join("");
+  if(cats.includes(catAtual))$("filtroCategoria").value=catAtual;
+}
+
+function filtradas(){
+  const busca=normalizar($("busca").value);
+  const camp=$("filtroCampeonato").value;
+  const cat=$("filtroCategoria").value;
+
+  return finalizadas().filter(s=>{
+    if(camp&&s.campeonato!==camp)return false;
+    if(cat&&s.categoria!==cat)return false;
+    if(busca){
+      const txt=normalizar(`${s.timeA?.nome||""} ${s.timeB?.nome||""} ${s.campeonato||""} ${s.categoria||""} ${s.local||""} ${s.arbitro||""}`);
+      if(!txt.includes(busca))return false;
+    }
+    return true;
+  }).sort((a,b)=>{
+    const da=a.criadoEmLocal?new Date(a.criadoEmLocal).getTime():0;
+    const db=b.criadoEmLocal?new Date(b.criadoEmLocal).getTime():0;
+    return db-da;
+  });
+}
+
+function render(){
+  preencherFiltros();
+  const lista=filtradas();
+  $("contador").textContent=lista.length+" súmula"+(lista.length===1?"":"s");
+
+  const box=$("listaCards");
+  if(!lista.length){
+    box.innerHTML=`<div class="vazio">
+      <i class="fa-solid fa-file-signature"></i>
+      <h3>Nenhuma súmula publicada ainda</h3>
+      <p>Crie a primeira no botão "Nova Súmula"</p>
+      <a href="sumula-offline.html" class="btn-nova-topo" style="display:inline-flex">
+        <i class="fa-solid fa-plus"></i> Criar Nova Súmula
+      </a>
+    </div>`;
+    return;
+  }
+
+  box.innerHTML=lista.map(s=>{
+    const gA=(s.gols||[]).filter(g=>normalizar(g.time)!=="b").length;
+    const gB=(s.gols||[]).filter(g=>normalizar(g.time)==="b").length;
+    const golsA=s.golsA||gA;
+    const golsB=s.golsB||gB;
+    const data= dataBR(s.data||"");
+    const hora= horaBR(s.hora||"");
+    return `
+      <article class="card-sumula">
+        <div class="card-topo">
+          <div class="card-icon"><i class="fa-solid fa-file-lines"></i></div>
+          <div class="card-status">Publicada</div>
+        </div>
+
+        <div class="card-placar-wrap">
+          <div class="card-placar">${golsA} x ${golsB}</div>
+        </div>
+
+        <div class="card-times">
+          <b>${s.timeA?.nome||"Time A"}</b>
+          <i>×</i>
+          <b>${s.timeB?.nome||"Time B"}</b>
+        </div>
+
+        <div class="card-info">
+          <strong>${s.campeonato||"-"}</strong>
+          ${s.categoria||"-"}<br>
+          ${data} • ${hora}<br>
+          ${s.local||"-"}
+        </div>
+
+        ${s.arbitro?`<span class="card-tag-arbitro">${s.arbitro}</span>`:""}
+
+        <div class="card-acoes">
+          <a class="btn-ver-card" href="sumula-publica.html?id=${encodeURIComponent(s.id)}">
+            <i class="fa-solid fa-eye"></i> Ver Súmula
+          </a>
+          <a class="btn-wpp-card" href="https://wa.me/?text=${encodeURIComponent("Súmula: "+location.origin+location.pathname.replace("sumulas.html","")+"sumula-publica.html?id="+s.id)}" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </article>`;
+  }).join("");
+}
+
+$("busca").addEventListener("input",render);
+$("filtroCampeonato").addEventListener("change",()=>{ $("filtroCategoria").value=""; render(); });
+$("filtroCategoria").addEventListener("change",render);
+
+onSnapshot(collection(db,"sumulas"),snap=>{
+  todasSumulas=[];
+  snap.forEach(d=>todasSumulas.push({id:d.id,...d.data()}));
+  render();
+},error=>{
+  console.error(error);
+  $("listaCards").innerHTML=`<div class="vazio"><i class="fa-solid fa-triangle-exclamation" style="color:#dc2626;"></i><h3>Erro ao carregar</h3><p>Confira a conexão.</p></div>`;
+});
+</script>
+
+</body>
+</html>
