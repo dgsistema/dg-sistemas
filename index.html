@@ -10,8 +10,7 @@
 :root{
   --azul:#061d44;--azul2:#08285c;--verde:#069447;--dourado:#f7c600;
   --linha:#cfd7e3;--texto:#071833;--muted:#4b5563;--bg:#dfe6ef;
-  --gold:#ffd400;--gold-2:#ffe600;--gold-soft:rgba(255,212,0,.12);
-  --gold-line:rgba(255,212,0,.25);
+  --gold:#ffd400;--gold-soft:rgba(255,212,0,.12);--gold-line:rgba(255,212,0,.25);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:100%;min-height:100%;overflow-x:hidden}
@@ -21,174 +20,159 @@ input,select,textarea{font-family:inherit;outline:none}
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
 
-/* ===== MENU DE CIMA ===== */
-.topbar-principal{
-  background:linear-gradient(180deg,#061d44,#04122b);
-  border-bottom:3px solid var(--dourado);
-  padding:12px 0;
-  position:sticky;top:0;z-index:100;
-  box-shadow:0 4px 20px rgba(0,0,0,.3);
-}
-.topbar-inner{
-  width:min(100% - 28px, 1240px);margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
-}
-.brand{display:flex;align-items:center;gap:12px}
-.brand img{width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(247,198,0,.35))}
-.brand-text strong{
-  display:block;color:var(--dourado);font-size:18px;
-  letter-spacing:1.5px;font-weight:900;line-height:1.1;
-}
-.brand-text span{display:block;color:#cbd6ea;font-size:11px;margin-top:3px}
-.menu-toggle-cima{
-  width:44px;height:44px;border-radius:12px;
-  background:rgba(247,198,0,.1);border:1px solid rgba(247,198,0,.3);
-  color:var(--dourado);font-size:18px;
-  display:flex;align-items:center;justify-content:center;
-}
-.menu-toggle-cima:hover{background:var(--dourado);color:#061d44}
-
-.top-nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.top-nav a{
-  padding:10px 18px;border-radius:10px;color:#cbd6ea;
-  font-size:14px;font-weight:700;transition:.2s;
-  border:1px solid transparent;
-}
-.top-nav a:hover,.top-nav a.ativo{
-  color:var(--dourado);background:rgba(247,198,0,.1);
-  border-color:rgba(247,198,0,.25);
-}
-.btn-nova-topo{
-  background:linear-gradient(135deg,var(--dourado),#ffe45c);
-  color:#061d44;padding:11px 22px;border-radius:11px;
-  font-weight:900;font-size:14px;display:inline-flex;align-items:center;gap:8px;
-  box-shadow:0 8px 20px rgba(247,198,0,.3);
-}
-.btn-nova-topo:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(247,198,0,.45)}
-
-/* ===== MENU LATERAL ===== */
-.sidebar-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.6);
-  opacity:0;visibility:hidden;transition:.25s;z-index:998;
-}
-.sidebar-overlay.show{opacity:1;visibility:visible}
-.sidebar{
-  position:fixed;top:0;left:0;width:320px;max-width:88%;height:100vh;
-  background:linear-gradient(180deg,#061d44 0%,#021022 100%);
-  border-right:1px solid var(--gold-line);box-shadow:0 12px 30px rgba(0,0,0,.4);
-  padding:22px 18px 28px;overflow-y:auto;
-  transform:translateX(-105%);transition:.25s;z-index:999;
-}
-.sidebar.open{transform:translateX(0)}
-.sidebar-header{
-  display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
-  margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.08);
-}
-.sidebar-brand{display:flex;gap:12px;align-items:center}
-.sidebar-brand img{width:56px;height:56px;object-fit:contain}
-.sidebar-brand-text strong{
-  display:block;color:var(--dourado);font-size:15px;
-  letter-spacing:1.2px;font-weight:900;line-height:1.2;
-}
-.sidebar-brand-text span{display:block;color:#cbd6ea;font-size:11px;margin-top:4px}
-.sidebar-close{
-  width:36px;height:36px;border-radius:50%;
-  background:rgba(255,255,255,.08);color:#fff;font-size:22px;
-}
-.sidebar-close:hover{background:var(--dourado);color:#061d44}
-.sidebar-block{
-  margin-bottom:20px;background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px;
-}
-.sidebar-title{
-  color:var(--dourado);font-size:12px;font-weight:900;
-  letter-spacing:1.2px;text-transform:uppercase;margin-bottom:12px;
-}
-.side-menu{display:flex;flex-direction:column;gap:6px}
-.side-menu a{
-  display:flex;align-items:center;gap:10px;padding:11px 12px;
-  border-radius:11px;color:#cbd6ea;font-size:14px;
-  border:1px solid transparent;transition:.2s;
-}
-.side-menu a:hover{
-  background:var(--gold-soft);color:var(--dourado);
-  border-color:var(--gold-line);transform:translateX(3px);
-}
-.side-icon{width:20px;text-align:center;color:var(--dourado);flex-shrink:0}
-
 /* ===== TELA INICIAL ===== */
 #telaInicial{
-  min-height:calc(100vh - 80px);
+  min-height:100vh;
   background:
-    linear-gradient(rgba(1,7,18,.75), rgba(1,7,18,.9)),
+    linear-gradient(rgba(1,7,18,.78), rgba(1,7,18,.92)),
     url("fundo.png") center center / cover no-repeat fixed;
-  padding:30px 20px;
+  padding:24px 16px;
 }
 .wrap-inicial{max-width:1200px;margin:0 auto}
-.titulo-lista{
-  display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:24px;
+.topo-inicial{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;flex-wrap:wrap;margin-bottom:30px;
+  background:rgba(6,29,68,.92);border:2px solid var(--dourado);
+  border-radius:16px;padding:16px 22px;box-shadow:0 14px 34px rgba(0,0,0,.4);
 }
-.titulo-lista h2{color:#fff;font-size:26px;font-weight:900}
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{width:60px;height:60px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(247,198,0,.4))}
+.brand-text strong{display:block;color:var(--dourado);font-size:20px;font-weight:900;letter-spacing:1.2px;line-height:1.1}
+.brand-text span{display:block;color:#cbd6ea;font-size:12px;margin-top:4px}
+
+.btn-nova{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--dourado),#ffe45c);
+  color:#111;padding:14px 24px;border-radius:12px;
+  font-weight:900;font-size:15px;
+  box-shadow:0 10px 24px rgba(247,198,0,.35);
+}
+.btn-nova:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(247,198,0,.5)}
+
+.titulo-lista{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.titulo-lista h2{color:#fff;font-size:22px;font-weight:900}
 .titulo-lista .badge{
   background:rgba(247,198,0,.15);color:var(--dourado);
   border:1px solid rgba(247,198,0,.35);
-  padding:6px 14px;border-radius:999px;font-size:12px;font-weight:900;
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:900;
 }
 
-.lista-simples{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;
-}
+.lista-simples{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
 .card-salva{
   background:linear-gradient(180deg,rgba(16,42,82,.96),rgba(8,23,44,.97));
-  border:1px solid rgba(247,198,0,.22);border-radius:16px;padding:18px;
+  border:1px solid rgba(247,198,0,.22);border-radius:14px;padding:16px;
   cursor:pointer;transition:.25s;position:relative;
 }
-.card-salva:hover{
-  border-color:var(--dourado);transform:translateY(-3px);
-  box-shadow:0 14px 30px rgba(247,198,0,.2);
-}
+.card-salva:hover{border-color:var(--dourado);transform:translateY(-3px);box-shadow:0 12px 26px rgba(247,198,0,.2)}
 .card-salva .status{
-  position:absolute;top:14px;right:14px;
+  position:absolute;top:12px;right:12px;
   background:var(--verde);color:#fff;font-size:10px;font-weight:900;
-  padding:5px 11px;border-radius:999px;letter-spacing:.5px;
+  padding:4px 10px;border-radius:999px;
 }
 .card-salva .status.rascunho{background:#7a5a00}
 .times-linha{
   display:grid;grid-template-columns:1fr auto 1fr;gap:10px;
-  align-items:center;margin:16px 0;
+  align-items:center;margin:14px 0;
 }
-.time-nome{
-  color:#fff;font-size:14px;font-weight:900;text-align:center;
-  line-height:1.2;word-break:break-word;
-}
+.time-nome{color:#fff;font-size:14px;font-weight:900;text-align:center;line-height:1.2;word-break:break-word}
 .placar-mini{
   background:var(--azul);border:1px solid var(--dourado);
-  color:var(--dourado);padding:9px 16px;border-radius:10px;
-  font-size:18px;font-weight:900;white-space:nowrap;
+  color:var(--dourado);padding:8px 14px;border-radius:10px;
+  font-size:17px;font-weight:900;white-space:nowrap;
 }
-.info-card{color:#cbd6ea;font-size:12px;line-height:1.75;margin-bottom:14px}
+.info-card{color:#cbd6ea;font-size:12px;line-height:1.7;margin-bottom:12px}
 .info-card i{color:var(--dourado);width:14px}
 .botoes-card{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .botoes-card button{
-  padding:10px 8px;border-radius:10px;font-weight:900;font-size:12px;
+  padding:9px 8px;border-radius:9px;font-weight:900;font-size:12px;
   display:flex;align-items:center;justify-content:center;gap:6px;
 }
-.btn-ver{background:linear-gradient(135deg,var(--dourado),#ffe45c);color:#061d44}
+.btn-ver{background:linear-gradient(135deg,var(--dourado),#ffe45c);color:#111}
 .btn-wpp{background:#25d366;color:#fff}
-.btn-ver:hover{transform:translateY(-2px)}
-.btn-wpp:hover{background:#1ebe5b}
 
 .vazio{
-  grid-column:1/-1;text-align:center;padding:70px 20px;
-  background:rgba(6,29,68,.7);
-  border:2px dashed rgba(247,198,0,.3);border-radius:20px;
+  grid-column:1/-1;text-align:center;padding:60px 20px;
+  background:rgba(6,29,68,.7);border:2px dashed rgba(247,198,0,.3);
+  border-radius:20px;
 }
-.vazio i{font-size:64px;color:var(--dourado);opacity:.6;margin-bottom:18px}
-.vazio h3{color:#fff;font-size:22px;font-weight:900;margin-bottom:10px}
-.vazio p{color:#cbd6ea;font-size:14px;margin-bottom:22px}
+.vazio i{font-size:60px;color:var(--dourado);opacity:.6;margin-bottom:16px}
+.vazio h3{color:#fff;font-size:20px;font-weight:900;margin-bottom:8px}
+.vazio p{color:#cbd6ea;font-size:14px;margin-bottom:20px}
 
 /* ===== TELA SÚMULA ===== */
 #telaSumula{display:none;background:var(--bg);min-height:100vh}
+
+.offline-tools{
+  max-width:1120px;margin:12px auto 0;background:#fff;
+  border:1px solid #b9c4d4;border-radius:10px;
+  box-shadow:0 8px 24px rgba(0,0,0,.14);overflow:hidden;
+}
+.tools-head{
+  background:linear-gradient(135deg,var(--azul),var(--azul2));
+  color:#fff;border-bottom:4px solid var(--dourado);
+  padding:14px 18px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.tools-head h2{color:var(--dourado);font-size:22px;text-transform:uppercase}
+.tools-head p{color:#dbe6f7;font-size:13px;margin-top:3px}
+.net-status{
+  padding:8px 12px;border-radius:999px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);
+  font-weight:900;font-size:12px;
+}
+.net-status.on{color:#9dffb7}
+.net-status.off{color:#ffd0d0}
+
+.tools-body{padding:14px}
+.alerta{
+  background:#fff7d6;border:1px solid #e7c955;color:#4a3b00;
+  padding:10px 12px;border-radius:10px;margin-bottom:12px;
+  font-weight:800;line-height:1.4;font-size:13px;
+}
+.botoes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.btn-tool{
+  min-height:42px;padding:9px 12px;border-radius:8px;
+  color:#111;font-weight:900;display:flex;align-items:center;
+  justify-content:center;gap:7px;font-size:12px;
+  background:linear-gradient(135deg,var(--dourado),#ffe45c);
+}
+.btn-tool.azul{background:var(--azul2);color:#fff}
+.btn-tool.verde{background:var(--verde);color:#fff}
+.btn-tool.vermelho{background:#dc2626;color:#fff}
+.btn-tool.cinza{background:#4b5563;color:#fff}
+
+.form-area{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-card{border:1px solid var(--linha);border-radius:10px;overflow:hidden;background:#fff}
+.form-card.full{grid-column:1/-1}
+.form-title{
+  background:linear-gradient(135deg,var(--azul),var(--azul2));
+  color:#fff;padding:9px 12px;font-size:15px;font-weight:900;text-transform:uppercase;
+}
+.form-body{padding:12px}
+.form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.form-grid.duas{grid-template-columns:1fr 1fr}
+.campo.full{grid-column:1/-1}
+label{display:block;color:var(--azul);font-size:11px;font-weight:900;text-transform:uppercase;margin-bottom:4px}
+input,select,textarea{
+  width:100%;padding:9px;border:1px solid var(--linha);
+  border-radius:8px;background:#f9fbff;color:#111;
+  font-size:13px;
+}
+textarea{min-height:70px;resize:vertical}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--dourado);box-shadow:0 0 0 3px rgba(247,198,0,.15);
+}
+.lista{display:grid;gap:7px;margin-top:10px}
+.item{
+  background:#f5f7fb;border:1px solid var(--linha);border-radius:9px;
+  padding:8px;display:grid;grid-template-columns:1fr auto;
+  gap:8px;align-items:center;
+}
+.item strong{color:var(--azul);display:block;font-size:13px}
+.item small{color:var(--muted);font-size:11px;line-height:1.35;display:block;margin-top:2px}
+.icon-btn{width:30px;height:30px;border-radius:8px;color:#fff;background:#dc2626}
+
+/* ===== PREVIEW DA SÚMULA ===== */
 .sumula-viewport{width:100%;overflow:hidden;display:flex;justify-content:center;padding:14px 8px}
 .sumula-scale{width:1120px;max-width:1120px;transform-origin:top center}
 .sumula-page{
@@ -196,15 +180,14 @@ a{text-decoration:none;color:inherit}
   border:1px solid #b9c4d4;border-radius:7px;overflow:hidden;
   box-shadow:0 8px 24px rgba(0,0,0,.16);
 }
-
-.header-sumula{
+.header{
   display:grid;grid-template-columns:145px 1.35fr 145px 260px;
   align-items:center;gap:14px;padding:16px 22px 18px;
   background:radial-gradient(circle at top left,rgba(255,255,255,.10),transparent 32%),
     linear-gradient(135deg,#041b40 0%,#06265a 55%,#061d44 100%);
   color:#fff;border-bottom:4px solid var(--dourado);position:relative;overflow:hidden;
 }
-.header-sumula:after{
+.header:after{
   content:"";position:absolute;right:-70px;bottom:-28px;width:310px;height:70px;
   border-top:5px solid var(--dourado);transform:rotate(-12deg);opacity:.95;
 }
@@ -219,9 +202,7 @@ a{text-decoration:none;color:inherit}
   letter-spacing:1px;line-height:.95;text-transform:uppercase;
 }
 .header-title p{margin-top:8px;color:var(--dourado);font-size:20px;font-weight:900;text-transform:uppercase}
-.header-title span{
-  display:block;margin-top:6px;color:#fff;font-size:14px;font-weight:900;text-transform:uppercase;
-}
+.header-title span{display:block;margin-top:6px;color:#fff;font-size:14px;font-weight:900;text-transform:uppercase}
 .header-right{
   text-align:left;color:#fff;font-weight:900;line-height:1.12;
   text-transform:uppercase;position:relative;z-index:1;
@@ -244,18 +225,18 @@ a{text-decoration:none;color:inherit}
   display:block;font-size:12px;font-weight:900;text-transform:uppercase;
   color:#111;margin-bottom:4px;
 }
-.info-box input{
-  display:block;color:var(--azul);font-size:15px;font-weight:900;
-  border:none;background:transparent;padding:0;width:100%;
+.info-box strong{display:block;color:var(--azul);font-size:17px;font-weight:900}
+.status-finalizado{
+  display:inline-flex!important;align-items:center;justify-content:center;gap:7px;
+  background:var(--verde);color:#fff!important;padding:8px 15px;
+  border-radius:8px;font-size:15px!important;font-weight:900;
 }
-.info-box input:focus{background:#f5f7fb;border-radius:6px;padding:4px 6px}
-
-.status-badge{
-  display:inline-flex;align-items:center;justify-content:center;gap:7px;
-  background:#7a5a00;color:#fff;padding:8px 15px;border-radius:8px;
-  font-size:15px;font-weight:900;text-transform:uppercase;
+.status-rascunho{
+  display:inline-flex!important;align-items:center;justify-content:center;gap:7px;
+  background:#7a5a00;color:#fff!important;padding:8px 15px;
+  border-radius:8px;font-size:15px!important;font-weight:900;
 }
-.status-badge.final{background:var(--verde)}
+.status-finalizado i,.status-rascunho i{color:#fff!important;font-size:18px!important;width:auto!important}
 
 .score-card{
   margin:0 16px 12px;display:grid;grid-template-columns:1fr 250px 1fr;
@@ -266,24 +247,19 @@ a{text-decoration:none;color:inherit}
   padding:13px;background:#fff;
 }
 .team-score.away{flex-direction:row-reverse}
-.team-score img{width:104px;height:104px;object-fit:contain}
-.team-name{text-align:center;flex:1}
-.team-name input{
-  width:100%;color:var(--azul);font-size:31px;font-weight:900;
-  text-transform:uppercase;text-align:center;border:none;
-  background:transparent;padding:4px;
+.team-score img{display:none!important}
+.team-name{text-align:center}
+.team-name h2{
+  color:var(--azul);font-size:31px;font-weight:900;
+  text-transform:uppercase;line-height:1.05;
 }
-.team-name input:focus{background:#f5f7fb;border-radius:8px}
+.team-name p{display:none}
 .score-center{
   background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   border-left:1px solid var(--linha);border-right:1px solid var(--linha);
 }
-.score-number{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  font-size:70px;font-weight:900;
-}
-.score-valor{min-width:72px;text-align:center;color:var(--dourado)}
+.score-number{font-size:74px;font-weight:900;letter-spacing:5px;line-height:1}
 .score-center span{margin-top:8px;text-transform:uppercase;font-size:14px;font-weight:900}
 
 .match-strip{
@@ -298,200 +274,150 @@ a{text-decoration:none;color:inherit}
 .match-box:last-child{border-right:none}
 .match-box i{width:34px;color:var(--azul);font-size:30px;text-align:center}
 .match-box small{
-  display:block;color:var(--azul);text-transform:uppercase;font-weight:900;
-  font-size:12px;margin-bottom:3px;
+  display:block;color:var(--azul);text-transform:uppercase;
+  font-weight:900;font-size:12px;margin-bottom:3px;
 }
-.match-box input{
-  display:block;color:#111;font-size:15px;font-weight:900;
-  border:none;background:transparent;padding:0;width:100%;
-}
+.match-box strong{display:block;color:#111;font-size:15px;font-weight:900}
 
-.section{
-  margin:0 16px 12px;border:1px solid var(--linha);border-radius:6px;overflow:hidden;background:#fff;
-}
 .section-title{
-  background:var(--azul);color:#fff;text-align:center;padding:8px 10px;
-  font-size:20px;font-weight:900;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--azul),var(--azul2));
+  color:#fff;text-align:center;padding:8px 10px;font-size:20px;
+  font-weight:900;text-transform:uppercase;border-radius:5px 5px 0 0;
 }
-.section-body{padding:12px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-
+.line-empty{color:#777;font-size:13px;text-align:center;padding:12px}
+.lineups,.comissao{margin:0 16px 12px}
+.lineups-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.lineup-card{border:1px solid var(--linha);border-radius:0 0 5px 5px;overflow:hidden;background:#fff}
 .lineup-head{
-  min-height:42px;display:flex;align-items:center;justify-content:center;gap:10px;
-  color:var(--azul);font-size:20px;font-weight:900;text-transform:uppercase;
-  border:1px solid var(--linha);border-bottom:none;background:#fff;padding:6px;
-}
-.lineup-head input{
-  border:none;background:transparent;color:var(--azul);
+  height:40px;display:flex;align-items:center;justify-content:center;
+  gap:10px;color:var(--azul);background:#fff;border-bottom:1px solid var(--linha);
   font-size:20px;font-weight:900;text-transform:uppercase;
-  text-align:center;width:100%;padding:4px;
 }
-
-.table-wrap{overflow:hidden}
-table.jogadores{width:100%;border-collapse:collapse;table-layout:fixed}
-table.jogadores th{
-  background:#f5f7fb;color:var(--azul);font-size:10.5px;
-  text-transform:uppercase;padding:6px 4px;border:1px solid var(--linha);text-align:left;
+.lineup-head img{display:none!important}
+.table{width:100%;border-collapse:collapse}
+.table th{
+  background:#f5f7fb;color:var(--azul);font-size:12px;
+  text-transform:uppercase;padding:7px 8px;
+  border-bottom:1px solid var(--linha);text-align:left;
 }
-table.jogadores td{
-  color:#111;font-size:11.5px;padding:3px 4px;border:1px solid #e5eaf1;
-}
-table.jogadores input,table.jogadores select{
-  border:none;padding:4px;width:100%;font-size:11px;background:transparent;
-}
-table.jogadores select{cursor:pointer;font-weight:700;color:var(--azul)}
-table.jogadores .num{width:40px;text-align:center}
-table.jogadores .cpf{width:90px}
-table.jogadores .pos{width:95px}
-table.jogadores .acao{width:32px;text-align:center}
-table.jogadores .sub-row td{
+.table td{color:#111;font-size:13px;padding:5px 8px;border-bottom:1px solid #e5eaf1}
+.table tr:last-child td{border-bottom:none}
+.table .num{width:48px;text-align:center}
+.table .posicao{width:160px}
+.sub-row td{
   background:#f8fafc;color:var(--azul);text-align:center;
-  font-weight:900;text-transform:uppercase;padding:6px;font-size:11px;
+  font-weight:900;text-transform:uppercase;padding:7px;
 }
+.legend{margin-top:8px;padding:7px;text-align:center;color:#111;font-size:14px;background:#fff}
 
-.add-row{
-  display:grid;grid-template-columns:52px 1fr 130px 100px 100px auto;
-  gap:5px;margin-top:8px;
+.comissao-grid{
+  display:grid;grid-template-columns:1fr 1fr !important;
+  border:1px solid var(--linha);border-top:none;
+  border-radius:0 0 5px 5px;overflow:hidden;background:#fff;
 }
-.add-row input,.add-row select{
-  padding:7px;border:1px solid var(--linha);border-radius:7px;font-size:11px;
-  background:#fff;color:#111;min-width:0;
-}
-.add-row button{
-  padding:7px 12px;border-radius:7px;font-weight:900;
-  background:var(--azul);color:#fff;font-size:13px;
-}
-.add-row button:hover{background:var(--azul2)}
-
-.btn-remover{
-  background:#dc3545;color:#fff;border-radius:5px;padding:3px 6px;
-  font-weight:900;font-size:10px;cursor:pointer;border:none;
-}
-
-.comissao-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.comissao-card{border:1px solid var(--linha);border-radius:8px;overflow:hidden;background:#fff}
+.comissao-card{padding:12px;border-right:1px solid var(--linha)}
+.comissao-card:last-child{border-right:none}
 .comissao-head{
-  background:#f5f7fb;color:var(--azul);text-align:center;
-  padding:8px;font-size:15px;font-weight:900;text-transform:uppercase;
-  border-bottom:1px solid var(--linha);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  color:var(--azul);font-size:18px;font-weight:900;
+  text-transform:uppercase;margin-bottom:10px;
 }
-.comissao-head input{
-  border:none;background:transparent;color:var(--azul);
-  font-size:15px;font-weight:900;text-transform:uppercase;
-  text-align:center;width:100%;padding:4px;
-}
-.comissao-lista{padding:10px;display:grid;gap:8px;min-height:80px}
+.comissao-head img{display:none!important}
+.comissao-lista{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .comissao-item{
-  display:grid;grid-template-columns:100px 1fr;gap:8px;align-items:center;
-  padding:8px;border:1px solid #dbe3ef;border-radius:8px;background:#f8fafc;
+  min-height:72px;display:grid;grid-template-columns:38px 1fr;
+  gap:10px;align-items:center;padding:10px;
+  border:1px solid #dbe3ef;border-radius:12px;
+  background:linear-gradient(180deg,#fff,#f8fafc);
+  box-shadow:0 4px 10px rgba(6,29,68,.05);
 }
-.comissao-item input{
-  border:none;background:transparent;font-size:11px;color:#111;
-  width:100%;padding:3px;
+.comissao-icone{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,#eaf2ff,#fff);
+  color:var(--azul);display:flex;align-items:center;
+  justify-content:center;font-size:18px;border:1px solid #d7e2f0;
 }
-.comissao-item select{
-  border:none;background:transparent;font-size:10px;color:var(--azul);
-  font-weight:900;text-transform:uppercase;width:100%;
+.comissao-info small{
+  display:block;color:var(--azul);font-size:10px;
+  font-weight:900;text-transform:uppercase;margin-bottom:4px;
 }
-.comissao-add{
-  display:grid;grid-template-columns:1fr 100px auto;gap:6px;
-  padding:10px;border-top:1px solid var(--linha);background:#fff;
-}
-.comissao-add input{
-  padding:7px;border:1px solid var(--linha);border-radius:7px;font-size:11px;
-}
-.comissao-add button{
-  padding:7px 12px;border-radius:7px;background:var(--azul);color:#fff;
-  font-weight:900;font-size:13px;
-}
+.comissao-info strong{display:block;color:#111;font-size:13px;line-height:1.25}
+.comissao-vazio{grid-column:1/-1;color:#777;font-size:13px;text-align:center;padding:12px}
 
-.event-box{border:1px solid var(--linha);border-radius:6px;overflow:hidden}
-.event-box h3{
-  color:#fff;background:var(--azul);text-align:center;padding:8px;
-  font-size:18px;font-weight:900;text-transform:uppercase;
+.events-grid{margin:0 16px 12px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.team-events{border:1px solid var(--linha);border-radius:5px;overflow:hidden;background:#fff}
+.team-events h3{
+  color:#fff;background:linear-gradient(135deg,var(--azul),var(--azul2));
+  text-align:center;padding:8px;font-size:20px;font-weight:900;text-transform:uppercase;
 }
-.event-box.away h3{background:#8b0000}
-.event-box h3 input{
-  border:none;background:transparent;color:#fff;
-  font-size:18px;font-weight:900;text-transform:uppercase;
-  text-align:center;width:100%;padding:4px;
-}
-.event-columns{display:grid;grid-template-columns:1fr 1fr}
+.events-columns{display:grid;grid-template-columns:1fr 1fr}
 .event-col{min-height:130px;padding:12px;border-right:1px solid var(--linha)}
 .event-col:last-child{border-right:none}
 .event-col h4{
-  color:var(--azul);text-align:center;font-size:16px;
+  color:var(--azul);text-align:center;font-size:17px;
   font-weight:900;text-transform:uppercase;margin-bottom:10px;
 }
-.event-form{display:grid;grid-template-columns:1fr 55px 55px auto;gap:5px;margin-bottom:8px}
-.event-form.cartao-form{grid-template-columns:1fr 50px 50px 80px auto}
-.event-form input,.event-form select{
-  padding:6px;border:1px solid var(--linha);border-radius:6px;font-size:11px;
-  background:#fff;color:#111;
-}
-.event-form button{
-  padding:6px 9px;border-radius:6px;background:var(--azul);color:#fff;
-  font-weight:900;font-size:13px;
-}
-.event-item{
-  display:flex;align-items:center;justify-content:space-between;gap:8px;
-  padding:6px 8px;border:1px solid var(--linha);border-radius:7px;
-  background:#f8fafc;margin-bottom:6px;font-size:11.5px;color:#111;
-}
-.event-item button{
-  background:#dc3545;color:#fff;border-radius:5px;padding:3px 6px;
-  font-weight:900;font-size:10px;
-}
+.event-item{display:flex;align-items:center;gap:8px;margin-bottom:10px;color:#111;font-size:14px;line-height:1.2}
+.event-minute{color:var(--azul);font-weight:900;width:42px;flex:0 0 auto}
+.event-name{flex:1}
+.ball{font-size:18px;width:20px;text-align:center}
+.yellow-card,.red-card{width:14px;height:19px;border-radius:3px;display:inline-block;flex:0 0 auto}
+.yellow-card{background:#f7c600}
+.red-card{background:#e30613}
 
-.lower-grid{margin:0 16px 12px;display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}
-.panel{border:1px solid var(--linha);border-radius:6px;overflow:hidden;background:#fff}
+.lower-grid{margin:0 16px 12px;display:grid;grid-template-columns:.8fr 1.35fr;gap:24px}
+.panel{border:1px solid var(--linha);border-radius:5px;overflow:hidden;background:#fff}
 .panel h3{
-  background:var(--azul);color:#fff;text-align:center;padding:8px;
-  font-size:17px;font-weight:900;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--azul),var(--azul2));
+  color:#fff;text-align:center;padding:8px;font-size:18px;
+  font-weight:900;text-transform:uppercase;
 }
-.panel-body{padding:12px}
-.arb-grid{display:grid;gap:8px}
-.arb-grid input{
-  padding:9px;border:1px solid var(--linha);border-radius:7px;font-size:12px;
+.official-row{
+  display:grid;grid-template-columns:165px 1fr;min-height:44px;
+  border-bottom:1px solid var(--linha);align-items:center;
 }
+.official-row:last-child{border-bottom:none}
+.official-label{
+  display:flex;align-items:center;gap:10px;color:var(--azul);
+  font-size:13px;font-weight:900;text-transform:uppercase;padding:10px 12px;
+}
+.official-value{color:#111;font-size:14px;padding:10px 12px}
 .summary-grid{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--linha)}
-.summary-box{text-align:center;padding:12px 8px;border-right:1px solid var(--linha)}
+.summary-box{text-align:center;padding:15px 10px;border-right:1px solid var(--linha)}
 .summary-box:last-child{border-right:none}
-.summary-box span{
-  display:block;color:var(--azul);font-size:11px;font-weight:900;text-transform:uppercase;
-}
-.summary-box strong{
-  display:block;color:var(--azul);font-size:28px;font-weight:900;margin-top:4px;
-}
-.melhor-area{padding:12px;border-top:1px solid var(--linha);display:grid;grid-template-columns:60px 1fr;gap:10px;align-items:center}
-.trofeu{
-  width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--dourado),#ffe45c);
-  display:flex;align-items:center;justify-content:center;font-size:28px;
-}
-.melhor-area select,.melhor-area input{
-  width:100%;padding:7px;border:1px solid var(--linha);border-radius:7px;
-  font-size:12px;margin-bottom:5px;background:#fff;
-}
+.summary-box i{color:var(--azul);font-size:28px;margin-bottom:6px}
+.summary-box span{display:block;color:var(--azul);font-size:12px;font-weight:900;text-transform:uppercase}
+.summary-box strong{display:block;color:var(--azul);font-size:31px;font-weight:900;margin-top:4px}
+.summary-detail{color:#111;font-size:12px;margin-top:2px}
+.summary-card-icon{margin:0 auto 7px;width:18px;height:24px;border-radius:3px}
+.best-player{display:grid;grid-template-columns:110px 1fr 90px;align-items:center;gap:12px;padding:12px}
+.best-photo{display:none!important}
+.best-player h4{color:var(--azul);font-size:14px;font-weight:900;text-transform:uppercase;margin-bottom:8px}
+.best-player strong{display:block;color:#111;font-size:18px;font-weight:900}
+.best-player span{display:block;color:var(--azul);font-size:13px;margin-top:4px}
+.trophy{text-align:center;font-size:58px}
 
-.obs-box{margin:0 16px 12px}
-.obs-box textarea{
-  width:100%;min-height:90px;padding:10px;border:1px solid var(--linha);
-  border-radius:7px;font-size:13px;resize:vertical;background:#fff;
-}
-
-.botoes-final{
-  margin:0 16px 16px;display:grid;
-  grid-template-columns:repeat(4,1fr);gap:10px;
-}
-.btn-final{
-  padding:14px 12px;border-radius:10px;font-weight:900;font-size:13px;
+.footer-grid{margin:0 16px;display:grid;grid-template-columns:.8fr 1.35fr;gap:24px}
+.auth-box{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;padding:12px}
+.auth-box img{width:98px;height:98px}
+.auth-text strong{display:block;color:var(--azul);font-size:14px;font-weight:900;text-transform:uppercase}
+.auth-text p{color:#111;font-size:12px;line-height:1.35}
+.auth-code{color:var(--azul);font-size:17px;font-weight:900;margin:4px 0}
+.buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:18px}
+.btn{
+  min-height:58px;border-radius:8px;color:#fff;font-weight:900;
   display:flex;align-items:center;justify-content:center;gap:8px;
+  text-align:center;font-size:13px;padding:10px;
 }
-.btn-final i{font-size:16px}
-.btn-salvar{background:var(--azul);color:#fff}
-.btn-pdf{background:#dc2626;color:#fff}
-.btn-whats{background:#25d366;color:#fff}
-.btn-fechar{background:linear-gradient(135deg,var(--dourado),#ffe45c);color:#061d44}
+.btn i{font-size:24px}
+.btn-whats{background:#0ca84a}
+.btn-email{background:#2563eb}
+.btn-link{background:#4b5563}
+.btn-pdf{background:#dc2626}
+.final-footer{
+  margin-top:12px;background:linear-gradient(135deg,var(--azul),var(--azul2));
+  color:#fff;text-align:center;padding:9px;font-size:13px;line-height:1.35;
+}
 
 .patrocinio-sumula{
   width:100%;background:#061d44;margin:0;padding:10px 16px;
@@ -501,984 +427,772 @@ table.jogadores .sub-row td{
   width:100%;max-height:150px;object-fit:contain;margin:0 auto;
 }
 
-.final-footer{
-  background:linear-gradient(135deg,var(--azul),var(--azul2));
-  color:#fff;text-align:center;padding:9px;font-size:12px;line-height:1.4;
-}
-
 @media(max-width:900px){
-  .topbar-principal .top-nav{display:none}
-  .sumula-viewport{justify-content:flex-start;padding:8px 0}
+  body{background:#fff}
+  .offline-tools{margin:0;border-radius:0}
+  .form-area,.form-grid,.form-grid.duas{grid-template-columns:1fr}
+  .sumula-viewport{justify-content:flex-start;align-items:flex-start;padding:8px 0}
   .sumula-scale{transform:scale(var(--escala-mobile,1));transform-origin:top left}
-  .grid2,.comissao-grid,.lower-grid,.event-columns{grid-template-columns:1fr}
-  .botoes-final{grid-template-columns:1fr 1fr}
-  .brand img{width:44px;height:44px}
-  .brand-text strong{font-size:14px}
-  .brand-text span{font-size:10px}
-  .btn-nova-topo{padding:9px 14px;font-size:12px}
+  .sumula-page{border-radius:0;box-shadow:none}
+  .header-title h1{font-size:52px;white-space:nowrap}
+  .comissao-grid{grid-template-columns:1fr 1fr !important}
+  .comissao-lista{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+  .match-strip{grid-template-columns:1fr 1fr 1.35fr 1.1fr !important}
+  .team-name p{display:none !important}
 }
 @media print{
   @page{size:A4 portrait;margin:5mm}
-  body{background:#fff!important}
-  .topbar-principal,.sidebar,.sidebar-overlay,.botoes-final{display:none!important}
-  .sumula-viewport{display:block;padding:0}
-  .sumula-scale{transform:none!important;width:100%!important}
+  html,body{width:210mm;min-height:297mm;background:#fff!important;overflow:visible!important}
+  body{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .offline-tools,#telaInicial{display:none!important}
+  .sumula-viewport{display:block;width:100%;padding:0;overflow:visible}
+  .sumula-scale{width:100%;max-width:none;transform:none!important}
+  .sumula-page{width:100%;max-width:none;margin:0;border:1px solid #b9c4d4;border-radius:0;box-shadow:none}
+  .header{grid-template-columns:85px 1fr 80px 150px;padding:8px 10px 6px}
+  .header-logo img,.header-campeonato-logo img{width:70px;height:70px}
+  .header-title h1{font-size:38px}
+  .header-title p{font-size:15px}
+  .header-title span{font-size:10px}
+  .header-right .liga-nome{font-size:14px}
+  .header-right .liga-slogan{font-size:11px}
+  .info-strip{margin:7px 10px 8px}
+  .info-box{min-height:56px;padding:6px 8px}
+  .info-box i{font-size:24px;width:28px}
+  .info-box strong{font-size:13px}
+  .info-box small{font-size:10px}
+  .score-card,.match-strip,.lineups,.comissao,.events-grid,.lower-grid,.footer-grid{margin-left:10px;margin-right:10px}
+  .score-card{grid-template-columns:1fr 180px 1fr;min-height:96px}
+  .team-score{gap:10px;padding:8px}
+  .team-name h2{font-size:20px}
+  .team-name p{font-size:12px}
+  .score-number{font-size:48px}
+  .match-strip{grid-template-columns:1fr 1fr 1.35fr 1.1fr}
+  .match-box{min-height:48px;padding:6px 8px}
+  .match-box i{font-size:22px}
+  .section-title,.team-events h3,.panel h3{font-size:15px;padding:5px}
+  .lineup-head{height:30px;font-size:15px}
+  .table th{font-size:9px;padding:3px 5px}
+  .table td{font-size:9.5px;padding:2.6px 5px}
+  .events-grid,.lower-grid,.footer-grid{gap:12px}
+  .event-col{min-height:85px;padding:7px}
+  .event-col h4{font-size:12px;margin-bottom:6px}
+  .event-item{font-size:10px;margin-bottom:5px}
+  .comissao-lista{grid-template-columns:repeat(2,1fr);gap:5px}
+  .comissao-item{min-height:44px;grid-template-columns:24px 1fr;gap:5px;padding:5px}
+  .comissao-icone{width:22px;height:22px;font-size:11px}
+  .comissao-info small{font-size:7px;margin-bottom:1px}
+  .comissao-info strong{font-size:8px}
+  .official-row{min-height:31px;grid-template-columns:130px 1fr}
+  .official-label,.official-value{font-size:10px;padding:6px 8px}
+  .summary-box{padding:8px 6px}
+  .summary-box strong{font-size:22px}
+  .best-player{grid-template-columns:75px 1fr 60px;padding:7px}
+  .trophy{font-size:36px}
+  .auth-box{grid-template-columns:76px 1fr;padding:7px}
+  .auth-box img{width:70px;height:70px}
+  .buttons{display:none!important}
+  .final-footer{margin-top:8px;padding:6px;font-size:10px}
+  .lineup-card,.comissao-card,.team-events,.panel,.score-card,.match-strip,.info-strip,.lower-grid,.footer-grid{break-inside:avoid;page-break-inside:avoid}
 }
 </style>
 </head>
 <body>
 
-<!-- ===== MENU LATERAL ===== -->
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="fecharSidebar()"></div>
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <div class="sidebar-brand">
-      <img src="logo.png" alt="DG Sistemas">
-      <div class="sidebar-brand-text">
-        <strong>DG SISTEMAS</strong>
-        <span>Gestão de súmulas</span>
-      </div>
-    </div>
-    <button class="sidebar-close" onclick="fecharSidebar()">×</button>
-  </div>
-
-  <div class="sidebar-block">
-    <div class="sidebar-title">Navegação</div>
-    <div class="side-menu">
-      <a href="javascript:irInicio()"><span class="side-icon"><i class="fa-solid fa-house"></i></span>Início</a>
-      <a href="javascript:novaSumula()"><span class="side-icon"><i class="fa-solid fa-plus"></i></span>Nova Súmula</a>
-      <a href="javascript:irInicio()"><span class="side-icon"><i class="fa-solid fa-file-signature"></i></span>Minhas Súmulas</a>
-    </div>
-  </div>
-
-  <div class="sidebar-block">
-    <div class="sidebar-title">Informações</div>
-    <div class="side-menu">
-      <a href="javascript:alert('DG Sistemas - Sistema de súmulas oficiais. Documento autenticado por QR Code.')"><span class="side-icon"><i class="fa-solid fa-circle-info"></i></span>Sobre o sistema</a>
-      <a href="https://wa.me/5562984284785" target="_blank"><span class="side-icon"><i class="fa-solid fa-phone"></i></span>Contato</a>
-    </div>
-  </div>
-</aside>
-
-<!-- ===== MENU DE CIMA ===== -->
-<header class="topbar-principal">
-  <div class="topbar-inner">
-    <div style="display:flex;align-items:center;gap:14px;">
-      <button class="menu-toggle-cima" onclick="abrirSidebar()">☰</button>
-      <a href="javascript:irInicio()" class="brand">
+<div id="telaInicial">
+  <div class="wrap-inicial">
+    <div class="topo-inicial">
+      <div class="brand">
         <img src="logo.png" alt="DG Sistemas">
         <div class="brand-text">
           <strong>DG SISTEMAS</strong>
           <span>Súmula digital oficial</span>
         </div>
-      </a>
+      </div>
+      <button class="btn-nova" onclick="novaSumula()">
+        <i class="fa-solid fa-plus"></i> Nova Súmula
+      </button>
     </div>
 
-    <nav class="top-nav">
-      <a href="javascript:irInicio()" id="navInicio">Início</a>
-      <a href="javascript:novaSumula()">Nova Súmula</a>
-      <a href="javascript:irInicio()">Minhas Súmulas</a>
-    </nav>
-
-    <button class="btn-nova-topo" onclick="novaSumula()">
-      <i class="fa-solid fa-plus"></i> Nova Súmula
-    </button>
-  </div>
-</header>
-
-<!-- ===== TELA INICIAL ===== -->
-<div id="telaInicial">
-  <div class="wrap-inicial">
     <div class="titulo-lista">
       <h2><i class="fa-solid fa-file-signature" style="color:var(--dourado);"></i> Minhas Súmulas</h2>
       <span class="badge" id="contador">0 salvas</span>
     </div>
+
     <div id="listaCards" class="lista-simples"></div>
   </div>
 </div>
 
-<!-- ===== TELA SÚMULA ===== -->
 <div id="telaSumula">
-  <div class="sumula-viewport">
-    <div class="sumula-scale">
-      <div class="sumula-page" id="paginaSumula">
+  <section class="offline-tools">
+    <div class="tools-head">
+      <div>
+        <h2 id="tituloSumula">Nova Súmula — DG Sistemas</h2>
+        <p>Preencha os campos e a súmula se monta automaticamente.</p>
+      </div>
+      <div class="net-status" id="statusNet">Verificando...</div>
+    </div>
 
-        <header class="header-sumula">
-          <div class="header-logo"><img src="logo.png" alt="DG Sistemas"></div>
-          <div class="header-title">
-            <h1>SÚMULA OFICIAL</h1>
-            <p>DG Sistemas</p>
-            <span>Onde o talento encontra o futuro</span>
-          </div>
-          <div class="header-campeonato-logo"><img src="logo.png" alt="DG"></div>
-          <div class="header-right">
-            <div class="liga-nome" id="campeonatoTopo">CAMPEONATO</div>
-            <div class="liga-slogan" id="categoriaTopo">CATEGORIA</div>
-          </div>
-        </header>
+    <div class="tools-body">
+      <div class="alerta">
+        Preencha os campos abaixo. A súmula se atualiza automaticamente. Clique em <strong>Finalizar</strong> pra gerar o código de verificação e o QR Code.
+      </div>
 
-        <section class="info-strip">
-          <div class="info-box"><i class="fa-regular fa-file-lines"></i><div><small>Súmula Nº</small><input id="numeroSumula"></div></div>
-          <div class="info-box"><i class="fa-solid fa-barcode"></i><div><small>Código</small><input id="codigoSumula" readonly></div></div>
-          <div class="info-box"><i class="fa-solid fa-trophy"></i><div><small>Competição</small><input id="competicao"></div></div>
-          <div class="info-box"><i class="fa-solid fa-list-ol"></i><div><small>Categoria</small><input id="categoria"></div></div>
-          <div class="info-box"><div><small>Status</small><strong class="status-badge" id="statusOficial">RASCUNHO</strong></div></div>
-        </section>
+      <div class="botoes">
+        <button class="btn-tool verde" onclick="salvarSumula()"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+        <button class="btn-tool" onclick="finalizarSumula()"><i class="fa-solid fa-lock"></i> Finalizar</button>
+        <button class="btn-tool cinza" onclick="baixarPDF()"><i class="fa-solid fa-file-pdf"></i> PDF</button>
+        <button class="btn-tool verde" onclick="enviarWhats()"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+        <button class="btn-tool vermelho" onclick="voltarLista()"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
+        <button class="btn-tool vermelho" onclick="limparTudo()"><i class="fa-solid fa-trash"></i> Limpar</button>
+      </div>
 
-        <section class="score-card">
-          <div class="team-score">
-            <div class="team-name"><input id="timeA" placeholder="TIME A"></div>
-          </div>
-          <div class="score-center">
-            <div class="score-number">
-              <strong class="score-valor" id="golsA">0</strong>
-              <span>x</span>
-              <strong class="score-valor" id="golsB">0</strong>
-            </div>
-            <span>Placar</span>
-          </div>
-          <div class="team-score away">
-            <div class="team-name"><input id="timeB" placeholder="TIME B"></div>
-          </div>
-        </section>
-
-        <section class="match-strip">
-          <div class="match-box"><i class="fa-regular fa-calendar-days"></i><div><small>Data</small><input id="dataJogo" type="date"></div></div>
-          <div class="match-box"><i class="fa-regular fa-clock"></i><div><small>Horário</small><input id="horaJogo" type="time"></div></div>
-          <div class="match-box"><i class="fa-solid fa-diamond"></i><div><small>Local</small><input id="localJogo" placeholder="Estádio"></div></div>
-          <div class="match-box"><i class="fa-solid fa-whistle"></i><div><small>Árbitro</small><input id="arbitroTopo" placeholder="Seu nome"></div></div>
-        </section>
-
-        <section class="section">
-          <div class="section-title">Escalações</div>
-          <div class="section-body grid2">
-            <div>
-              <div class="lineup-head"><input id="tituloA" placeholder="TIME A" readonly></div>
-              <div class="table-wrap">
-                <table class="jogadores">
-                  <thead>
-                    <tr>
-                      <th class="num">Nº</th>
-                      <th>Jogador</th>
-                      <th class="cpf">CPF</th>
-                      <th class="pos">Posição</th>
-                      <th class="acao"></th>
-                    </tr>
-                  </thead>
-                  <tbody id="escA"></tbody>
-                </table>
-              </div>
-              <div class="add-row">
-                <input id="novoNumA" placeholder="Nº">
-                <input id="novoNomeA" placeholder="Nome">
-                <input id="novoCpfA" placeholder="CPF">
-                <select id="novaPosA">
-                  <option value="">Posição</option>
-                  <option>Goleiro</option><option>Zagueiro</option>
-                  <option>Lateral Direito</option><option>Lateral Esquerdo</option>
-                  <option>Volante</option><option>Meia</option><option>Atacante</option>
-                </select>
-                <select id="novoTipoA"><option value="titular">Titular</option><option value="suplente">Suplente</option></select>
-                <button onclick="addJogador('A')">+</button>
-              </div>
-            </div>
-
-            <div>
-              <div class="lineup-head"><input id="tituloB" placeholder="TIME B" readonly></div>
-              <div class="table-wrap">
-                <table class="jogadores">
-                  <thead>
-                    <tr>
-                      <th class="num">Nº</th>
-                      <th>Jogador</th>
-                      <th class="cpf">CPF</th>
-                      <th class="pos">Posição</th>
-                      <th class="acao"></th>
-                    </tr>
-                  </thead>
-                  <tbody id="escB"></tbody>
-                </table>
-              </div>
-              <div class="add-row">
-                <input id="novoNumB" placeholder="Nº">
-                <input id="novoNomeB" placeholder="Nome">
-                <input id="novoCpfB" placeholder="CPF">
-                <select id="novaPosB">
-                  <option value="">Posição</option>
-                  <option>Goleiro</option><option>Zagueiro</option>
-                  <option>Lateral Direito</option><option>Lateral Esquerdo</option>
-                  <option>Volante</option><option>Meia</option><option>Atacante</option>
-                </select>
-                <select id="novoTipoB"><option value="titular">Titular</option><option value="suplente">Suplente</option></select>
-                <button onclick="addJogador('B')">+</button>
-              </div>
+      <div class="form-area">
+        <div class="form-card full">
+          <div class="form-title">Dados da partida</div>
+          <div class="form-body">
+            <div class="form-grid">
+              <div><label>Súmula Nº</label><input id="numeroSumula" readonly></div>
+              <div><label>Código</label><input id="codigoPartida" readonly></div>
+              <div><label>Campeonato</label><input id="campeonato" placeholder="Campeonato"></div>
+              <div><label>Categoria</label><input id="categoria" placeholder="Sub-15"></div>
+              <div><label>Rodada/Fase</label><input id="rodada" placeholder="1ª Rodada"></div>
+              <div><label>Local/Campo</label><input id="local" placeholder="Campo"></div>
+              <div><label>Data</label><input id="data" type="date"></div>
+              <div><label>Hora</label><input id="hora" type="time"></div>
             </div>
           </div>
-        </section>
-
-        <section class="section">
-          <div class="section-title">Comissão Técnica</div>
-          <div class="section-body comissao-grid">
-            <div class="comissao-card">
-              <div class="comissao-head"><input id="comissaoTituloA" placeholder="TIME A" readonly></div>
-              <div class="comissao-lista" id="comissaoA"></div>
-              <div class="comissao-add">
-                <input id="novoTecNomeA" placeholder="Nome do técnico">
-                <input id="novoTecFuncaoA" placeholder="Função" value="Técnico">
-                <button onclick="addTecnico('A')">+</button>
-              </div>
-            </div>
-            <div class="comissao-card">
-              <div class="comissao-head"><input id="comissaoTituloB" placeholder="TIME B" readonly></div>
-              <div class="comissao-lista" id="comissaoB"></div>
-              <div class="comissao-add">
-                <input id="novoTecNomeB" placeholder="Nome do técnico">
-                <input id="novoTecFuncaoB" placeholder="Função" value="Técnico">
-                <button onclick="addTecnico('B')">+</button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="section-title">Gols e Cartões</div>
-          <div class="section-body grid2">
-            <div class="event-box">
-              <h3><input id="eventoTituloA" placeholder="TIME A" readonly></h3>
-              <div class="event-columns">
-                <div class="event-col">
-                  <h4>Gols</h4>
-                  <div class="event-form">
-                    <select id="golJogadorA"></select>
-                    <input id="golMinutoA" placeholder="Min">
-                    <input id="golNumeroA" placeholder="Nº">
-                    <button onclick="addGol('A')">⚽</button>
-                  </div>
-                  <div id="listaGolsA"></div>
-                </div>
-                <div class="event-col">
-                  <h4>Cartões</h4>
-                  <div class="event-form cartao-form">
-                    <select id="cartaoJogadorA"></select>
-                    <input id="cartaoMinutoA" placeholder="Min">
-                    <input id="cartaoNumeroA" placeholder="Nº">
-                    <select id="cartaoTipoA">
-                      <option value="amarelo">🟨</option>
-                      <option value="vermelho">🟥</option>
-                    </select>
-                    <button onclick="addCartao('A')">+</button>
-                  </div>
-                  <div id="listaCartoesA"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="event-box away">
-              <h3><input id="eventoTituloB" placeholder="TIME B" readonly></h3>
-              <div class="event-columns">
-                <div class="event-col">
-                  <h4>Gols</h4>
-                  <div class="event-form">
-                    <select id="golJogadorB"></select>
-                    <input id="golMinutoB" placeholder="Min">
-                    <input id="golNumeroB" placeholder="Nº">
-                    <button onclick="addGol('B')">⚽</button>
-                  </div>
-                  <div id="listaGolsB"></div>
-                </div>
-                <div class="event-col">
-                  <h4>Cartões</h4>
-                  <div class="event-form cartao-form">
-                    <select id="cartaoJogadorB"></select>
-                    <input id="cartaoMinutoB" placeholder="Min">
-                    <input id="cartaoNumeroB" placeholder="Nº">
-                    <select id="cartaoTipoB">
-                      <option value="amarelo">🟨</option>
-                      <option value="vermelho">🟥</option>
-                    </select>
-                    <button onclick="addCartao('B')">+</button>
-                  </div>
-                  <div id="listaCartoesB"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="lower-grid">
-          <div class="panel">
-            <h3>Arbitragem</h3>
-            <div class="panel-body arb-grid">
-              <input id="arbitro" placeholder="Árbitro">
-              <input id="assistente1" placeholder="Assistente 1">
-              <input id="assistente2" placeholder="Assistente 2">
-              <input id="observador" placeholder="Observador">
-            </div>
-          </div>
-          <div class="panel">
-            <h3>Resumo da Partida</h3>
-            <div class="summary-grid">
-              <div class="summary-box"><span>Gols</span><strong id="totalGols">0</strong></div>
-              <div class="summary-box"><span>Amarelos</span><strong id="totalAmarelos">0</strong></div>
-              <div class="summary-box"><span>Vermelhos</span><strong id="totalVermelhos">0</strong></div>
-            </div>
-            <div class="melhor-area">
-              <div class="trofeu">🏆</div>
-              <div>
-                <select id="melhorTime"><option value="">Time do melhor jogador</option></select>
-                <select id="melhorJogador"><option value="">Melhor jogador</option></select>
-                <input id="melhorDestaque" placeholder="Ex: 1 gol e 1 assistência">
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="obs-box">
-          <textarea id="observacoes" placeholder="Observações oficiais do árbitro..."></textarea>
-        </section>
-
-        <section class="section">
-          <div class="section-title">Autenticação</div>
-          <div class="section-body" style="display:grid;grid-template-columns:160px 1fr;gap:20px;align-items:center;">
-            <div id="qrcodeArea" style="text-align:center;">
-              <div id="qrcode" style="width:150px;height:150px;margin:0 auto;background:#f5f7fb;border:1px solid #cfd7e3;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#999;font-size:11px;text-align:center;padding:8px;">QR aparece após finalizar</div>
-            </div>
-            <div>
-              <strong style="color:var(--azul);font-size:14px;display:block;margin-bottom:6px;">SÚMULA PUBLICADA EM</strong>
-              <p id="publicadaEm" style="color:#111;font-size:12px;">Aguardando finalização</p>
-              <p style="color:var(--azul);font-size:12px;font-weight:900;margin-top:10px;">CÓDIGO DE VERIFICAÇÃO</p>
-              <div id="codigoVerif" style="color:var(--azul);font-size:20px;font-weight:900;letter-spacing:2px;margin:4px 0;">---</div>
-              <p style="color:#4b5563;font-size:11px;line-height:1.4;">Escaneie o QR Code para verificar a autenticidade desta súmula no site oficial DG Sistemas.</p>
-            </div>
-          </div>
-        </section>
-
-        <div class="botoes-final">
-          <button class="btn-final btn-salvar" onclick="salvarSumula()">
-            <i class="fa-solid fa-floppy-disk"></i> Salvar
-          </button>
-          <button class="btn-final btn-pdf" onclick="baixarPDF()">
-            <i class="fa-solid fa-file-pdf"></i> PDF
-          </button>
-          <button class="btn-final btn-whats" onclick="enviarWhats()">
-            <i class="fa-brands fa-whatsapp"></i> WhatsApp
-          </button>
-          <button class="btn-final btn-fechar" onclick="finalizarSumula()">
-            <i class="fa-solid fa-lock"></i> Finalizar
-          </button>
         </div>
 
-        <section class="patrocinio-sumula">
-          <img src="patrocinio.png" alt="Patrocínio Oficial">
-        </section>
+        <div class="form-card">
+          <div class="form-title">Time A / Mandante</div>
+          <div class="form-body">
+            <div class="form-grid duas">
+              <div><label>Nome</label><input id="timeA" placeholder="Time A"></div>
+              <div><label>Cidade</label><input id="cidadeA" placeholder="Goiânia - GO"></div>
+              <div><label>Gols</label><input id="golsA" type="number" value="0" min="0"></div>
+              <div><label>Técnico</label><input id="tecnicoA" placeholder="Técnico"></div>
+              <div><label>Auxiliar</label><input id="auxiliarA" placeholder="Auxiliar"></div>
+            </div>
+          </div>
+        </div>
 
-        <footer class="final-footer">
-          Documento oficial gerado pelo sistema DG Sistemas<br>
-          © 2026 DG Sistemas — Todos os direitos reservados
-        </footer>
+        <div class="form-card">
+          <div class="form-title">Time B / Visitante</div>
+          <div class="form-body">
+            <div class="form-grid duas">
+              <div><label>Nome</label><input id="timeB" placeholder="Time B"></div>
+              <div><label>Cidade</label><input id="cidadeB" placeholder="Goiânia - GO"></div>
+              <div><label>Gols</label><input id="golsB" type="number" value="0" min="0"></div>
+              <div><label>Técnico</label><input id="tecnicoB" placeholder="Técnico"></div>
+              <div><label>Auxiliar</label><input id="auxiliarB" placeholder="Auxiliar"></div>
+            </div>
+          </div>
+        </div>
 
+        <div class="form-card full">
+          <div class="form-title">Jogadores</div>
+          <div class="form-body">
+            <div class="form-grid">
+              <div><label>Time</label><select id="jogadorTime"><option value="A">Time A</option><option value="B">Time B</option></select></div>
+              <div><label>Número</label><input id="jogadorNumero" type="number"></div>
+              <div><label>Nome</label><input id="jogadorNome" placeholder="Nome do jogador"></div>
+              <div><label>CPF</label><input id="jogadorCpf" placeholder="CPF"></div>
+              <div><label>Nascimento</label><input id="jogadorNascimento" type="date"></div>
+              <div><label>Posição</label><input id="jogadorPosicao" placeholder="Atacante"></div>
+            </div>
+            <div class="botoes" style="margin-top:10px">
+              <button class="btn-tool azul" onclick="adicionarJogador()"><i class="fa-solid fa-plus"></i> Adicionar jogador</button>
+            </div>
+            <div class="form-area">
+              <div><label>Jogadores Time A</label><div class="lista" id="listaJogadoresA"></div></div>
+              <div><label>Jogadores Time B</label><div class="lista" id="listaJogadoresB"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card full">
+          <div class="form-title">Gols e cartões</div>
+          <div class="form-body">
+            <div class="form-grid">
+              <div><label>Tipo</label><select id="eventoTipo"><option value="gol">Gol</option><option value="amarelo">Cartão amarelo</option><option value="vermelho_direto">Vermelho direto</option><option value="segundo_amarelo">Vermelho por 2º amarelo</option></select></div>
+              <div><label>Time</label><select id="eventoTime"><option value="A">Time A</option><option value="B">Time B</option></select></div>
+              <div><label>Minuto</label><input id="eventoMinuto" placeholder="35"></div>
+              <div><label>Nº jogador</label><input id="eventoNumero" placeholder="10"></div>
+              <div><label>Nome jogador</label><input id="eventoNome" placeholder="Jogador"></div>
+              <div><label>Observação/Motivo</label><input id="eventoObs" placeholder="pênalti, falta grave..."></div>
+            </div>
+            <div class="botoes" style="margin-top:10px">
+              <button class="btn-tool azul" onclick="adicionarEvento()"><i class="fa-solid fa-plus"></i> Adicionar evento</button>
+            </div>
+            <div class="lista" id="listaEventos"></div>
+          </div>
+        </div>
+
+        <div class="form-card full">
+          <div class="form-title">Arbitragem e observações</div>
+          <div class="form-body">
+            <div class="form-grid">
+              <div><label>Árbitro</label><input id="arbitro" placeholder="Árbitro principal"></div>
+              <div><label>Assistente 1</label><input id="assistente1" placeholder="Assistente 1"></div>
+              <div><label>Assistente 2</label><input id="assistente2" placeholder="Assistente 2"></div>
+              <div><label>4º árbitro</label><input id="quartoArbitro" placeholder="4º árbitro"></div>
+              <div><label>Melhor jogador</label><input id="melhorJogador" placeholder="Melhor jogador"></div>
+              <div><label>Status</label><select id="statusSumula"><option value="rascunho">Rascunho</option><option value="finalizada">Finalizada</option></select></div>
+              <div class="campo full"><label>Observações</label><textarea id="observacoes" placeholder="Relato da partida"></textarea></div>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <div class="sumula-viewport">
+    <div class="sumula-scale">
+      <div class="sumula-page" id="previewSumula"></div>
     </div>
   </div>
 </div>
 
-<div id="alerta" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#069447;color:#fff;padding:14px 24px;border-radius:12px;font-weight:900;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.4);z-index:9999;opacity:0;pointer-events:none;transition:.25s;"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script type="module">
 import { db } from "./firebase.js";
 import { doc, setDoc, getDoc, collection, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
-const $ = id => document.getElementById(id);
-let sumulaAtual = { id:null, criadoEm:null, finalizada:false };
-let jogadoresA = [], jogadoresB = [];
-let comissaoA = [], comissaoB = [];
-let golsA = [], golsB = [];
-let cartoesA = [], cartoesB = [];
+const $=id=>document.getElementById(id);
+const txt=v=>String(v||"").trim();
+const normalizar=v=>String(v||"").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
 
-/* ===== MENU ===== */
-function abrirSidebar(){ $("sidebar").classList.add("open"); $("sidebarOverlay").classList.add("show"); }
-function fecharSidebar(){ $("sidebar").classList.remove("open"); $("sidebarOverlay").classList.remove("show"); }
-window.abrirSidebar = abrirSidebar; window.fecharSidebar = fecharSidebar;
+let jogadores=[];
+let eventos=[];
+let sumulaAtual={id:null,criadoEm:null,finalizada:false};
 
-function irInicio(){
-  fecharSidebar();
-  $("telaSumula").style.display = "none";
-  $("telaInicial").style.display = "block";
-  carregarLista();
-}
-window.irInicio = irInicio;
-
-/* ===== ALERTA ===== */
-function mostrarAlerta(msg, erro){
-  const a = $("alerta");
-  a.textContent = msg;
-  a.style.background = erro ? "#dc2626" : "#069447";
-  a.style.opacity = "1";
-  setTimeout(()=>{ a.style.opacity = "0"; }, 2500);
+function gerarCodigoPartida(){
+  const ts=Date.now().toString();
+  return ts.slice(-12).toUpperCase();
 }
 
-/* ===== LISTA ===== */
-async function carregarLista(){
-  const box = $("listaCards");
-  box.innerHTML = `<div class="vazio"><i class="fa-solid fa-spinner fa-spin"></i><h3>Carregando...</h3></div>`;
-  try{
-    const snap = await getDocs(collection(db, "sumulas"));
-    const lista = [];
-    snap.forEach(d => lista.push({ id:d.id, ...d.data() }));
-    lista.sort((a,b) => (b.criadoEm?.seconds || 0) - (a.criadoEm?.seconds || 0));
-    $("contador").textContent = lista.length + " salva" + (lista.length === 1 ? "" : "s");
-    renderLista(lista);
-  }catch(e){
-    console.error(e);
-    box.innerHTML = `<div class="vazio"><i class="fa-solid fa-triangle-exclamation" style="color:#dc2626;"></i><h3>Erro ao carregar</h3><p>Verifique a conexão.</p></div>`;
-  }
-}
-window.carregarLista = carregarLista;
-
-function renderLista(lista){
-  const box = $("listaCards");
-  if(!lista.length){
-    box.innerHTML = `
-      <div class="vazio">
-        <i class="fa-solid fa-file-signature"></i>
-        <h3>Nenhuma súmula ainda</h3>
-        <p>Clique em "Nova Súmula" pra começar</p>
-        <button class="btn-nova-topo" onclick="novaSumula()">
-          <i class="fa-solid fa-plus"></i> Nova Súmula
-        </button>
-      </div>`;
-    return;
-  }
-
-  box.innerHTML = lista.map(s => {
-    const dt = s.dataJogo ? s.dataJogo.split("-").reverse().join("/") : "-";
-    const final = s.finalizada;
-    return `
-      <div class="card-salva" onclick="abrirSumula('${s.id}')">
-        <div class="status ${final ? '' : 'rascunho'}">${final ? 'Finalizada' : 'Rascunho'}</div>
-        <div class="times-linha">
-          <div class="time-nome">${s.timeA || "Time A"}</div>
-          <div class="placar-mini">${(s.golsA||[]).length} x ${(s.golsB||[]).length}</div>
-          <div class="time-nome">${s.timeB || "Time B"}</div>
-        </div>
-        <div class="info-card">
-          <i class="fa-solid fa-trophy"></i> ${s.competicao || "Sem competição"}<br>
-          <i class="fa-solid fa-calendar"></i> ${dt} ${s.horaJogo || ""}<br>
-          <i class="fa-solid fa-location-dot"></i> ${s.localJogo || "-"}
-        </div>
-        <div class="botoes-card">
-          <button class="btn-ver" onclick="event.stopPropagation();abrirSumula('${s.id}')">
-            <i class="fa-solid fa-eye"></i> Ver
-          </button>
-          <button class="btn-wpp" onclick="event.stopPropagation();wppRapido('${s.id}')">
-            <i class="fa-brands fa-whatsapp"></i> Enviar
-          </button>
-        </div>
-      </div>`;
-  }).join("");
+function proximoNumero(){
+  let n=parseInt(localStorage.getItem("dg_ultimo_numero")||"0",10);
+  n=n+1;
+  localStorage.setItem("dg_ultimo_numero",n);
+  return "DG-"+String(n).padStart(4,"0");
 }
 
-/* ===== NOVA / ABRIR ===== */
-function novaSumula(){
-  fecharSidebar();
-  sumulaAtual = { id:"DG"+Date.now(), criadoEm:new Date(), finalizada:false };
-  jogadoresA=[]; jogadoresB=[]; comissaoA=[]; comissaoB=[];
-  golsA=[]; golsB=[]; cartoesA=[]; cartoesB=[];
-  limpar();
-  $("numeroSumula").value = "DG-" + String(Date.now()).slice(-5);
-  $("codigoSumula").value = sumulaAtual.id.slice(-10).toUpperCase();
-  $("codigoVerif").textContent = "---";
-  $("qrcode").innerHTML = "QR aparece após finalizar";
-  $("statusOficial").textContent = "RASCUNHO";
-  $("statusOficial").classList.remove("final");
-  $("telaInicial").style.display = "none";
-  $("telaSumula").style.display = "block";
-  window.scrollTo(0,0);
-}
-window.novaSumula = novaSumula;
-
-async function abrirSumula(id){
-  fecharSidebar();
-  try{
-    const snap = await getDoc(doc(db, "sumulas", id));
-    if(!snap.exists()){ mostrarAlerta("Súmula não encontrada", true); return; }
-    const s = { id:snap.id, ...snap.data() };
-    sumulaAtual = { id:s.id, criadoEm:s.criadoEm, finalizada:s.finalizada || false };
-    jogadoresA = s.jogadoresA || [];
-    jogadoresB = s.jogadoresB || [];
-    comissaoA = s.comissaoA || [];
-    comissaoB = s.comissaoB || [];
-    golsA = s.golsA || [];
-    golsB = s.golsB || [];
-    cartoesA = s.cartoesA || [];
-    cartoesB = s.cartoesB || [];
-    preencher(s);
-    $("telaInicial").style.display = "none";
-    $("telaSumula").style.display = "block";
-    window.scrollTo(0,0);
-  }catch(e){
-    console.error(e);
-    mostrarAlerta("Erro ao abrir", true);
-  }
-}
-window.abrirSumula = abrirSumula;
-
-/* ===== FORM ===== */
-function limpar(){
-  ["numeroSumula","competicao","categoria","timeA","timeB","dataJogo","horaJogo","localJogo","arbitroTopo","arbitro","assistente1","assistente2","observador","observacoes","melhorDestaque"]
-    .forEach(id => { if($(id)) $(id).value = ""; });
-  ["tituloA","tituloB","comissaoTituloA","comissaoTituloB","eventoTituloA","eventoTituloB"]
-    .forEach(id => { if($(id)) $(id).value = ""; });
-  $("campeonatoTopo").textContent = "CAMPEONATO";
-  $("categoriaTopo").textContent = "CATEGORIA";
-  $("golsA").textContent = "0"; $("golsB").textContent = "0";
-  $("totalGols").textContent = "0";
-  $("totalAmarelos").textContent = "0";
-  $("totalVermelhos").textContent = "0";
-  $("escA").innerHTML = ""; $("escB").innerHTML = "";
-  $("comissaoA").innerHTML = ""; $("comissaoB").innerHTML = "";
-  $("listaGolsA").innerHTML = ""; $("listaGolsB").innerHTML = "";
-  $("listaCartoesA").innerHTML = ""; $("listaCartoesB").innerHTML = "";
-  $("melhorTime").innerHTML = '<option value="">Time do melhor jogador</option>';
-  $("melhorJogador").innerHTML = '<option value="">Melhor jogador</option>';
-  $("publicadaEm").textContent = "Aguardando finalização";
+function mascararCpf(cpf){
+  const limpo=String(cpf||"").replace(/\D/g,"");
+  if(limpo.length<3)return "***";
+  return "***.***."+limpo.slice(-3);
 }
 
-function preencher(s){
-  $("numeroSumula").value = s.numeroSumula || "";
-  $("codigoSumula").value = s.codigoSumula || "";
-  $("competicao").value = s.competicao || "";
-  $("categoria").value = s.categoria || "";
-  $("timeA").value = s.timeA || "";
-  $("timeB").value = s.timeB || "";
-  $("dataJogo").value = s.dataJogo || "";
-  $("horaJogo").value = s.horaJogo || "";
-  $("localJogo").value = s.localJogo || "";
-  $("arbitroTopo").value = s.arbitro || "";
-  $("arbitro").value = s.arbitro || "";
-  $("assistente1").value = s.assistente1 || "";
-  $("assistente2").value = s.assistente2 || "";
-  $("observador").value = s.observador || "";
-  $("observacoes").value = s.observacoes || "";
-  $("melhorDestaque").value = s.melhorDestaque || "";
-  $("campeonatoTopo").textContent = s.competicao || "CAMPEONATO";
-  $("categoriaTopo").textContent = s.categoria || "CATEGORIA";
-  $("statusOficial").textContent = s.finalizada ? "FINALIZADA" : "RASCUNHO";
-  if(s.finalizada) $("statusOficial").classList.add("final");
-
-  renderEscalacoes();
-  renderComissao();
-  renderEventos();
-  atualizarResumo();
-  atualizarPlacar();
-  atualizarTitulos();
-  atualizarSelects();
-  atualizarMelhorTime();
-  setTimeout(()=>{
-    if(s.melhorTime) $("melhorTime").value = s.melhorTime;
-    atualizarMelhorJogador();
-    if(s.melhorJogador) $("melhorJogador").value = s.melhorJogador;
-  }, 100);
-
-  if(s.codigoVerif){
-    $("codigoVerif").textContent = s.codigoVerif;
-    $("publicadaEm").textContent = s.publicadaEm || "Finalizada";
-    gerarQR(s.codigoVerif);
-  }
+function atualizarStatusNet(){
+  const box=$("statusNet");
+  if(!box)return;
+  const ok=navigator.onLine;
+  box.className="net-status "+(ok?"on":"off");
+  box.innerHTML=ok?`<i class="fa-solid fa-wifi"></i> Online`:`<i class="fa-solid fa-triangle-exclamation"></i> Offline`;
 }
 
-/* ===== TÍTULOS DINÂMICOS ===== */
-function atualizarTitulos(){
-  const a = $("timeA").value || "TIME A";
-  const b = $("timeB").value || "TIME B";
-  $("tituloA").value = a;
-  $("tituloB").value = b;
-  $("comissaoTituloA").value = a;
-  $("comissaoTituloB").value = b;
-  $("eventoTituloA").value = a;
-  $("eventoTituloB").value = b;
-}
-document.addEventListener("input", e => {
-  if(e.target.id === "timeA" || e.target.id === "timeB") atualizarTitulos();
-  if(e.target.id === "competicao") $("campeonatoTopo").textContent = e.target.value || "CAMPEONATO";
-  if(e.target.id === "categoria") $("categoriaTopo").textContent = e.target.value || "CATEGORIA";
-});
+window.addEventListener("online",atualizarStatusNet);
+window.addEventListener("offline",atualizarStatusNet);
 
-/* ===== JOGADORES ===== */
-function addJogador(time){
-  const num = $("novoNum"+time).value.trim();
-  const nome = $("novoNome"+time).value.trim();
-  const cpf = $("novoCpf"+time).value.trim();
-  const pos = $("novaPos"+time).value;
-  const tipo = $("novoTipo"+time).value;
-  if(!nome){ mostrarAlerta("Informe o nome", true); return; }
-  const lista = time === "A" ? jogadoresA : jogadoresB;
-  lista.push({ num, nome, cpf, pos, tipo });
-  ["novoNum","novoNome","novoCpf","novaPos"].forEach(p => $("p"+time).value);
-  $("novoNum"+time).value = ""; $("novoNome"+time).value = ""; $("novoCpf"+time).value = ""; $("novaPos"+time).value = "";
-  renderEscalacoes(); atualizarSelects(); atualizarMelhorTime();
-}
-window.addJogador = addJogador;
-
-function removerJogador(time, i){
-  const lista = time === "A" ? jogadoresA : jogadoresB;
-  lista.splice(i, 1);
-  renderEscalacoes(); atualizarSelects(); atualizarMelhorTime();
-}
-window.removerJogador = removerJogador;
-
-function cpfMask(cpf){
-  const limpo = String(cpf || "").replace(/\D/g, "");
-  if(limpo.length < 3) return "***";
-  return "***.***." + limpo.slice(-3);
-}
-
-function renderEscalacoes(){
-  ["A","B"].forEach(time => {
-    const lista = time === "A" ? jogadoresA : jogadoresB;
-    const titulares = lista.filter(j => j.tipo !== "suplente");
-    const suplentes = lista.filter(j => j.tipo === "suplente");
-    const html = `
-      <tr class="sub-row"><td colspan="5">Titulares</td></tr>
-      ${titulares.map(j => linhaJogador(j, time, lista.indexOf(j))).join("") || `<tr><td colspan="5" style="text-align:center;color:#999;font-size:11px;">Nenhum</td></tr>`}
-      <tr class="sub-row"><td colspan="5">Suplentes</td></tr>
-      ${suplentes.map(j => linhaJogador(j, time, lista.indexOf(j))).join("") || `<tr><td colspan="5" style="text-align:center;color:#999;font-size:11px;">Nenhum</td></tr>`}
-    `;
-    $("esc"+time).innerHTML = html;
-  });
-}
-
-function linhaJogador(j, time, idx){
-  return `
-    <tr>
-      <td><input value="${j.num||''}" onchange="editJog('${time}',${idx},'num',this.value)"></td>
-      <td><input value="${j.nome||''}" onchange="editJog('${time}',${idx},'nome',this.value)"></td>
-      <td><input value="${j.cpf||''}" onchange="editJog('${time}',${idx},'cpf',this.value)" placeholder="CPF"></td>
-      <td>
-        <select onchange="editJog('${time}',${idx},'pos',this.value)">
-          ${opcoesPos(j.pos)}
-        </select>
-      </td>
-      <td><button class="btn-remover" onclick="removerJogador('${time}',${idx})">×</button></td>
-    </tr>`;
-}
-
-function opcoesPos(atual){
-  const opts = ["Goleiro","Zagueiro","Lateral Direito","Lateral Esquerdo","Volante","Meia","Atacante"];
-  return `<option value="">-</option>` + opts.map(p =>
-    `<option value="${p}" ${p === atual ? "selected" : ""}>${p}</option>`
-  ).join("");
-}
-
-function editJog(time, i, campo, valor){
-  const lista = time === "A" ? jogadoresA : jogadoresB;
-  if(lista[i]) lista[i][campo] = valor;
-  if(campo === "nome"){ atualizarSelects(); atualizarMelhorTime(); }
-}
-window.editJog = editJog;
-
-/* ===== COMISSÃO ===== */
-function addTecnico(time){
-  const nome = $("novoTecNome"+time).value.trim();
-  const funcao = $("novoTecFuncao"+time).value.trim() || "Técnico";
-  if(!nome){ mostrarAlerta("Informe o nome", true); return; }
-  const lista = time === "A" ? comissaoA : comissaoB;
-  lista.push({ nome, funcao });
-  $("novoTecNome"+time).value = "";
-  $("novoTecFuncao"+time).value = "Técnico";
-  renderComissao();
-}
-window.addTecnico = addTecnico;
-
-function removerTecnico(time, i){
-  const lista = time === "A" ? comissaoA : comissaoB;
-  lista.splice(i, 1);
-  renderComissao();
-}
-window.removerTecnico = removerTecnico;
-
-function renderComissao(){
-  ["A","B"].forEach(time => {
-    const lista = time === "A" ? comissaoA : comissaoB;
-    $("comissao"+time).innerHTML = lista.length
-      ? lista.map((t, i) => `
-        <div class="comissao-item">
-          <select onchange="editTec('${time}',${i},'funcao',this.value)">
-            ${["Técnico","Auxiliar Técnico","Preparador","Médico","Massagista","Outro"].map(f =>
-              `<option value="${f}" ${f === t.funcao ? "selected" : ""}>${f}</option>`
-            ).join("")}
-          </select>
-          <div style="display:flex;gap:6px;align-items:center;">
-            <input value="${t.nome||''}" onchange="editTec('${time}',${i},'nome',this.value)">
-            <button class="btn-remover" onclick="removerTecnico('${time}',${i})">×</button>
-          </div>
-        </div>`).join("")
-      : `<div style="color:#999;text-align:center;padding:12px;font-size:11px;">Nenhum</div>`;
-  });
-}
-
-function editTec(time, i, campo, valor){
-  const lista = time === "A" ? comissaoA : comissaoB;
-  if(lista[i]) lista[i][campo] = valor;
-}
-window.editTec = editTec;
-
-/* ===== SELECTS ===== */
-function atualizarSelects(){
-  ["A","B"].forEach(time => {
-    const lista = time === "A" ? jogadoresA : jogadoresB;
-    const opts = lista.map(j => `<option value="${j.nome}" data-num="${j.num||''}">${j.num ? j.num + " - " : ""}${j.nome}</option>`).join("");
-    $("golJogador"+time).innerHTML = opts || `<option value="">--</option>`;
-    $("cartaoJogador"+time).innerHTML = opts || `<option value="">--</option>`;
-  });
-}
-
-function atualizarMelhorTime(){
-  const a = $("timeA").value || "TIME A";
-  const b = $("timeB").value || "TIME B";
-  $("melhorTime").innerHTML = `<option value="">Time do melhor jogador</option><option value="${a}">${a}</option><option value="${b}">${b}</option>`;
-}
-
-function atualizarMelhorJogador(){
-  const time = $("melhorTime").value;
-  const a = $("timeA").value || "TIME A";
-  const b = $("timeB").value || "TIME B";
-  let lista = [];
-  if(time === a) lista = jogadoresA;
-  else if(time === b) lista = jogadoresB;
-  $("melhorJogador").innerHTML = `<option value="">Melhor jogador</option>` +
-    lista.map(j => `<option value="${j.nome}">${j.num ? j.num + " - " : ""}${j.nome}</option>`).join("");
-}
-window.atualizarMelhorJogador = atualizarMelhorJogador;
-document.addEventListener("change", e => {
-  if(e.target.id === "melhorTime") atualizarMelhorJogador();
-});
-
-/* ===== GOLS ===== */
-function addGol(time){
-  const sel = $("golJogador"+time);
-  const jog = sel.value;
-  const num = $("golNumero"+time).value.trim() || sel.selectedOptions[0]?.dataset?.num || "";
-  const min = $("golMinuto"+time).value.trim();
-  if(!jog){ mostrarAlerta("Escolha o jogador", true); return; }
-  const obj = { jog, num, min };
-  if(time === "A") golsA.push(obj); else golsB.push(obj);
-  $("golMinuto"+time).value = ""; $("golNumero"+time).value = "";
-  renderEventos(); atualizarResumo(); atualizarPlacar();
-}
-window.addGol = addGol;
-
-function removerGol(time, i){
-  const lista = time === "A" ? golsA : golsB;
-  lista.splice(i, 1);
-  renderEventos(); atualizarResumo(); atualizarPlacar();
-}
-window.removerGol = removerGol;
-
-/* ===== CARTÕES ===== */
-function addCartao(time){
-  const sel = $("cartaoJogador"+time);
-  const jog = sel.value;
-  const num = $("cartaoNumero"+time).value.trim() || sel.selectedOptions[0]?.dataset?.num || "";
-  const min = $("cartaoMinuto"+time).value.trim();
-  const tipo = $("cartaoTipo"+time).value;
-  if(!jog){ mostrarAlerta("Escolha o jogador", true); return; }
-  const obj = { jog, num, min, tipo };
-  if(time === "A") cartoesA.push(obj); else cartoesB.push(obj);
-  $("cartaoMinuto"+time).value = ""; $("cartaoNumero"+time).value = "";
-  renderEventos(); atualizarResumo();
-}
-window.addCartao = addCartao;
-
-function removerCartao(time, i){
-  const lista = time === "A" ? cartoesA : cartoesB;
-  lista.splice(i, 1);
-  renderEventos(); atualizarResumo();
-}
-window.removerCartao = removerCartao;
-
-function renderEventos(){
-  ["A","B"].forEach(time => {
-    const gols = time === "A" ? golsA : golsB;
-    const cartoes = time === "A" ? cartoesA : cartoesB;
-    $("listaGols"+time).innerHTML = gols.length
-      ? gols.map((g, i) => `<div class="event-item"><span>⚽ ${g.min||"-"}' ${g.num ? '#'+g.num+' ' : ''}${g.jog}</span><button onclick="removerGol('${time}',${i})">×</button></div>`).join("")
-      : "";
-    $("listaCartoes"+time).innerHTML = cartoes.length
-      ? cartoes.map((c, i) => `<div class="event-item"><span>${c.tipo === 'amarelo' ? '🟨' : '🟥'} ${c.min||"-"}' ${c.num ? '#'+c.num+' ' : ''}${c.jog}</span><button onclick="removerCartao('${time}',${i})">×</button></div>`).join("")
-      : "";
-  });
-}
-
-function atualizarResumo(){
-  $("totalGols").textContent = golsA.length + golsB.length;
-  const todos = [...cartoesA, ...cartoesB];
-  $("totalAmarelos").textContent = todos.filter(c => c.tipo === "amarelo").length;
-  $("totalVermelhos").textContent = todos.filter(c => c.tipo === "vermelho").length;
-}
-
-function atualizarPlacar(){
-  $("golsA").textContent = golsA.length;
-  $("golsB").textContent = golsB.length;
-}
-
-/* ===== QR CODE ===== */
-function gerarQR(codigo){
-  const url = `${location.origin}${location.pathname.replace(/index\.html$/, "")}sumula.html?codigo=${encodeURIComponent(codigo)}`;
-  const box = $("qrcode");
-  box.innerHTML = "";
-  box.style.background = "#fff";
-  box.style.border = "1px solid #cfd7e3";
-  box.style.padding = "6px";
-  try{
-    new QRCode(box, { text: url, width: 140, height: 140, colorDark: "#061d44", colorLight: "#ffffff" });
-  }catch(e){
-    box.textContent = "Erro ao gerar QR";
-  }
-}
-
-/* ===== COLETAR ===== */
-function coletar(){
-  return {
-    id: sumulaAtual.id,
-    criadoEm: sumulaAtual.criadoEm,
-    finalizada: sumulaAtual.finalizada || false,
-    numeroSumula: $("numeroSumula").value,
-    codigoSumula: $("codigoSumula").value,
-    competicao: $("competicao").value,
-    categoria: $("categoria").value,
-    timeA: $("timeA").value,
-    timeB: $("timeB").value,
-    dataJogo: $("dataJogo").value,
-    horaJogo: $("horaJogo").value,
-    localJogo: $("localJogo").value,
-    arbitro: $("arbitro").value,
-    assistente1: $("assistente1").value,
-    assistente2: $("assistente2").value,
-    observador: $("observador").value,
-    observacoes: $("observacoes").value,
-    melhorTime: $("melhorTime").value,
-    melhorJogador: $("melhorJogador").value,
-    melhorDestaque: $("melhorDestaque").value,
-    jogadoresA, jogadoresB,
-    comissaoA, comissaoB,
-    golsA, golsB,
-    cartoesA, cartoesB
+function dados(){
+  const finalizada=$("statusSumula").value==="finalizada";
+  return{
+    id:sumulaAtual.id,
+    criadoEm:sumulaAtual.criadoEm,
+    criadoEmLocal:sumulaAtual.criadoEm instanceof Date ? sumulaAtual.criadoEm.toISOString() : (sumulaAtual.criadoEm || new Date().toISOString()),
+    campeonato:txt($("campeonato").value),
+    categoria:txt($("categoria").value),
+    rodada:txt($("rodada").value),
+    fase:txt($("rodada").value)||"Manual",
+    data:txt($("data").value),
+    hora:txt($("hora").value),
+    local:txt($("local").value),
+    campo:txt($("local").value),
+    timeA:{nome:txt($("timeA").value)||"Time A",cidade:txt($("cidadeA").value)||"Goiânia - GO"},
+    timeB:{nome:txt($("timeB").value)||"Time B",cidade:txt($("cidadeB").value)||"Goiânia - GO"},
+    golsA:Number($("golsA").value||0),
+    golsB:Number($("golsB").value||0),
+    tecnicoA:txt($("tecnicoA").value),
+    tecnicoB:txt($("tecnicoB").value),
+    auxiliarA:txt($("auxiliarA").value),
+    auxiliarB:txt($("auxiliarB").value),
+    jogadoresA:jogadores.filter(j=>j.time==="A"),
+    jogadoresB:jogadores.filter(j=>j.time==="B"),
+    eventos,
+    gols:eventos.filter(e=>e.tipo==="gol"),
+    cartoes:eventos.filter(e=>e.tipo!=="gol"),
+    arbitro:txt($("arbitro").value),
+    assistente1:txt($("assistente1").value),
+    assistente2:txt($("assistente2").value),
+    quartoArbitro:txt($("quartoArbitro").value),
+    melhorJogador:txt($("melhorJogador").value),
+    observacoes:txt($("observacoes").value),
+    status:finalizada?"finalizado":"rascunho",
+    sumulaStatus:finalizada?"finalizada":"rascunho",
+    sumulaFinalizada:finalizada,
+    publico:finalizada,
+    publica:finalizada,
+    numeroSumula:$("numeroSumula").value,
+    codigoPartida:$("codigoPartida").value,
+    codigo:$("codigoPartida").value
   };
 }
 
-/* ===== SALVAR ===== */
-async function salvarSumula(){
-  if(!$("timeA").value || !$("timeB").value){
-    mostrarAlerta("Preencha os dois times", true); return;
-  }
-  try{
-    const dados = coletar();
-    dados.atualizadoEm = serverTimestamp();
-    await setDoc(doc(db, "sumulas", dados.id), dados, { merge: true });
-    mostrarAlerta("Súmula salva ✓");
-  }catch(e){
-    console.error(e);
-    mostrarAlerta("Erro ao salvar", true);
-  }
+function aplicarDados(d){
+  if(!d)return;
+  jogadores=[...(d.jogadoresA||[]).map(x=>({...x,time:"A"})),...(d.jogadoresB||[]).map(x=>({...x,time:"B"}))];
+  eventos=Array.isArray(d.eventos)?d.eventos:[...(d.gols||[]),...(d.cartoes||[])];
+  $("numeroSumula").value=d.numeroSumula||"";
+  $("codigoPartida").value=d.codigoPartida||"";
+  $("campeonato").value=d.campeonato||"";
+  $("categoria").value=d.categoria||"";
+  $("rodada").value=d.rodada||d.fase||"";
+  $("data").value=d.data||"";
+  $("hora").value=d.hora||"";
+  $("local").value=d.local||d.campo||"";
+  $("timeA").value=d.timeA?.nome||"";
+  $("cidadeA").value=d.timeA?.cidade||"";
+  $("timeB").value=d.timeB?.nome||"";
+  $("cidadeB").value=d.timeB?.cidade||"";
+  $("golsA").value=d.golsA||0;
+  $("golsB").value=d.golsB||0;
+  $("tecnicoA").value=d.tecnicoA||"";
+  $("tecnicoB").value=d.tecnicoB||"";
+  $("auxiliarA").value=d.auxiliarA||"";
+  $("auxiliarB").value=d.auxiliarB||"";
+  $("arbitro").value=d.arbitro||"";
+  $("assistente1").value=d.assistente1||"";
+  $("assistente2").value=d.assistente2||"";
+  $("quartoArbitro").value=d.quartoArbitro||"";
+  $("melhorJogador").value=d.melhorJogador||"";
+  $("observacoes").value=d.observacoes||"";
+  $("statusSumula").value=(d.sumulaFinalizada||d.sumulaStatus==="finalizada")?"finalizada":"rascunho";
+  atualizarTudo();
 }
-window.salvarSumula = salvarSumula;
 
-async function finalizarSumula(){
-  if(!confirm("Finalizar essa súmula? Ela receberá um código de verificação e QR Code.")) return;
-  if(!$("timeA").value || !$("timeB").value){
-    mostrarAlerta("Preencha os dois times", true); return;
-  }
-  try{
-    const codigoVerif = "DG-" + sumulaAtual.id.slice(-8).toUpperCase();
-    const dados = coletar();
-    dados.finalizada = true;
-    dados.codigoVerif = codigoVerif;
-    dados.publicadaEm = new Date().toLocaleString("pt-BR");
-    dados.atualizadoEm = serverTimestamp();
-    await setDoc(doc(db, "sumulas", dados.id), dados, { merge: true });
-    sumulaAtual.finalizada = true;
-    $("codigoVerif").textContent = codigoVerif;
-    $("publicadaEm").textContent = dados.publicadaEm;
-    $("statusOficial").textContent = "FINALIZADA";
-    $("statusOficial").classList.add("final");
-    gerarQR(codigoVerif);
-    mostrarAlerta("Súmula finalizada ✓");
-  }catch(e){
-    console.error(e);
-    mostrarAlerta("Erro ao finalizar", true);
-  }
+window.novaSumula=function(){
+  sumulaAtual={id:"DG"+Date.now(),criadoEm:new Date(),finalizada:false};
+  jogadores=[];
+  eventos=[];
+  ["campeonato","categoria","rodada","data","hora","local","timeA","cidadeA","golsA","tecnicoA","auxiliarA","timeB","cidadeB","golsB","tecnicoB","auxiliarB","arbitro","assistente1","assistente2","quartoArbitro","melhorJogador","observacoes"].forEach(id=>$(id).value="");
+  $("golsA").value="0";
+  $("golsB").value="0";
+  $("statusSumula").value="rascunho";
+  $("numeroSumula").value=proximoNumero();
+  $("codigoPartida").value=gerarCodigoPartida();
+  $("telaInicial").style.display="none";
+  $("telaSumula").style.display="block";
+  atualizarTudo();
+  window.scrollTo(0,0);
+};
+
+window.voltarLista=function(){
+  $("telaSumula").style.display="none";
+  $("telaInicial").style.display="block";
+  carregarLista();
+};
+
+window.adicionarJogador=function(){
+  const nome=txt($("jogadorNome").value);
+  if(!nome)return alert("Digite o nome do jogador.");
+  jogadores.push({
+    id:"j"+Date.now()+Math.random(),
+    time:$("jogadorTime").value,
+    numero:txt($("jogadorNumero").value),
+    nome,
+    cpf:txt($("jogadorCpf").value),
+    nascimento:txt($("jogadorNascimento").value),
+    posicao:txt($("jogadorPosicao").value)
+  });
+  ["jogadorNumero","jogadorNome","jogadorCpf","jogadorNascimento","jogadorPosicao"].forEach(id=>$(id).value="");
+  atualizarTudo();
+};
+
+window.excluirJogador=function(id){
+  jogadores=jogadores.filter(j=>j.id!==id);
+  atualizarTudo();
+};
+
+window.adicionarEvento=function(){
+  const nome=txt($("eventoNome").value);
+  const numero=txt($("eventoNumero").value);
+  if(!nome&&!numero)return alert("Digite pelo menos nome ou número do jogador.");
+  eventos.push({
+    id:"e"+Date.now()+Math.random(),
+    tipo:$("eventoTipo").value,
+    time:$("eventoTime").value,
+    minuto:txt($("eventoMinuto").value),
+    numero,
+    nome,
+    observacao:txt($("eventoObs").value)
+  });
+  ["eventoMinuto","eventoNumero","eventoNome","eventoObs"].forEach(id=>$(id).value="");
+  atualizarTudo();
+};
+
+window.excluirEvento=function(id){
+  eventos=eventos.filter(e=>e.id!==id);
+  atualizarTudo();
+};
+
+function renderListaJogadores(){
+  ["A","B"].forEach(time=>{
+    const box=$("listaJogadores"+time);
+    const lista=jogadores.filter(j=>j.time===time);
+    box.innerHTML=lista.length?lista.map(j=>`
+      <div class="item">
+        <div>
+          <strong>${j.numero?"Nº "+j.numero+" - ":""}${j.nome}</strong>
+          <small>CPF: ${mascararCpf(j.cpf)} | Nasc.: ${j.nascimento||"-"} | Pos.: ${j.posicao||"-"}</small>
+        </div>
+        <button class="icon-btn" onclick="excluirJogador('${j.id}')"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    `).join(""):`<div class="item"><small>Nenhum jogador adicionado.</small></div>`;
+  });
 }
-window.finalizarSumula = finalizarSumula;
 
-/* ===== PDF ===== */
-function baixarPDF(){
-  const elem = $("paginaSumula");
-  const nome = `sumula-${$("timeA").value || 'A'}-x-${$("timeB").value || 'B'}.pdf`
-    .replace(/\s+/g, "-").toLowerCase();
-  html2pdf().set({
-    margin: 0, filename: nome,
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff" },
-    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-  }).from(elem).save();
-}
-window.baixarPDF = baixarPDF;
-
-/* ===== WHATSAPP ===== */
-function textoWhats(s){
-  const dt = s.dataJogo ? s.dataJogo.split("-").reverse().join("/") : "-";
-  let t = `*📋 SÚMULA OFICIAL*\n_DG Sistemas_\n\n`;
-  t += `🏆 *${s.competicao || "-"}*\n📂 ${s.categoria || "-"}\n📅 ${dt} ${s.horaJogo || ""}\n📍 ${s.localJogo || "-"}\n\n`;
-  t += `⚽ *${s.timeA}* ${(s.golsA||[]).length} x ${(s.golsB||[]).length} *${s.timeB}*\n\n`;
-  if((s.golsA||[]).length){
-    t += `*GOLS - ${s.timeA}*\n`;
-    s.golsA.forEach(g => t += `⚽ ${g.min||'-'}' ${g.num ? '#'+g.num+' ' : ''}${g.jog}\n`);
-    t += `\n`;
-  }
-  if((s.golsB||[]).length){
-    t += `*GOLS - ${s.timeB}*\n`;
-    s.golsB.forEach(g => t += `⚽ ${g.min||'-'}' ${g.num ? '#'+g.num+' ' : ''}${g.jog}\n`);
-    t += `\n`;
-  }
-  const todos = [...(s.cartoesA||[]), ...(s.cartoesB||[])];
-  if(todos.length){
-    t += `*CARTÕES*\n`;
-    (s.cartoesA||[]).forEach(c => t += `${c.tipo==='amarelo'?'🟨':'🟥'} ${c.min||'-'}' ${c.jog} (${s.timeA})\n`);
-    (s.cartoesB||[]).forEach(c => t += `${c.tipo==='amarelo'?'🟨':'🟥'} ${c.min||'-'}' ${c.jog} (${s.timeB})\n`);
-    t += `\n`;
-  }
-  if(s.melhorJogador){
-    t += `🏆 *Melhor jogador:* ${s.melhorJogador} (${s.melhorTime || ''})\n\n`;
-  }
-  t += `*ARBITRAGEM*\n👨‍⚖️ ${s.arbitro || "-"}\n`;
-  if(s.assistente1) t += `🚩 ${s.assistente1}\n`;
-  if(s.assistente2) t += `🚩 ${s.assistente2}\n`;
-  if(s.observacoes) t += `\n*OBS:* ${s.observacoes}\n`;
-  if(s.codigoVerif) t += `\n✅ *Autenticação:* ${s.codigoVerif}\n`;
+function nomeTipoEvento(t){
+  if(t==="gol")return"Gol";
+  if(t==="amarelo")return"Cartão amarelo";
+  if(t==="vermelho_direto")return"Vermelho direto";
+  if(t==="segundo_amarelo")return"Vermelho por 2º amarelo";
   return t;
 }
 
-function enviarWhats(){
-  const s = coletar();
-  if(!s.timeA || !s.timeB){ mostrarAlerta("Preencha os times", true); return; }
-  window.open("https://wa.me/?text=" + encodeURIComponent(textoWhats(s)), "_blank");
+function renderListaEventos(){
+  $("listaEventos").innerHTML=eventos.length?eventos.map(e=>`
+    <div class="item">
+      <div>
+        <strong>${nomeTipoEvento(e.tipo)} - Time ${e.time} ${e.minuto?"("+e.minuto+"')":""}</strong>
+        <small>${e.numero?"Nº "+e.numero+" - ":""}${e.nome||"-"} ${e.observacao?"| "+e.observacao:""}</small>
+      </div>
+      <button class="icon-btn" onclick="excluirEvento('${e.id}')"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  `).join(""):`<div class="item"><small>Nenhum evento adicionado.</small></div>`;
 }
-window.enviarWhats = enviarWhats;
 
-async function wppRapido(id){
+function dataBR(v){
+  if(!v)return"-";
+  const d=new Date(v+"T00:00:00");
+  if(!isNaN(d.getTime()))return d.toLocaleDateString("pt-BR");
+  return String(v);
+}
+
+function separarEventosPorTime(lista){
+  const a=[],b=[];
+  (lista||[]).forEach(item=>{
+    const t=normalizar(item.time||"");
+    if(t==="b")b.push(item);else a.push(item);
+  });
+  return{a,b};
+}
+
+function renderJogadores(lista){
+  if(!lista.length)return`<tr><td colspan="4" class="line-empty">Nenhum jogador informado.</td></tr>`;
+  return lista.map(j=>`<tr><td class="num">${j.numero||"-"}</td><td>${j.nome||"-"}</td><td>${mascararCpf(j.cpf)}</td><td class="posicao">${j.posicao||"-"}</td></tr>`).join("");
+}
+
+function listaComissao(d,time){
+  const l=[];
+  if(time==="A"){
+    if(d.tecnicoA)l.push({nome:d.tecnicoA,funcao:"Técnico"});
+    if(d.auxiliarA)l.push({nome:d.auxiliarA,funcao:"Auxiliar"});
+  }else{
+    if(d.tecnicoB)l.push({nome:d.tecnicoB,funcao:"Técnico"});
+    if(d.auxiliarB)l.push({nome:d.auxiliarB,funcao:"Auxiliar"});
+  }
+  return l;
+}
+
+function renderComissao(lista){
+  if(!lista.length)return`<div class="comissao-vazio">Nenhum técnico informado.</div>`;
+  return lista.map(t=>{
+    const nf=normalizar(t.funcao);
+    const icon=nf.includes("aux")?"fa-user-group":"fa-user-tie";
+    return`<div class="comissao-item"><div class="comissao-icone"><i class="fa-solid ${icon}"></i></div><div class="comissao-info"><small>${t.funcao}</small><strong>${t.nome}</strong></div></div>`;
+  }).join("");
+}
+
+function renderGols(lista){
+  if(!lista.length)return`<div class="line-empty">Nenhum gol.</div>`;
+  return lista.map(g=>`<div class="event-item"><span class="ball">⚽</span><span class="event-minute">${g.minuto||"-"}'</span><span class="event-name">${g.nome||"-"}</span></div>`).join("");
+}
+
+function renderCartoes(lista){
+  if(!lista.length)return`<div class="line-empty">Nenhum cartão.</div>`;
+  return lista.map(c=>{
+    const vermelho=c.tipo!=="amarelo";
+    const extra=vermelho?`<small>${c.tipo==="segundo_amarelo"?"2º amarelo":"vermelho direto"}</small>`:"";
+    return`<div class="event-item"><span class="${vermelho?"red-card":"yellow-card"}"></span><span class="event-minute">${c.minuto||"-"}'</span><span class="event-name">${c.nome||"-"}${extra}${c.observacao?`<br><small><strong>Motivo:</strong> ${c.observacao}</small>`:""}</span></div>`;
+  }).join("");
+}
+
+function contarCartoes(lista){
+  let a=0,v=0;
+  (lista||[]).forEach(c=>{if(c.tipo==="amarelo")a++;else v++;});
+  return{amarelos:a,vermelhos:v};
+}
+
+function qrUrl(){
+  return`https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=${encodeURIComponent(location.href)}`;
+}
+
+function ajustarEscala(){
+  const sb=document.querySelector(".sumula-scale");
+  const vp=document.querySelector(".sumula-viewport");
+  const pg=document.querySelector(".sumula-page");
+  if(!sb||!vp||!pg)return;
+  if(window.innerWidth<=900){
+    const esc=window.innerWidth/1120;
+    sb.style.setProperty("--escala-mobile",esc);
+    vp.style.height=(pg.offsetHeight*esc+16)+"px";
+  }else{
+    sb.style.removeProperty("--escala-mobile");
+    vp.style.height="auto";
+  }
+}
+
+function renderPreview(){
+  const d=dados();
+  const nA=d.timeA.nome,nB=d.timeB.nome;
+  const g=d.gols||[],c=d.cartoes||[];
+  const gp=separarEventosPorTime(g),cp=separarEventosPorTime(c);
+  const tc=contarCartoes(c);
+  const cA=listaComissao(d,"A"),cB=listaComissao(d,"B");
+  const st=d.sumulaFinalizada
+    ?`<strong class="status-finalizado"><i class="fa-solid fa-check"></i> FINALIZADO</strong>`
+    :`<strong class="status-rascunho"><i class="fa-solid fa-pen"></i> RASCUNHO</strong>`;
+
+  $("previewSumula").innerHTML=`
+<header class="header">
+  <div class="header-logo"><img src="logo.png" alt="DG Sistemas"></div>
+  <div class="header-title"><h1>SÚMULA OFICIAL</h1><p>DG Sistemas</p><span>Onde o talento encontra o futuro</span></div>
+  <div class="header-campeonato-logo"><img src="logo.png" alt="DG"></div>
+  <div class="header-right"><div class="liga-nome">${d.campeonato||"SÚMULA MANUAL"}</div><div class="liga-slogan">${d.categoria||""}</div></div>
+</header>
+
+<section class="info-strip">
+  <div class="info-box"><i class="fa-regular fa-file-lines"></i><div><small>Súmula Nº</small><strong>${d.numeroSumula}</strong></div></div>
+  <div class="info-box"><i class="fa-solid fa-barcode"></i><div><small>Código da partida</small><strong>${d.codigoPartida}</strong></div></div>
+  <div class="info-box"><i class="fa-solid fa-trophy"></i><div><small>Fase</small><strong>${d.fase||"Manual"}</strong></div></div>
+  <div class="info-box"><i class="fa-solid fa-list-ol"></i><div><small>Rodada</small><strong>${d.rodada||"-"}</strong></div></div>
+  <div class="info-box"><div><small>Status</small>${st}</div></div>
+</section>
+
+<section class="score-card">
+  <div class="team-score"><div class="team-name"><h2>${nA}</h2></div></div>
+  <div class="score-center"><div class="score-number">${d.golsA} x ${d.golsB}</div><span>Placar Final</span></div>
+  <div class="team-score away"><div class="team-name"><h2>${nB}</h2></div></div>
+</section>
+
+<section class="match-strip">
+  <div class="match-box"><i class="fa-regular fa-calendar-days"></i><div><small>Data</small><strong>${dataBR(d.data)}</strong></div></div>
+  <div class="match-box"><i class="fa-regular fa-clock"></i><div><small>Horário</small><strong>${d.hora||"-"}</strong></div></div>
+  <div class="match-box"><i class="fa-solid fa-diamond"></i><div><small>Campo</small><strong>${d.local||"-"}</strong></div></div>
+  <div class="match-box"><i class="fa-solid fa-whistle"></i><div><small>Árbitro</small><strong>${d.arbitro||"-"}</strong></div></div>
+</section>
+
+<section class="lineups">
+  <div class="section-title">Escalações</div>
+  <div class="lineups-grid">
+    <div class="lineup-card"><div class="lineup-head">${nA}</div><table class="table"><thead><tr><th class="num">Nº</th><th>Jogador</th><th>CPF</th><th class="posicao">Posição</th></tr></thead><tbody>${renderJogadores(d.jogadoresA)}</tbody></table></div>
+    <div class="lineup-card away"><div class="lineup-head">${nB}</div><table class="table"><thead><tr><th class="num">Nº</th><th>Jogador</th><th>CPF</th><th class="posicao">Posição</th></tr></thead><tbody>${renderJogadores(d.jogadoresB)}</tbody></table></div>
+  </div>
+</section>
+
+<section class="comissao">
+  <div class="section-title">Comissão Técnica</div>
+  <div class="comissao-grid">
+    <div class="comissao-card"><div class="comissao-head">${nA}</div><div class="comissao-lista">${renderComissao(cA)}</div></div>
+    <div class="comissao-card"><div class="comissao-head">${nB}</div><div class="comissao-lista">${renderComissao(cB)}</div></div>
+  </div>
+</section>
+
+<section class="events-grid">
+  <div class="team-events"><h3>${nA}</h3><div class="events-columns"><div class="event-col"><h4>Gols</h4>${renderGols(gp.a)}</div><div class="event-col"><h4>Cartões</h4>${renderCartoes(cp.a)}</div></div></div>
+  <div class="team-events away"><h3>${nB}</h3><div class="events-columns"><div class="event-col"><h4>Gols</h4>${renderGols(gp.b)}</div><div class="event-col"><h4>Cartões</h4>${renderCartoes(cp.b)}</div></div></div>
+</section>
+
+<section class="lower-grid">
+  <div class="panel"><h3>Arbitragem</h3>
+    <div class="official-row"><div class="official-label"><i class="fa-solid fa-user-tie"></i> Árbitro</div><div class="official-value">${d.arbitro||"-"}</div></div>
+    <div class="official-row"><div class="official-label"><i class="fa-solid fa-flag"></i> Assistente 1</div><div class="official-value">${d.assistente1||"-"}</div></div>
+    <div class="official-row"><div class="official-label"><i class="fa-solid fa-flag"></i> Assistente 2</div><div class="official-value">${d.assistente2||"-"}</div></div>
+    <div class="official-row"><div class="official-label"><i class="fa-solid fa-user-shield"></i> 4º Árbitro</div><div class="official-value">${d.quartoArbitro||"-"}</div></div>
+  </div>
+  <div class="panel"><h3>Resumo da Partida</h3>
+    <div class="summary-grid">
+      <div class="summary-box"><i class="fa-solid fa-futbol"></i><span>Gols</span><strong>${g.length||(d.golsA+d.golsB)}</strong><div class="summary-detail">(${d.golsA} x ${d.golsB})</div></div>
+      <div class="summary-box"><div class="summary-card-icon yellow-card"></div><span>Cartões Amarelos</span><strong>${tc.amarelos}</strong></div>
+      <div class="summary-box"><div class="summary-card-icon red-card"></div><span>Cartões Vermelhos</span><strong>${tc.vermelhos}</strong></div>
+    </div>
+    <div class="best-player"><div class="trophy">🏆</div><div><h4>Melhor jogador da partida</h4><strong>${d.melhorJogador||"-"}</strong></div></div>
+  </div>
+</section>
+
+<section class="footer-grid">
+  <div class="panel"><h3>Autenticação</h3><div class="auth-box"><img src="${qrUrl()}" alt="QR"><div class="auth-text"><strong>Autenticação</strong><p>${new Date().toLocaleString("pt-BR")}</p><p>Código de verificação</p><div class="auth-code">${d.codigo||"---"}</div></div></div></div>
+  <div class="panel"><h3>Compartilhar</h3><div class="buttons"><button class="btn btn-whats" onclick="enviarWhats()"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button><button class="btn btn-pdf" onclick="baixarPDF()"><i class="fa-solid fa-file-pdf"></i> PDF</button></div></div>
+</section>
+
+<section class="patrocinio-sumula"><img src="patrocinio.png" alt="Patrocínio Oficial"></section>
+
+<footer class="final-footer"><div>Documento oficial gerado pelo sistema DG Sistemas</div><div>© 2026 DG Sistemas — Todos os direitos reservados</div></footer>
+`;
+  setTimeout(ajustarEscala,100);
+}
+
+window.atualizarTudo=function(){
+  renderListaJogadores();
+  renderListaEventos();
+  renderPreview();
+};
+
+window.salvarSumula=async function(){
+  if(!txt($("timeA").value)||!txt($("timeB").value)){alert("Preencha os dois times.");return;}
   try{
-    const snap = await getDoc(doc(db, "sumulas", id));
-    if(!snap.exists()) return;
-    const s = snap.data();
-    window.open("https://wa.me/?text=" + encodeURIComponent(textoWhats(s)), "_blank");
-  }catch(e){ console.error(e); }
-}
-window.wppRapido = wppRapido;
+    const d=dados();
+    d.atualizadoEm=serverTimestamp();
+    await setDoc(doc(db,"sumulas",d.id),d,{merge:true});
+    alert("Súmula salva ✓");
+  }catch(e){
+    console.error(e);
+    alert("Erro ao salvar: "+(e.message||e));
+  }
+};
 
-/* ===== INIT ===== */
+window.finalizarSumula=async function(){
+  if(!txt($("timeA").value)||!txt($("timeB").value)){alert("Preencha os dois times.");return;}
+  if(!confirm("Finalizar essa súmula? Ela não poderá mais ser editada."))return;
+  try{
+    $("statusSumula").value="finalizada";
+    sumulaAtual.finalizada=true;
+    const d=dados();
+    d.atualizadoEm=serverTimestamp();
+    await setDoc(doc(db,"sumulas",d.id),d,{merge:true});
+    alert("Súmula finalizada ✓");
+    atualizarTudo();
+  }catch(e){
+    console.error(e);
+    alert("Erro ao finalizar: "+(e.message||e));
+  }
+};
+
+window.baixarPDF=function(){
+  ajustarEscala();
+  setTimeout(()=>window.print(),300);
+};
+
+window.enviarWhats=function(){
+  const d=dados();
+  const dt=dataBR(d.data);
+  let t=`*📋 SÚMULA OFICIAL*\n_DG Sistemas_\n\n`;
+  t+=`🏆 *${d.campeonato||"-"}*\n📂 ${d.categoria||"-"}\n📅 ${dt} ${d.hora||""}\n📍 ${d.local||"-"}\n\n`;
+  t+=`⚽ *${d.timeA.nome}* ${d.golsA} x ${d.golsB} *${d.timeB.nome}*\n\n`;
+  const gA=d.gols.filter(g=>normalizar(g.time)!=="b");
+  const gB=d.gols.filter(g=>normalizar(g.time)==="b");
+  if(gA.length){t+=`*GOLS - ${d.timeA.nome}*\n`;gA.forEach(g=>t+=`⚽ ${g.minuto||"-"}' ${g.nome}\n`);t+=`\n`;}
+  if(gB.length){t+=`*GOLS - ${d.timeB.nome}*\n`;gB.forEach(g=>t+=`⚽ ${g.minuto||"-"}' ${g.nome}\n`);t+=`\n`;}
+  t+=`👨‍⚖️ ${d.arbitro||"-"}\n`;
+  window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank");
+};
+
+window.limparTudo=function(){
+  if(!confirm("Apagar tudo desta tela?"))return;
+  jogadores=[];
+  eventos=[];
+  ["campeonato","categoria","rodada","data","hora","local","timeA","cidadeA","tecnicoA","auxiliarA","timeB","cidadeB","tecnicoB","auxiliarB","arbitro","assistente1","assistente2","quartoArbitro","melhorJogador","observacoes"].forEach(id=>$(id).value="");
+  $("golsA").value="0";$("golsB").value="0";
+  atualizarTudo();
+};
+
+async function carregarLista(){
+  const box=$("listaCards");
+  box.innerHTML=`<div class="vazio"><i class="fa-solid fa-spinner fa-spin"></i><h3>Carregando...</h3></div>`;
+  try{
+    const snap=await getDocs(collection(db,"sumulas"));
+    const lista=[];
+    snap.forEach(d=>lista.push({id:d.id,...d.data()}));
+    lista.sort((a,b)=>{
+      const ta=a.criadoEmLocal?new Date(a.criadoEmLocal).getTime():0;
+      const tb=b.criadoEmLocal?new Date(b.criadoEmLocal).getTime():0;
+      return tb-ta;
+    });
+    $("contador").textContent=lista.length+" salva"+(lista.length===1?"":"s");
+    renderLista(lista);
+  }catch(e){
+    console.error(e);
+    box.innerHTML=`<div class="vazio"><i class="fa-solid fa-triangle-exclamation" style="color:#dc2626;"></i><h3>Erro ao carregar</h3></div>`;
+  }
+}
+window.carregarLista=carregarLista;
+
+function renderLista(lista){
+  const box=$("listaCards");
+  if(!lista.length){
+    box.innerHTML=`<div class="vazio"><i class="fa-solid fa-file-signature"></i><h3>Nenhuma súmula ainda</h3><p>Clique em "Nova Súmula" pra começar</p><button class="btn-nova" onclick="novaSumula()"><i class="fa-solid fa-plus"></i> Nova Súmula</button></div>`;
+    return;
+  }
+  box.innerHTML=lista.map(s=>{
+    const dt=s.data?s.data.split("-").reverse().join("/"):"-";
+    const gA=(s.golsA||s.gols&&s.gols.filter(g=>normalizar(g.time)!=="b").length)||0;
+    const gB=(s.golsB||s.gols&&s.gols.filter(g=>normalizar(g.time)==="b").length)||0;
+    return`<div class="card-salva" onclick="abrirSumula('${s.id}')">
+      <div class="status ${s.finalizada?'':'rascunho'}">${s.finalizada?'Finalizada':'Rascunho'}</div>
+      <div class="times-linha">
+        <div class="time-nome">${s.timeA?.nome||"Time A"}</div>
+        <div class="placar-mini">${gA} x ${gB}</div>
+        <div class="time-nome">${s.timeB?.nome||"Time B"}</div>
+      </div>
+      <div class="info-card">
+        <i class="fa-solid fa-trophy"></i> ${s.campeonato||"Sem competição"}<br>
+        <i class="fa-solid fa-calendar"></i> ${dt} ${s.hora||""}<br>
+        <i class="fa-solid fa-location-dot"></i> ${s.local||"-"}
+      </div>
+      <div class="botoes-card">
+        <button class="btn-ver" onclick="event.stopPropagation();abrirSumula('${s.id}')"><i class="fa-solid fa-eye"></i> Ver</button>
+        <button class="btn-wpp" onclick="event.stopPropagation();wppRapido('${s.id}')"><i class="fa-brands fa-whatsapp"></i> Enviar</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+window.abrirSumula=async function(id){
+  try{
+    const snap=await getDoc(doc(db,"sumulas",id));
+    if(!snap.exists()){alert("Não encontrada");return;}
+    const s={id:snap.id,...snap.data()};
+    sumulaAtual={id:s.id,criadoEm:s.criadoEmLocal?new Date(s.criadoEmLocal):new Date(),finalizada:s.finalizada||false};
+    aplicarDados(s);
+    $("telaInicial").style.display="none";
+    $("telaSumula").style.display="block";
+    window.scrollTo(0,0);
+  }catch(e){console.error(e);alert("Erro");}
+};
+
+window.wppRapido=async function(id){
+  try{
+    const snap=await getDoc(doc(db,"sumulas",id));
+    if(!snap.exists())return;
+    const s=snap.data();
+    const dt=s.data?s.data.split("-").reverse().join("/"):"-";
+    let t=`*📋 SÚMULA OFICIAL*\n_DG Sistemas_\n\n🏆 ${s.campeonato||"-"}\n📅 ${dt}\n📍 ${s.local||"-"}\n\n`;
+    t+=`⚽ *${s.timeA?.nome||"A"}* ${s.golsA||0} x ${s.golsB||0} *${s.timeB?.nome||"B"}*\n\n`;
+    t+=`👨‍⚖️ ${s.arbitro||"-"}\n`;
+    window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank");
+  }catch(e){console.error(e);}
+};
+
+document.addEventListener("input",e=>{
+  if(e.target.closest("#telaSumula")) atualizarTudo();
+});
+document.addEventListener("change",e=>{
+  if(e.target.closest("#telaSumula")) atualizarTudo();
+});
+
+window.addEventListener("resize",ajustarEscala);
+
+atualizarStatusNet();
 carregarLista();
 </script>
 </body>
