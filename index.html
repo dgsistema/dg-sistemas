@@ -42,6 +42,77 @@
 
     .wrap{width:min(100% - 32px, var(--max));margin:0 auto;}
 
+    /* ============ SIDEBAR ============ */
+    .menu-toggle{
+      width:46px;height:46px;border-radius:14px;
+      border:1px solid var(--gold-line);
+      background:var(--gold-soft);color:var(--gold-2);
+      font-size:20px;display:flex;align-items:center;justify-content:center;
+      flex-shrink:0;margin-right:10px;
+    }
+    .menu-toggle:hover{background:var(--gold);color:#08172c;}
+
+    .sidebar-overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,.55);
+      opacity:0;visibility:hidden;transition:var(--transition);z-index:998;
+    }
+    .sidebar-overlay.show{opacity:1;visibility:visible;}
+
+    .sidebar{
+      position:fixed;top:0;left:0;width:320px;max-width:88%;
+      height:100vh;
+      background:linear-gradient(180deg, #04132d 0%, #021022 100%);
+      border-right:1px solid var(--gold-line);
+      box-shadow:var(--shadow);padding:22px 18px 28px;
+      overflow-y:auto;transform:translateX(-105%);
+      transition:var(--transition);z-index:999;
+    }
+    .sidebar.open{transform:translateX(0);}
+
+    .sidebar-header{
+      display:flex;justify-content:space-between;align-items:flex-start;
+      gap:12px;margin-bottom:20px;padding-bottom:16px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .sidebar-brand{display:flex;gap:12px;align-items:center;}
+    .sidebar-brand img{
+      width:60px;height:60px;object-fit:contain;
+      filter:drop-shadow(0 5px 12px rgba(212,175,55,.45));
+    }
+    .sidebar-brand-text strong{
+      display:block;font-size:15px;color:var(--gold-2);
+      line-height:1.25;letter-spacing:1.5px;font-weight:900;
+    }
+    .sidebar-brand-text span{
+      display:block;margin-top:4px;color:var(--muted);font-size:11px;line-height:1.35;
+    }
+    .sidebar-close{
+      width:36px;height:36px;border-radius:50%;
+      background:rgba(255,255,255,.08);color:#fff;font-size:24px;
+    }
+    .sidebar-close:hover{background:var(--gold);color:#08172c;}
+
+    .sidebar-block{
+      margin-bottom:22px;background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:16px;padding:14px;
+    }
+    .sidebar-title{
+      font-size:13px;font-weight:800;color:var(--gold-2);
+      margin-bottom:12px;letter-spacing:1.2px;
+    }
+    .side-menu{display:flex;flex-direction:column;gap:6px;}
+    .side-menu a{
+      display:flex;align-items:center;gap:10px;
+      padding:11px 12px;border-radius:12px;
+      color:var(--muted);border:1px solid transparent;font-size:14px;
+    }
+    .side-menu a:hover{
+      background:var(--gold-soft);color:var(--gold-2);
+      border-color:var(--gold-line);transform:translateX(3px);
+    }
+    .side-icon{width:20px;text-align:center;color:var(--gold-2);flex-shrink:0;}
+
     /* ============ TOPBAR ============ */
     .topbar{
       position:sticky;top:0;z-index:100;
@@ -54,6 +125,8 @@
       display:flex;align-items:center;justify-content:space-between;
       gap:16px;padding:14px 0;flex-wrap:wrap;
     }
+
+    .topbar-left{display:flex;align-items:center;}
 
     .topbar-logo{display:flex;align-items:center;gap:14px;min-width:0;}
 
@@ -120,7 +193,6 @@
     .hero{padding:40px 0 30px;position:relative;}
 
     .hero-card{
-      border-radius:0;overflow:hidden;
       position:relative;
       background:
         linear-gradient(135deg, rgba(2,6,15,.92) 0%, rgba(2,6,15,.72) 50%, rgba(2,6,15,.95) 100%),
@@ -261,10 +333,7 @@
 
     .panel-head h2{font-size:24px;color:#fff;}
 
-    .panel-head a{
-      color:var(--gold-2);font-weight:700;
-    }
-
+    .panel-head a{color:var(--gold-2);font-weight:700;}
     .panel-head a:hover{color:#fff176;}
 
     .empty-box{
@@ -349,22 +418,74 @@
       .top-nav a{padding:8px 12px;font-size:13px;}
       .btn-primary, .btn-secondary{width:100%;justify-content:center;}
       .cta-banner-inner h3{font-size:22px;}
+      .menu-toggle{width:42px;height:42px;font-size:18px;}
     }
   </style>
 </head>
 
 <body>
 
-  <header class="topbar">
-    <div class="wrap topbar-inner">
+  <!-- SIDEBAR -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-      <a href="index.html" class="topbar-logo">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
         <img src="logo.png" alt="DG Sistemas">
-        <div class="logo-text">
+        <div class="sidebar-brand-text">
           <strong>LIGA GOLD</strong>
           <span>Gestão profissional para seus campeonatos</span>
         </div>
-      </a>
+      </div>
+      <button class="sidebar-close" id="sidebarClose" type="button">×</button>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-title">NAVEGAÇÃO PÚBLICA</div>
+      <div class="side-menu">
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-ranking-star"></i></span>Classificação</a>
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-calendar-days"></i></span>Tabela de Jogos</a>
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-file-signature"></i></span>Súmula</a>
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-futbol"></i></span>Artilharia</a>
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-users"></i></span>Jogadores</a>
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-whistle"></i></span>Árbitros</a>
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-user-group"></i></span>Assistentes</a>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-title">INFORMAÇÕES</div>
+      <div class="side-menu">
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-layer-group"></i></span>Categorias</a>
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-shield-halved"></i></span>Clubes</a>
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-book"></i></span>Regulamento</a>
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-phone"></i></span>Contato</a>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-title">ÁREA DO SISTEMA</div>
+      <div class="side-menu">
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-id-badge"></i></span>Meu Perfil</a>
+        <a href="#"><span class="side-icon"><i class="fa-solid fa-file-signature"></i></span>Minhas Súmulas</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+
+      <div class="topbar-left">
+        <button class="menu-toggle" id="menuToggle" type="button">☰</button>
+        <a href="index.html" class="topbar-logo">
+          <img src="logo.png" alt="DG Sistemas">
+          <div class="logo-text">
+            <strong>LIGA GOLD</strong>
+            <span>Gestão profissional para seus campeonatos</span>
+          </div>
+        </a>
+      </div>
 
       <div class="top-actions">
         <a href="login.html" class="btn-login-chip">
@@ -534,6 +655,28 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const toggle = document.getElementById('menuToggle');
+    const closeBtn = document.getElementById('sidebarClose');
+
+    function openSidebar(){
+      sidebar.classList.add('open');
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar(){
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', openSidebar);
+    closeBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+  </script>
 
 </body>
 </html>
