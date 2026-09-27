@@ -20,7 +20,6 @@
       --text-soft:#a8b6cf;
       --dark:#04132d;
       --dark-2:#021022;
-      --card:rgba(7,24,59,.55);
       --shadow:0 12px 30px rgba(0,0,0,.45);
       --transition:.25s ease;
       --max:1280px;
@@ -30,10 +29,10 @@
     html{scroll-behavior:smooth;overflow-x:hidden;}
 
     body{
-      font-family:'Segoe UI', Arial, Helvetica, sans-serif;
+      font-family:Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(ellipse at top, rgba(255,212,0,.08), transparent 55%),
-        linear-gradient(180deg, #061225 0%, #02060f 100%);
+        linear-gradient(rgba(1,7,18,.55), rgba(1,7,18,.75)),
+        url("fundo.png") center top / cover fixed no-repeat;
       color:var(--white);
       overflow-x:hidden;
       min-height:100vh;
@@ -204,9 +203,9 @@
     /* ============ HERO ============ */
     .hero{
       position:relative;
-      padding:60px 0;
+      padding:70px 0;
       background:
-        linear-gradient(rgba(2,6,15,.82), rgba(2,6,15,.92)),
+        linear-gradient(rgba(2,6,15,.72), rgba(2,6,15,.88)),
         url("fundo.png") center / cover no-repeat;
       border-bottom:1px solid var(--gold-line);
     }
@@ -305,7 +304,7 @@
     }
 
     .feature-card{
-      background:linear-gradient(180deg, rgba(7,24,59,.7), rgba(3,17,45,.8));
+      background:linear-gradient(180deg, rgba(7,24,59,.75), rgba(3,17,45,.85));
       border:1px solid rgba(255,212,0,.14);
       border-radius:16px;
       padding:24px 20px;
@@ -378,7 +377,7 @@
 
     /* ============ PARA TODOS ============ */
     .para-todos{
-      background:linear-gradient(180deg, rgba(7,24,59,.5), rgba(2,10,24,.7));
+      background:linear-gradient(180deg, rgba(7,24,59,.55), rgba(2,10,24,.75));
       padding:70px 0;
       border-top:1px solid rgba(255,212,0,.1);
       border-bottom:1px solid rgba(255,212,0,.1);
@@ -451,7 +450,7 @@
       position:relative;
       padding:70px 0;
       background:
-        linear-gradient(rgba(2,6,15,.78), rgba(2,6,15,.9)),
+        linear-gradient(rgba(2,6,15,.72), rgba(2,6,15,.9)),
         url("fundo.png") center / cover no-repeat;
       border-top:1px solid var(--gold-line);
       border-bottom:1px solid var(--gold-line);
@@ -758,279 +757,4 @@
         </div>
 
         <div class="feature-card">
-          <div class="feature-icon"><i class="fa-solid fa-calendar-days"></i></div>
-          <h3>Partidas e Escalações</h3>
-          <p>Organize confrontos, horários, locais e escalações, mantendo todas as informações centralizadas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- POR QUE USAR -->
-  <section class="section" id="campeonatos">
-    <div class="wrap">
-      <div class="why-grid">
-        <div class="why-left">
-          <span class="section-eyebrow">Por que usar a DG Sistemas?</span>
-          <h3>Mais organização.<span>Mais resultados.</span></h3>
-
-          <p>Deixe para trás planilhas, documentos espalhados e processos manuais.</p>
-
-          <p>
-            Com a DG Sistemas, as informações do seu campeonato ficam centralizadas,
-            organizadas e acessíveis, facilitando o trabalho de gestores, árbitros,
-            equipes e atletas.
-          </p>
-        </div>
-
-        <div class="why-cards">
-          <div class="why-card">
-            <div class="why-icon"><i class="fa-solid fa-bolt"></i></div>
-            <h4>Mais agilidade</h4>
-            <p>Simplifique processos que antes exigiam papel, planilhas e trabalho manual.</p>
-          </div>
-
-          <div class="why-card">
-            <div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div>
-            <h4>Mais controle</h4>
-            <p>Mantenha os dados e informações da competição organizados em um único ambiente.</p>
-          </div>
-
-          <div class="why-card">
-            <div class="why-icon"><i class="fa-solid fa-mobile-screen"></i></div>
-            <h4>Acesso fácil</h4>
-            <p>Tenha acesso às informações do campeonato de forma prática, onde estiver.</p>
-          </div>
-
-          <div class="why-card">
-            <div class="why-icon"><i class="fa-solid fa-chart-simple"></i></div>
-            <h4>Mais informação</h4>
-            <p>Transforme os dados das partidas em informações úteis para acompanhar o desempenho.</p>
-          </div>
-
-          <div class="why-card">
-            <div class="why-icon"><i class="fa-solid fa-star"></i></div>
-            <h4>Mais profissionalismo</h4>
-            <p>Ofereça aos participantes uma experiência mais moderna e organizada.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PARA TODOS -->
-  <section class="para-todos">
-    <div class="wrap">
-      <div class="para-todos-head">
-        <span class="section-eyebrow">Uma plataforma para todos os envolvidos</span>
-        <h3>Do gestor ao atleta,<span>todos conectados.</span></h3>
-      </div>
-
-      <div class="para-grid">
-        <div class="para-card">
-          <div class="para-avatar"><i class="fa-solid fa-crown"></i></div>
-          <h4>Gestores</h4>
-          <p>Tenha controle da competição e organize todas as informações em um único lugar.</p>
-        </div>
-
-        <div class="para-card">
-          <div class="para-avatar"><i class="fa-solid fa-whistle"></i></div>
-          <h4>Árbitros</h4>
-          <p>Acesse suas partidas, preencha súmulas e registre os acontecimentos dos jogos.</p>
-        </div>
-
-        <div class="para-card">
-          <div class="para-avatar"><i class="fa-solid fa-user"></i></div>
-          <h4>Jogadores</h4>
-          <p>Tenha seus dados, equipes e estatísticas organizados dentro da competição.</p>
-        </div>
-
-        <div class="para-card">
-          <div class="para-avatar"><i class="fa-solid fa-user-tie"></i></div>
-          <h4>Técnicos</h4>
-          <p>Gerencie informações da equipe e acompanhe seus atletas e competições.</p>
-        </div>
-
-        <div class="para-card">
-          <div class="para-avatar"><i class="fa-solid fa-users"></i></div>
-          <h4>Equipes</h4>
-          <p>Mantenha jogadores, comissão técnica e informações do time sempre organizados.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ETAPAS -->
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="section-eyebrow">Do cadastro ao apito final</span>
-        <h2 class="section-title">A DG Sistemas acompanha<span>todas as etapas da competição.</span></h2>
-      </div>
-
-      <div class="etapas-grid">
-        <div class="etapa">
-          <div class="etapa-num">01</div>
-          <h4>Cadastre</h4>
-          <p>Jogadores, árbitros, técnicos, equipes e demais profissionais.</p>
-        </div>
-
-        <div class="etapa">
-          <div class="etapa-num">02</div>
-          <h4>Organize</h4>
-          <p>Crie seu campeonato, categorias, partidas e confrontos.</p>
-        </div>
-
-        <div class="etapa">
-          <div class="etapa-num">03</div>
-          <h4>Gerencie</h4>
-          <p>Administre inscrições, escalações e informações das equipes.</p>
-        </div>
-
-        <div class="etapa">
-          <div class="etapa-num">04</div>
-          <h4>Realize</h4>
-          <p>Tenha as informações da partida organizadas durante o jogo.</p>
-        </div>
-
-        <div class="etapa">
-          <div class="etapa-num">05</div>
-          <h4>Registre</h4>
-          <p>Preencha a súmula e registre gols, cartões, substituições e ocorrências.</p>
-        </div>
-
-        <div class="etapa">
-          <div class="etapa-num">06</div>
-          <h4>Acompanhe</h4>
-          <p>Consulte estatísticas, artilharia, resultados e informações da competição.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA FINAL -->
-  <section class="cta-final">
-    <div class="wrap">
-      <div class="cta-final-inner">
-        <div>
-          <h3>Seu campeonato merece <span>uma gestão profissional.</span></h3>
-          <p>Comece agora com a DG Sistemas.</p>
-          <p>Transforme a maneira como você organiza e administra seu campeonato.</p>
-          <p class="bold">Mais organização. Mais tecnologia. Mais futebol.</p>
-        </div>
-        <div class="cta-btn-wrap">
-          <a href="login.html" class="btn-primary">
-            <i class="fa-solid fa-user-plus"></i> CRIAR MINHA CONTA
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer id="sobre">
-    <div class="wrap">
-      <div class="footer-grid">
-
-        <div class="footer-brand-block">
-          <img src="logo.png" alt="DG Sistemas">
-          <div>
-            <h3>DG SISTEMAS</h3>
-            <p>Tecnologia que transforma a gestão do futebol.</p>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4>Navegação</h4>
-          <ul>
-            <li><a href="#inicio">Início</a></li>
-            <li><a href="#funcionalidades">Funcionalidades</a></li>
-            <li><a href="#campeonatos">Campeonatos</a></li>
-            <li><a href="#sobre">Sobre nós</a></li>
-            <li><a href="https://wa.me/5562984284785" target="_blank">Contato</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col dois">
-          <div>
-            <h4>Sistema</h4>
-            <ul>
-              <li><a href="#">Súmulas</a></li>
-              <li><a href="#">Jogadores</a></li>
-              <li><a href="#">Árbitros</a></li>
-              <li><a href="#">Técnicos</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>&nbsp;</h4>
-            <ul>
-              <li><a href="#">Equipes</a></li>
-              <li><a href="#">Campeonatos</a></li>
-              <li><a href="#">Estatísticas</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4>Contato</h4>
-          <ul>
-            <li><a href="https://wa.me/5562984284785" target="_blank"><i class="fa-brands fa-whatsapp"></i> (62) 98428-4785</a></li>
-            <li><a href="mailto:dg.sistemaspro@gmail.com"><i class="fa-solid fa-envelope"></i> dg.sistemaspro@gmail.com</a></li>
-            <li><a href="#"><i class="fa-solid fa-location-dot"></i> Goiânia - GO</a></li>
-          </ul>
-
-          <div class="footer-social">
-            <a href="https://www.instagram.com/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.facebook.com/" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://www.youtube.com/" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="copyright">
-        © 2026 <strong>DG Sistemas</strong> — Todos os direitos reservados.<br>
-        Gestão profissional para o futebol.
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebarOverlay');
-    const toggle = document.getElementById('menuToggle');
-    const closeBtn = document.getElementById('sidebarClose');
-
-    function openSidebar(){
-      sidebar.classList.add('open');
-      overlay.classList.add('show');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeSidebar(){
-      sidebar.classList.remove('open');
-      overlay.classList.remove('show');
-      document.body.style.overflow = '';
-    }
-
-    toggle.addEventListener('click', openSidebar);
-    closeBtn.addEventListener('click', closeSidebar);
-    overlay.addEventListener('click', closeSidebar);
-
-    // Scroll suave para âncoras
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        const id = a.getAttribute('href');
-        if(id.length > 1){
-          e.preventDefault();
-          const target = document.querySelector(id);
-          if(target){
-            target.scrollIntoView({behavior:'smooth', block:'start'});
-            closeSidebar();
-          }
-        }
-      });
-    });
-  </script>
-
-</body>
-</html>
+          <div class="feature-icon"><i class="fa-solid fa-calendar-days
