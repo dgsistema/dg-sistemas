@@ -69,7 +69,7 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
 .time-toggle button{padding:12px;border-radius:9px;font-weight:900;font-size:14px;color:var(--azul);background:transparent;text-transform:uppercase}
 .time-toggle button.ativo{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;box-shadow:0 4px 12px rgba(6,29,68,.25)}
 
-/* MODAL EDITAR JOGADOR */
+/* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px}
 .modal-overlay.on{display:flex}
 .modal-box{background:#fff;border-radius:14px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.5)}
@@ -159,6 +159,7 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
 .event-item-btn{background:none;border:none;width:100%;text-align:left;padding:6px 8px;border-radius:8px;cursor:pointer;transition:.2s}
 .event-item-btn:hover{background:#fff7d6}
 .event-minute{color:var(--azul);font-weight:900;width:42px;flex:0 0 auto}
+.event-num{color:#666;font-weight:900;min-width:36px}
 .event-name{flex:1}
 .ball{font-size:18px;width:20px;text-align:center}
 .yellow-card,.red-card{width:14px;height:19px;border-radius:3px;display:inline-block;flex:0 0 auto}
@@ -201,7 +202,6 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
 .patrocinio-sumula{width:100%;background:#061d44;margin:0;padding:10px 16px;border-top:4px solid var(--dourado)}
 .patrocinio-sumula img{width:100%;max-height:150px;object-fit:contain;margin:0 auto}
 
-/* MODAL RASCUNHOS */
 .rascunho-item{border:1px solid var(--linha);border-radius:10px;padding:14px;margin-bottom:10px;cursor:pointer;transition:.2s;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
 .rascunho-item:hover{border-color:var(--dourado);background:#fffbf0}
 .rascunho-item strong{display:block;color:var(--azul);font-size:15px;font-weight:900;margin-bottom:4px}
@@ -360,7 +360,6 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
   </div>
 </div>
 
-<!-- MODAL EDITAR JOGADOR -->
 <div class="modal-overlay" id="modalJogador">
   <div class="modal-box">
     <div class="modal-head">
@@ -388,7 +387,6 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
   </div>
 </div>
 
-<!-- MODAL RASCUNHOS -->
 <div class="modal-overlay" id="modalRascunhos">
   <div class="modal-box">
     <div class="modal-head">
@@ -416,56 +414,25 @@ let sumulaAtual={id:null,criadoEm:null,finalizada:false};
 let timeAtivo="A";
 let timerAutoSave=null;
 let editandoJogadorId=null;
-
-/* ========== HELPERS ========== */
-function dadosTime(time){
-  if(time==="A"){
-    return {
-      nome:txt($("timeNome").value)||"Time A",
-      cidade:txt($("timeCidade").value)||"Goiânia - GO",
-      tecnico:txt($("timeTecnico").value),
-      auxiliar:txt($("timeAuxiliar").value)
-    };
-  }
-  return {
-    nome:txt($("timeNome").value)||"Time B",
-    cidade:txt($("timeCidade").value)||"Goiânia - GO",
-    tecnico:txt($("timeTecnico").value),
-    auxiliar:txt($("timeAuxiliar").value)
-  };
-}
-
-/* ========== TROCAR TIME A/B ========== */
-window.trocarTime=function(time){
-  // Salva o time atual antes de trocar
-  const dadosAnteriores=pegarTimeForm(timeAtivo);
-  salvarTimeNoCache(timeAtivo, dadosAnteriores);
-
-  timeAtivo=time;
-  // Atualiza visual dos botões
-  $("btnTimeA").classList.toggle("ativo", time==="A");
-  $("btnTimeB").classList.toggle("ativo", time==="B");
-
-  // Carrega os dados do novo time
-  const dados=pegarTimeCache(time);
-  $("timeNome").value=dados.nome||"";
-  $("timeCidade").value=dados.cidade||"";
-  $("timeTecnico").value=dados.tecnico||"";
-  $("timeAuxiliar").value=dados.auxiliar||"";
-};
-
 let cacheTimes={
   A:{nome:"",cidade:"",tecnico:"",auxiliar:""},
   B:{nome:"",cidade:"",tecnico:"",auxiliar:""}
 };
 
-function salvarTimeNoCache(time, dados){
-  cacheTimes[time]={...dados};
-}
-function pegarTimeCache(time){
-  return cacheTimes[time]||{nome:"",cidade:"",tecnico:"",auxiliar:""};
-}
-function pegarTimeForm(time){
+/* ========== TROCAR TIME A/B ========== */
+window.trocarTime=function(time){
+  const dadosAnteriores=pegarTimeForm();
+  salvarTimeNoCache(timeAtivo, dadosAnteriores);
+  timeAtivo=time;
+  $("btnTimeA").classList.toggle("ativo", time==="A");
+  $("btnTimeB").classList.toggle("ativo", time==="B");
+  carregarTimeNoForm(time);
+  atualizarTudo();
+};
+
+function salvarTimeNoCache(time, dados){ cacheTimes[time]={...dados}; }
+function pegarTimeCache(time){ return cacheTimes[time]||{nome:"",cidade:"",tecnico:"",auxiliar:""}; }
+function pegarTimeForm(){
   return {
     nome:txt($("timeNome").value),
     cidade:txt($("timeCidade").value),
@@ -498,10 +465,7 @@ function atualizarContadorRascunhos(){
 
 function salvarRascunhoLocal(){
   if(!sumulaAtual.id) return;
-
-  // Salva time atual no cache primeiro
   salvarTimeNoCache(timeAtivo, pegarTimeForm());
-
   const dados={
     id:sumulaAtual.id,
     criadoEm:sumulaAtual.criadoEm,
@@ -530,7 +494,6 @@ function salvarRascunhoLocal(){
     observacoes:txt($("observacoes").value),
     atualizadoEm:new Date().toISOString()
   };
-
   const lista=getRascunhos();
   const idx=lista.findIndex(r=>r.id===dados.id);
   if(idx>=0) lista[idx]=dados;
@@ -552,11 +515,7 @@ function autoSave(){
 
 function carregarRascunhoNoForm(d){
   if(!d) return;
-  sumulaAtual={
-    id:d.id,
-    criadoEm:d.criadoEm||new Date().toISOString(),
-    finalizada:d.finalizada||false
-  };
+  sumulaAtual={id:d.id,criadoEm:d.criadoEm||new Date().toISOString(),finalizada:d.finalizada||false};
   jogadores=[...(d.jogadoresA||[]).map(x=>({...x,time:"A"})),...(d.jogadoresB||[]).map(x=>({...x,time:"B"}))];
   eventos=Array.isArray(d.eventos)?d.eventos:[];
   cacheTimes=d.cacheTimes||{A:{nome:"",cidade:"",tecnico:"",auxiliar:""},B:{nome:"",cidade:"",tecnico:"",auxiliar:""}};
@@ -564,7 +523,6 @@ function carregarRascunhoNoForm(d){
   $("btnTimeA").classList.toggle("ativo", timeAtivo==="A");
   $("btnTimeB").classList.toggle("ativo", timeAtivo==="B");
   carregarTimeNoForm(timeAtivo);
-
   $("numeroSumula").value=d.numeroSumula||"";
   $("codigoPartida").value=d.codigoPartida||"";
   $("campeonato").value=d.campeonato||"";
@@ -732,7 +690,7 @@ function contarGols(time){
   let total=0;
   eventos.forEach(e=>{
     if(e.tipo==="gol" && e.time===time) total++;
-    if(e.tipo==="gol_contra" && e.time!==time) total++; // gol contra do adversário = ponto pro time
+    if(e.tipo==="gol_contra" && e.time!==time) total++;
   });
   return total;
 }
@@ -802,18 +760,9 @@ window.abrirModalEvento=function(id){
   const ev=eventos.find(x=>x.id===id);
   if(!ev) return;
 
-  const opcTipo=`
-    <option value="gol" ${ev.tipo==='gol'?'selected':''}>Gol</option>
-    <option value="gol_contra" ${ev.tipo==='gol_contra'?'selected':''}>Gol Contra</option>
-    <option value="amarelo" ${ev.tipo==='amarelo'?'selected':''}>Cartão Amarelo</option>
-    <option value="vermelho_direto" ${ev.tipo==='vermelho_direto'?'selected':''}>Vermelho Direto</option>
-    <option value="segundo_amarelo" ${ev.tipo==='segundo_amarelo'?'selected':''}>Vermelho (2º Amarelo)</option>
-  `;
-
   const nomeA=cacheTimes.A?.nome||"Time A";
   const nomeB=cacheTimes.B?.nome||"Time B";
 
-  // Monta HTML do modal de evento
   let modalExistente=document.getElementById("modalEvento");
   if(!modalExistente){
     const div=document.createElement("div");
@@ -826,12 +775,16 @@ window.abrirModalEvento=function(id){
           <button onclick="fecharModalEvento()">×</button>
         </div>
         <div class="modal-body">
-          <label>Tipo</label><select id="editEvTipo">${opcTipo}</select>
-          <label>Time</label>
-          <select id="editEvTime">
-            <option value="A" ${ev.time==='A'?'selected':''}>${nomeA}</option>
-            <option value="B" ${ev.time==='B'?'selected':''}>${nomeB}</option>
+          <label>Tipo</label>
+          <select id="editEvTipo">
+            <option value="gol">Gol</option>
+            <option value="gol_contra">Gol Contra</option>
+            <option value="amarelo">Cartão Amarelo</option>
+            <option value="vermelho_direto">Vermelho Direto</option>
+            <option value="segundo_amarelo">Vermelho (2º Amarelo)</option>
           </select>
+          <label>Time</label>
+          <select id="editEvTime"></select>
           <label>Minuto</label><input id="editEvMinuto" type="number">
           <label>Jogador</label><select id="editEvJogador"></select>
           <label>Observação</label><input id="editEvObs">
@@ -847,13 +800,18 @@ window.abrirModalEvento=function(id){
     div.addEventListener("click", e=>{
       if(e.target.id==="modalEvento") fecharModalEvento();
     });
-    // Atualiza jogadores quando troca o time
     setTimeout(()=>{
-      document.getElementById("editEvTime").addEventListener("change", atualizarJogadoresEditEvento);
+      const selT=document.getElementById("editEvTime");
+      if(selT) selT.addEventListener("change", atualizarJogadoresEditEvento);
     },100);
   }
 
   editandoEventoId=id;
+
+  // Atualiza times
+  const selT=document.getElementById("editEvTime");
+  selT.innerHTML=`<option value="A">${nomeA}</option><option value="B">${nomeB}</option>`;
+
   $("editEvTipo").value=ev.tipo||"gol";
   $("editEvTime").value=ev.time||"A";
   $("editEvMinuto").value=ev.minuto||"";
@@ -869,7 +827,7 @@ function atualizarJogadoresEditEvento(){
   const sel=document.getElementById("editEvJogador");
   const lista=time==="A"?jogadores.filter(j=>j.time==="A"):jogadores.filter(j=>j.time==="B");
   sel.innerHTML=`<option value="">Selecione o jogador</option>`+
-    lista.map(j=>`<option value="${j.nome}">${j.numero?"Nº "+j.numero+" - ":""}${j.nome}</option>`).join("");
+    lista.map(j=>`<option value="${j.nome}" data-num="${j.numero||''}">${j.numero?"Nº "+j.numero+" - ":""}${j.nome}</option>`).join("");
 }
 
 window.fecharModalEvento=function(){
@@ -883,7 +841,9 @@ window.salvarEditEvento=function(){
   ev.tipo=$("editEvTipo").value;
   ev.time=$("editEvTime").value;
   ev.minuto=txt($("editEvMinuto").value);
-  ev.nome=$("editEvJogador").value;
+  const selJ=document.getElementById("editEvJogador");
+  ev.nome=selJ.value;
+  ev.numero=selJ.selectedOptions[0]?.dataset?.num||"";
   ev.observacao=txt($("editEvObs").value);
   fecharModalEvento();
   atualizarTudo();
@@ -900,18 +860,21 @@ window.excluirEventoModal=function(){
 window.adicionarEvento=function(){
   const tipo=$("eventoTipo").value;
   const time=$("eventoTime").value;
-  const jogador=$("eventoJogador").value;
+  const jogadorNome=$("eventoJogador").value;
   const minuto=txt($("eventoMinuto").value);
 
-  if(!jogador&&tipo!=="gol_contra"){ alert("Selecione o jogador."); return; }
+  if(!jogadorNome&&tipo!=="gol_contra"){ alert("Selecione o jogador."); return; }
 
-  // Gol contra pode ser sem jogador especificado (jogador do outro time)
-  let nomeFinal=jogador;
+  const sel=$("eventoJogador");
+  const numero=sel.selectedOptions[0]?.dataset?.num||"";
+
+  let nomeFinal=jogadorNome;
   if(tipo==="gol_contra" && !nomeFinal) nomeFinal="(gol contra)";
 
   eventos.push({
     id:"e"+Date.now()+Math.random(),
     tipo, time, minuto,
+    numero,
     nome:nomeFinal,
     observacao:txt($("eventoObs").value)
   });
@@ -920,7 +883,6 @@ window.adicionarEvento=function(){
   atualizarTudo();
 };
 
-/* ========== TIPO DO EVENTO = MUDA O SELECT DE JOGADORES ========== */
 function atualizarSelectsEvento(){
   const time=$("eventoTime").value;
   const lista=time==="A"?jogadores.filter(j=>j.time==="A"):jogadores.filter(j=>j.time==="B");
@@ -931,7 +893,7 @@ function atualizarSelectsEvento(){
     return;
   }
   sel.innerHTML=`<option value="">Selecione o jogador</option>`+
-    lista.map(j=>`<option value="${j.nome}">${j.numero?"Nº "+j.numero+" - ":""}${j.nome}</option>`).join("");
+    lista.map(j=>`<option value="${j.nome}" data-num="${j.numero||''}">${j.numero?"Nº "+j.numero+" - ":""}${j.nome}</option>`).join("");
   if(atual)sel.value=atual;
 }
 
@@ -972,7 +934,7 @@ document.addEventListener("change",e=>{
   if(e.target.id==="melhorTime"){ atualizarJogadoresMelhor(); atualizarTudo(); }
 });
 
-/* ========== RENDER PREVIEW ========== */
+/* ========== RENDER ========== */
 function dataBR(v){
   if(!v)return"-";
   const d=new Date(v+"T00:00:00");
@@ -1013,6 +975,7 @@ function renderGols(lista){
   return lista.map(g=>`<button type="button" class="event-item event-item-btn" onclick="abrirModalEvento('${g.id}')">
     <span class="ball">${g.tipo==='gol_contra'?'⚽🚫':'⚽'}</span>
     <span class="event-minute">${g.minuto||"-"}'</span>
+    <span class="event-num">${g.numero?"Nº "+g.numero:""}</span>
     <span class="event-name">${g.nome||"-"}</span>
   </button>`).join("");
 }
@@ -1024,6 +987,7 @@ function renderCartoes(lista){
     return`<button type="button" class="event-item event-item-btn" onclick="abrirModalEvento('${c.id}')">
       <span class="${vermelho?"red-card":"yellow-card"}"></span>
       <span class="event-minute">${c.minuto||"-"}'</span>
+      <span class="event-num">${c.numero?"Nº "+c.numero:""}</span>
       <span class="event-name">${c.nome||"-"}${c.observacao?`<br><small><strong>Motivo:</strong> ${c.observacao}</small>`:""}</span>
     </button>`;
   }).join("");
@@ -1059,8 +1023,6 @@ function renderPreview(){
 
   const posMelhor=$("melhorJogador").selectedOptions[0]?.dataset?.pos||"";
   const nomeTimeMelhor=d.melhorTime==="A"?nA:(d.melhorTime==="B"?nB:"");
-
-  // Contadores (gol contra invertido)
   const golsA=contarGols("A");
   const golsB=contarGols("B");
 
@@ -1181,7 +1143,6 @@ window.excluirSumula=async function(){
   }catch(e){console.error(e);alert("Erro ao excluir: "+(e.message||e));}
 };
 
-/* ========== PDF ========== */
 window.baixarPDF=function(){
   salvarTimeNoCache(timeAtivo, pegarTimeForm());
   const sb=document.querySelector(".sumula-scale");
@@ -1206,7 +1167,6 @@ window.baixarPDF=function(){
   });
 };
 
-/* ========== COMPARTILHAR ========== */
 window.enviarWhats=function(){
   salvarTimeNoCache(timeAtivo, pegarTimeForm());
   const d=dados();
@@ -1226,13 +1186,11 @@ window.copiarLink=async function(){
   try{await navigator.clipboard.writeText(location.href);alert("Link copiado!");}catch(e){alert("Erro ao copiar.");}
 };
 
-/* ========== AUTO-SAVE ========== */
 document.addEventListener("input",e=>{ if(e.target.closest(".offline-tools")) atualizarTudo(); });
 document.addEventListener("change",e=>{ if(e.target.closest(".offline-tools")) atualizarTudo(); });
 window.addEventListener("resize",ajustarEscala);
 window.addEventListener("beforeunload", ()=>{ salvarRascunhoLocal(); });
 
-/* ========== INICIAR ========== */
 async function iniciar(){
   atualizarStatusNet();
   atualizarContadorRascunhos();
