@@ -6,6 +6,7 @@
 <title>Nova Súmula - DG Sistemas</title>
 <link rel="icon" href="logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 :root{--azul:#061d44;--azul2:#08285c;--verde:#069447;--dourado:#f7c600;--linha:#cfd7e3;--texto:#071833;--muted:#4b5563;--bg:#dfe6ef}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -184,13 +185,6 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
   .sumula-scale{transform:scale(var(--escala-mobile,1));transform-origin:top left}
   .sumula-page{border-radius:0;box-shadow:none}
   .header-title h1{font-size:52px;white-space:nowrap}
-}
-@media print{
-  @page{size:A4 portrait;margin:5mm}
-  body{background:#fff!important}
-  .topbar-cima,.offline-tools{display:none!important}
-  .sumula-viewport{display:block;padding:0}
-  .sumula-scale{transform:none!important;width:100%!important}
 }
 </style>
 </head>
@@ -497,7 +491,6 @@ function renderListaEventos(){
     </div>`).join(""):`<div class="item"><small>Nenhum evento.</small></div>`;
 }
 
-/* ATUALIZA SELECTS DE MELHOR JOGADOR */
 function atualizarSelectsMelhor(){
   const nomeA=txt($("timeA").value)||"Time A";
   const nomeB=txt($("timeB").value)||"Time B";
@@ -720,7 +713,29 @@ window.excluirSumula=async function(){
   }catch(e){console.error(e);alert("Erro ao excluir: "+(e.message||e));}
 };
 
-window.baixarPDF=function(){ ajustarEscala(); setTimeout(()=>window.print(),300); };
+/* ===== PDF INTEIRO (usa html2pdf) ===== */
+window.baixarPDF=function(){
+  const sb=document.querySelector(".sumula-scale");
+  const escalaSalva=sb ? sb.style.getPropertyValue("--escala-mobile") : "";
+  if(sb) sb.style.removeProperty("--escala-mobile");
+
+  const elemento=document.getElementById("previewSumula");
+  const nomeA=(txt($("timeA").value)||"A").replace(/\s+/g,"-");
+  const nomeB=(txt($("timeB").value)||"B").replace(/\s+/g,"-");
+  const nome=`sumula-${nomeA}-x-${nomeB}.pdf`.toLowerCase();
+
+  html2pdf().set({
+    margin: [5,5,5,5],
+    filename: nome,
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", windowWidth: 1120, scrollY: 0 },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    pagebreak: { mode: ["css", "legacy"] }
+  }).from(elemento).save().then(()=>{
+    if(sb && escalaSalva) sb.style.setProperty("--escala-mobile", escalaSalva);
+    setTimeout(ajustarEscala,200);
+  });
+};
 
 window.enviarWhats=function(){
   const d=dados();
@@ -749,7 +764,6 @@ document.addEventListener("input",e=>{ if(e.target.closest(".offline-tools")) at
 document.addEventListener("change",e=>{ if(e.target.closest(".offline-tools")) atualizarTudo(); });
 window.addEventListener("resize",ajustarEscala);
 
-/* AO CARREGAR: verifica se tem ?id= pra editar */
 async function carregarSeEditando(){
   const idUrl=new URLSearchParams(location.search).get("id");
   if(!idUrl){ novaSumula(); return; }
