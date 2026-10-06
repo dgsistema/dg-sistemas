@@ -26,11 +26,14 @@ a{text-decoration:none;color:inherit}
 .topbar-acoes{display:flex;gap:8px;flex-wrap:wrap}
 .btn-top{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border-radius:9px;font-weight:900;font-size:13px}
 .btn-top-voltar{background:rgba(255,255,255,.15);color:#fff}
-.btn-top-salvar{background:linear-gradient(135deg,var(--dourado),#ffe45c);color:#111}
+.btn-top-rascunhos{background:#2563eb;color:#fff}
+.btn-top-nova{background:#7c3aed;color:#fff}
 .btn-top-finalizar{background:var(--verde);color:#fff}
 .btn-top-pdf{background:#dc2626;color:#fff}
-.btn-top-limpar{background:#6b7280;color:#fff}
 .btn-top-excluir{background:#7f1d1d;color:#fff}
+
+.aviso-rascunho{background:#d1fae5;border-bottom:2px solid #10b981;color:#065f46;padding:8px 18px;text-align:center;font-size:13px;font-weight:800;display:none}
+.aviso-rascunho.on{display:block}
 
 .offline-tools{max-width:1120px;margin:12px auto 0;background:#fff;border:1px solid #b9c4d4;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.14);overflow:hidden}
 .tools-head{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;border-bottom:4px solid var(--dourado);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -60,11 +63,28 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
 .btn-tool.azul{background:var(--azul2);color:#fff}
 .btn-tool.verde{background:var(--verde);color:#fff}
 .btn-tool.vermelho{background:#dc2626;color:#fff}
-.lista{display:grid;gap:7px;margin-top:10px}
-.item{background:#f5f7fb;border:1px solid var(--linha);border-radius:9px;padding:8px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
-.item strong{color:var(--azul);display:block;font-size:13px}
-.item small{color:var(--muted);font-size:11px;line-height:1.35;display:block;margin-top:2px}
-.icon-btn{width:30px;height:30px;border-radius:8px;color:#fff;background:#dc2626}
+
+/* TOGGLE TIME A / B */
+.time-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;background:#eef2f7;padding:6px;border-radius:12px}
+.time-toggle button{padding:12px;border-radius:9px;font-weight:900;font-size:14px;color:var(--azul);background:transparent;text-transform:uppercase}
+.time-toggle button.ativo{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;box-shadow:0 4px 12px rgba(6,29,68,.25)}
+
+/* MODAL EDITAR JOGADOR */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.on{display:flex}
+.modal-box{background:#fff;border-radius:14px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.modal-head{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--dourado);border-radius:14px 14px 0 0}
+.modal-head h3{color:var(--dourado);font-size:18px;font-weight:900;text-transform:uppercase}
+.modal-head button{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center}
+.modal-head button:hover{background:var(--dourado);color:#061d44}
+.modal-body{padding:18px}
+.modal-body label{margin-top:10px}
+.modal-body label:first-child{margin-top:0}
+.modal-acoes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.modal-acoes button{padding:12px;border-radius:9px;font-weight:900;font-size:13px}
+.btn-cancelar{background:#e5e7eb;color:#374151}
+.btn-salvar-modal{background:var(--verde);color:#fff}
+.btn-excluir-modal{background:#dc2626;color:#fff;grid-column:1/-1}
 
 /* PREVIEW */
 .sumula-viewport{width:100%;overflow:hidden;display:flex;justify-content:center;padding:14px 8px}
@@ -116,6 +136,8 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
 .table tr:last-child td{border-bottom:none}
 .table .num{width:48px;text-align:center}
 .table .posicao{width:160px}
+.jogador-click{cursor:pointer;color:var(--azul);font-weight:700;text-decoration:underline dotted;transition:.2s}
+.jogador-click:hover{color:#dc2626;text-decoration:underline}
 .comissao-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--linha);border-top:none;border-radius:0 0 5px 5px;overflow:hidden;background:#fff}
 .comissao-card{padding:12px;border-right:1px solid var(--linha)}
 .comissao-card:last-child{border-right:none}
@@ -134,6 +156,8 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
 .event-col:last-child{border-right:none}
 .event-col h4{color:var(--azul);text-align:center;font-size:17px;font-weight:900;text-transform:uppercase;margin-bottom:10px}
 .event-item{display:flex;align-items:center;gap:8px;margin-bottom:10px;color:#111;font-size:14px;line-height:1.2}
+.event-item-btn{background:none;border:none;width:100%;text-align:left;padding:6px 8px;border-radius:8px;cursor:pointer;transition:.2s}
+.event-item-btn:hover{background:#fff7d6}
 .event-minute{color:var(--azul);font-weight:900;width:42px;flex:0 0 auto}
 .event-name{flex:1}
 .ball{font-size:18px;width:20px;text-align:center}
@@ -177,6 +201,15 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
 .patrocinio-sumula{width:100%;background:#061d44;margin:0;padding:10px 16px;border-top:4px solid var(--dourado)}
 .patrocinio-sumula img{width:100%;max-height:150px;object-fit:contain;margin:0 auto}
 
+/* MODAL RASCUNHOS */
+.rascunho-item{border:1px solid var(--linha);border-radius:10px;padding:14px;margin-bottom:10px;cursor:pointer;transition:.2s;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.rascunho-item:hover{border-color:var(--dourado);background:#fffbf0}
+.rascunho-item strong{display:block;color:var(--azul);font-size:15px;font-weight:900;margin-bottom:4px}
+.rascunho-item small{color:var(--muted);font-size:12px;display:block;line-height:1.4}
+.rascunho-item .btn-excluir-rasc{width:34px;height:34px;border-radius:50%;background:#fee2e2;color:#dc2626;display:flex;align-items:center;justify-content:center;font-size:14px}
+.rascunho-item .btn-excluir-rasc:hover{background:#dc2626;color:#fff}
+.sem-rascunho{text-align:center;padding:30px 20px;color:var(--muted);font-size:14px}
+
 @media(max-width:900px){
   body{background:#fff}
   .offline-tools{margin:0;border-radius:0}
@@ -185,6 +218,7 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
   .sumula-scale{transform:scale(var(--escala-mobile,1));transform-origin:top left}
   .sumula-page{border-radius:0;box-shadow:none}
   .header-title h1{font-size:52px;white-space:nowrap}
+  .btn-top{padding:7px 10px;font-size:11px}
 }
 </style>
 </head>
@@ -201,27 +235,31 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
     </div>
     <div class="topbar-acoes">
       <a href="index.html" class="btn-top btn-top-voltar"><i class="fa-solid fa-house"></i> Início</a>
-      <button class="btn-top btn-top-salvar" onclick="salvarSumula()"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
+      <button class="btn-top btn-top-rascunhos" onclick="abrirRascunhos()"><i class="fa-solid fa-folder-open"></i> Rascunhos <span id="contadorRasc" style="background:rgba(255,255,255,.25);padding:2px 7px;border-radius:999px;font-size:11px;margin-left:4px;">0</span></button>
+      <button class="btn-top btn-top-nova" onclick="criarNovaSumula()"><i class="fa-solid fa-plus"></i> Nova</button>
       <button class="btn-top btn-top-finalizar" onclick="finalizarSumula()"><i class="fa-solid fa-lock"></i> Finalizar</button>
       <button class="btn-top btn-top-pdf" onclick="baixarPDF()"><i class="fa-solid fa-file-pdf"></i> PDF</button>
       <button class="btn-top btn-top-excluir" id="btnExcluirTopo" style="display:none" onclick="excluirSumula()"><i class="fa-solid fa-trash"></i> Excluir</button>
-      <button class="btn-top btn-top-limpar" onclick="limparTudo()"><i class="fa-solid fa-eraser"></i> Limpar</button>
     </div>
   </div>
 </header>
+
+<div class="aviso-rascunho" id="avisoRascunho">
+  <i class="fa-solid fa-cloud-arrow-up"></i> Rascunho salvo automaticamente
+</div>
 
 <section class="offline-tools">
   <div class="tools-head">
     <div>
       <h2>Preencher Súmula</h2>
-      <p>A súmula se monta automaticamente conforme você preenche os campos.</p>
+      <p>Tudo é salvo automaticamente no seu aparelho.</p>
     </div>
     <div class="net-status" id="statusNet">Verificando...</div>
   </div>
 
   <div class="tools-body">
     <div class="alerta">
-      Preencha os dados. <strong>Salvar</strong> guarda como rascunho. <strong>Finalizar</strong> publica pra aparecer na lista de Súmulas.
+      <strong>Como funciona:</strong> Digite os dados. Tudo fica salvo automaticamente. Clique em <strong>"+ Nova"</strong> pra fazer outra súmula sem perder essa. Clique em <strong>"Rascunhos"</strong> pra voltar numa que já começou.
     </div>
 
     <div class="form-area">
@@ -241,34 +279,24 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
         </div>
       </div>
 
-      <div class="form-card">
-        <div class="form-title">Time A / Mandante</div>
+      <div class="form-card full">
+        <div class="form-title">Times</div>
         <div class="form-body">
-          <div class="form-grid duas">
-            <div><label>Nome</label><input id="timeA" placeholder="Time A"></div>
-            <div><label>Cidade</label><input id="cidadeA" placeholder="Goiânia - GO"></div>
-            <div><label>Gols</label><input id="golsA" type="number" value="0" min="0"></div>
-            <div><label>Técnico</label><input id="tecnicoA" placeholder="Técnico"></div>
-            <div><label>Auxiliar</label><input id="auxiliarA" placeholder="Auxiliar"></div>
+          <div class="time-toggle">
+            <button type="button" id="btnTimeA" class="ativo" onclick="trocarTime('A')">Time A / Mandante</button>
+            <button type="button" id="btnTimeB" onclick="trocarTime('B')">Time B / Visitante</button>
           </div>
-        </div>
-      </div>
-
-      <div class="form-card">
-        <div class="form-title">Time B / Visitante</div>
-        <div class="form-body">
           <div class="form-grid duas">
-            <div><label>Nome</label><input id="timeB" placeholder="Time B"></div>
-            <div><label>Cidade</label><input id="cidadeB" placeholder="Goiânia - GO"></div>
-            <div><label>Gols</label><input id="golsB" type="number" value="0" min="0"></div>
-            <div><label>Técnico</label><input id="tecnicoB" placeholder="Técnico"></div>
-            <div><label>Auxiliar</label><input id="auxiliarB" placeholder="Auxiliar"></div>
+            <div><label>Nome</label><input id="timeNome" placeholder="Time A"></div>
+            <div><label>Cidade</label><input id="timeCidade" placeholder="Goiânia - GO"></div>
+            <div><label>Técnico</label><input id="timeTecnico" placeholder="Técnico"></div>
+            <div><label>Auxiliar</label><input id="timeAuxiliar" placeholder="Auxiliar"></div>
           </div>
         </div>
       </div>
 
       <div class="form-card full">
-        <div class="form-title">Jogadores</div>
+        <div class="form-title">Adicionar Jogador</div>
         <div class="form-body">
           <div class="form-grid">
             <div><label>Time</label><select id="jogadorTime"><option value="A">Time A</option><option value="B">Time B</option></select></div>
@@ -281,10 +309,9 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
           <div class="botoes">
             <button class="btn-tool azul" onclick="adicionarJogador()"><i class="fa-solid fa-plus"></i> Adicionar Jogador</button>
           </div>
-          <div class="form-area" style="margin-top:10px">
-            <div><label>Jogadores Time A</label><div class="lista" id="listaJogadoresA"></div></div>
-            <div><label>Jogadores Time B</label><div class="lista" id="listaJogadoresB"></div></div>
-          </div>
+          <p style="margin-top:10px;font-size:12px;color:#666;font-style:italic;">
+            <i class="fa-solid fa-lightbulb" style="color:#f7c600;"></i> Pra editar um jogador, clique no nome dele na súmula lá embaixo.
+          </p>
         </div>
       </div>
 
@@ -292,17 +319,18 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
         <div class="form-title">Gols e Cartões</div>
         <div class="form-body">
           <div class="form-grid">
-            <div><label>Tipo</label><select id="eventoTipo"><option value="gol">Gol</option><option value="amarelo">Cartão Amarelo</option><option value="vermelho_direto">Vermelho Direto</option><option value="segundo_amarelo">Vermelho (2º Amarelo)</option></select></div>
+            <div><label>Tipo</label><select id="eventoTipo"><option value="gol">Gol</option><option value="gol_contra">Gol Contra</option><option value="amarelo">Cartão Amarelo</option><option value="vermelho_direto">Vermelho Direto</option><option value="segundo_amarelo">Vermelho (2º Amarelo)</option></select></div>
             <div><label>Time</label><select id="eventoTime"><option value="A">Time A</option><option value="B">Time B</option></select></div>
             <div><label>Minuto</label><input id="eventoMinuto" placeholder="35"></div>
-            <div><label>Nº Jogador</label><input id="eventoNumero" placeholder="10"></div>
-            <div><label>Nome Jogador</label><input id="eventoNome" placeholder="Jogador"></div>
+            <div><label>Jogador</label><select id="eventoJogador"><option value="">Selecione o time primeiro</option></select></div>
             <div><label>Observação</label><input id="eventoObs" placeholder="Pênalti, falta grave..."></div>
           </div>
           <div class="botoes">
             <button class="btn-tool azul" onclick="adicionarEvento()"><i class="fa-solid fa-plus"></i> Adicionar Evento</button>
           </div>
-          <div class="lista" id="listaEventos"></div>
+          <p style="margin-top:10px;font-size:12px;color:#666;font-style:italic;">
+            <i class="fa-solid fa-lightbulb" style="color:#f7c600;"></i> Pra editar um evento, clique nele na súmula lá embaixo.
+          </p>
         </div>
       </div>
 
@@ -332,6 +360,45 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
   </div>
 </div>
 
+<!-- MODAL EDITAR JOGADOR -->
+<div class="modal-overlay" id="modalJogador">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3><i class="fa-solid fa-user-pen"></i> Editar Jogador</h3>
+      <button onclick="fecharModalJogador()">×</button>
+    </div>
+    <div class="modal-body">
+      <label>Nome</label><input id="editJogNome">
+      <label>Número</label><input id="editJogNumero" type="number">
+      <label>CPF</label><input id="editJogCpf">
+      <label>Nascimento</label><input id="editJogNascimento" type="date">
+      <label>Posição</label>
+      <select id="editJogPosicao">
+        <option value="">Selecione</option>
+        <option>Goleiro</option><option>Zagueiro</option>
+        <option>Lateral Direito</option><option>Lateral Esquerdo</option>
+        <option>Volante</option><option>Meia</option><option>Atacante</option>
+      </select>
+      <div class="modal-acoes">
+        <button class="btn-cancelar" onclick="fecharModalJogador()">Cancelar</button>
+        <button class="btn-salvar-modal" onclick="salvarEditJogador()">Salvar</button>
+        <button class="btn-excluir-modal" onclick="excluirJogadorModal()">Excluir Jogador</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL RASCUNHOS -->
+<div class="modal-overlay" id="modalRascunhos">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3><i class="fa-solid fa-folder-open"></i> Meus Rascunhos</h3>
+      <button onclick="fecharRascunhos()">×</button>
+    </div>
+    <div class="modal-body" id="listaRascunhos"></div>
+  </div>
+</div>
+
 <script type="module">
 import { db } from "./firebase.js";
 import { doc, setDoc, getDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
@@ -340,18 +407,215 @@ const $=id=>document.getElementById(id);
 const txt=v=>String(v||"").trim();
 const normalizar=v=>String(v||"").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
 
+const KEY_RASCUNHOS="dg_rascunhos";
+const KEY_ATUAL="dg_rascunho_atual_id";
+
 let jogadores=[];
 let eventos=[];
 let sumulaAtual={id:null,criadoEm:null,finalizada:false};
+let timeAtivo="A";
+let timerAutoSave=null;
+let editandoJogadorId=null;
+
+/* ========== HELPERS ========== */
+function dadosTime(time){
+  if(time==="A"){
+    return {
+      nome:txt($("timeNome").value)||"Time A",
+      cidade:txt($("timeCidade").value)||"Goiânia - GO",
+      tecnico:txt($("timeTecnico").value),
+      auxiliar:txt($("timeAuxiliar").value)
+    };
+  }
+  return {
+    nome:txt($("timeNome").value)||"Time B",
+    cidade:txt($("timeCidade").value)||"Goiânia - GO",
+    tecnico:txt($("timeTecnico").value),
+    auxiliar:txt($("timeAuxiliar").value)
+  };
+}
+
+/* ========== TROCAR TIME A/B ========== */
+window.trocarTime=function(time){
+  // Salva o time atual antes de trocar
+  const dadosAnteriores=pegarTimeForm(timeAtivo);
+  salvarTimeNoCache(timeAtivo, dadosAnteriores);
+
+  timeAtivo=time;
+  // Atualiza visual dos botões
+  $("btnTimeA").classList.toggle("ativo", time==="A");
+  $("btnTimeB").classList.toggle("ativo", time==="B");
+
+  // Carrega os dados do novo time
+  const dados=pegarTimeCache(time);
+  $("timeNome").value=dados.nome||"";
+  $("timeCidade").value=dados.cidade||"";
+  $("timeTecnico").value=dados.tecnico||"";
+  $("timeAuxiliar").value=dados.auxiliar||"";
+};
+
+let cacheTimes={
+  A:{nome:"",cidade:"",tecnico:"",auxiliar:""},
+  B:{nome:"",cidade:"",tecnico:"",auxiliar:""}
+};
+
+function salvarTimeNoCache(time, dados){
+  cacheTimes[time]={...dados};
+}
+function pegarTimeCache(time){
+  return cacheTimes[time]||{nome:"",cidade:"",tecnico:"",auxiliar:""};
+}
+function pegarTimeForm(time){
+  return {
+    nome:txt($("timeNome").value),
+    cidade:txt($("timeCidade").value),
+    tecnico:txt($("timeTecnico").value),
+    auxiliar:txt($("timeAuxiliar").value)
+  };
+}
+function carregarTimeNoForm(time){
+  const dados=pegarTimeCache(time);
+  $("timeNome").value=dados.nome||"";
+  $("timeCidade").value=dados.cidade||"";
+  $("timeTecnico").value=dados.tecnico||"";
+  $("timeAuxiliar").value=dados.auxiliar||"";
+}
+
+/* ========== RASCUNHOS ========== */
+function getRascunhos(){
+  try{ return JSON.parse(localStorage.getItem(KEY_RASCUNHOS) || "[]"); }
+  catch(e){ return []; }
+}
+function setRascunhos(lista){
+  localStorage.setItem(KEY_RASCUNHOS, JSON.stringify(lista));
+  atualizarContadorRascunhos();
+}
+function atualizarContadorRascunhos(){
+  const n=getRascunhos().length;
+  const c=$("contadorRasc");
+  if(c) c.textContent=n;
+}
+
+function salvarRascunhoLocal(){
+  if(!sumulaAtual.id) return;
+
+  // Salva time atual no cache primeiro
+  salvarTimeNoCache(timeAtivo, pegarTimeForm());
+
+  const dados={
+    id:sumulaAtual.id,
+    criadoEm:sumulaAtual.criadoEm,
+    finalizada:sumulaAtual.finalizada,
+    numeroSumula:$("numeroSumula").value,
+    codigoPartida:$("codigoPartida").value,
+    campeonato:txt($("campeonato").value),
+    categoria:txt($("categoria").value),
+    rodada:txt($("rodada").value),
+    data:txt($("data").value),
+    hora:txt($("hora").value),
+    local:txt($("local").value),
+    timeAtivo:timeAtivo,
+    cacheTimes:JSON.parse(JSON.stringify(cacheTimes)),
+    jogadoresA:jogadores.filter(j=>j.time==="A"),
+    jogadoresB:jogadores.filter(j=>j.time==="B"),
+    eventos,
+    arbitro:txt($("arbitro").value),
+    assistente1:txt($("assistente1").value),
+    assistente2:txt($("assistente2").value),
+    quartoArbitro:txt($("quartoArbitro").value),
+    observador:txt($("observador").value),
+    melhorTime:txt($("melhorTime").value),
+    melhorJogador:txt($("melhorJogador").value),
+    melhorJogadorDestaque:txt($("melhorDestaque").value),
+    observacoes:txt($("observacoes").value),
+    atualizadoEm:new Date().toISOString()
+  };
+
+  const lista=getRascunhos();
+  const idx=lista.findIndex(r=>r.id===dados.id);
+  if(idx>=0) lista[idx]=dados;
+  else lista.push(dados);
+  setRascunhos(lista);
+}
+
+function autoSave(){
+  if(timerAutoSave) clearTimeout(timerAutoSave);
+  timerAutoSave=setTimeout(()=>{
+    salvarRascunhoLocal();
+    const aviso=$("avisoRascunho");
+    if(aviso){
+      aviso.classList.add("on");
+      setTimeout(()=>aviso.classList.remove("on"),1500);
+    }
+  },800);
+}
+
+function carregarRascunhoNoForm(d){
+  if(!d) return;
+  sumulaAtual={
+    id:d.id,
+    criadoEm:d.criadoEm||new Date().toISOString(),
+    finalizada:d.finalizada||false
+  };
+  jogadores=[...(d.jogadoresA||[]).map(x=>({...x,time:"A"})),...(d.jogadoresB||[]).map(x=>({...x,time:"B"}))];
+  eventos=Array.isArray(d.eventos)?d.eventos:[];
+  cacheTimes=d.cacheTimes||{A:{nome:"",cidade:"",tecnico:"",auxiliar:""},B:{nome:"",cidade:"",tecnico:"",auxiliar:""}};
+  timeAtivo=d.timeAtivo||"A";
+  $("btnTimeA").classList.toggle("ativo", timeAtivo==="A");
+  $("btnTimeB").classList.toggle("ativo", timeAtivo==="B");
+  carregarTimeNoForm(timeAtivo);
+
+  $("numeroSumula").value=d.numeroSumula||"";
+  $("codigoPartida").value=d.codigoPartida||"";
+  $("campeonato").value=d.campeonato||"";
+  $("categoria").value=d.categoria||"";
+  $("rodada").value=d.rodada||"";
+  $("data").value=d.data||"";
+  $("hora").value=d.hora||"";
+  $("local").value=d.local||"";
+  $("arbitro").value=d.arbitro||"";
+  $("assistente1").value=d.assistente1||"";
+  $("assistente2").value=d.assistente2||"";
+  $("quartoArbitro").value=d.quartoArbitro||"";
+  $("observador").value=d.observador||"";
+  $("melhorDestaque").value=d.melhorJogadorDestaque||"";
+  $("observacoes").value=d.observacoes||"";
+  $("tituloTopo").textContent = (cacheTimes.A?.nome && cacheTimes.B?.nome) ? (cacheTimes.A.nome + " x " + cacheTimes.B.nome) : "Nova Súmula";
+  atualizarTudo();
+  setTimeout(()=>{
+    $("melhorTime").value=d.melhorTime||"";
+    atualizarJogadoresMelhor();
+    $("melhorJogador").value=d.melhorJogador||"";
+    renderPreview();
+  },150);
+}
+
+/* ========== NOVA / CRIAR ========== */
+window.criarNovaSumula=function(){
+  salvarRascunhoLocal();
+  sumulaAtual={id:"DG"+Date.now(),criadoEm:new Date().toISOString(),finalizada:false};
+  jogadores=[];eventos=[];
+  cacheTimes={A:{nome:"",cidade:"",tecnico:"",auxiliar:""},B:{nome:"",cidade:"",tecnico:"",auxiliar:""}};
+  timeAtivo="A";
+  $("btnTimeA").classList.add("ativo");
+  $("btnTimeB").classList.remove("ativo");
+  ["campeonato","categoria","rodada","data","hora","local","timeNome","timeCidade","timeTecnico","timeAuxiliar","arbitro","assistente1","assistente2","quartoArbitro","observador","melhorDestaque","observacoes"].forEach(id=>$(id).value="");
+  $("numeroSumula").value=proximoNumero();
+  $("codigoPartida").value=gerarCodigoPartida();
+  $("tituloTopo").textContent="Nova Súmula";
+  $("btnExcluirTopo").style.display="none";
+  localStorage.setItem(KEY_ATUAL, sumulaAtual.id);
+  atualizarTudo();
+  window.scrollTo(0,0);
+  salvarRascunhoLocal();
+};
 
 function gerarCodigoPartida(){ return Date.now().toString().slice(-12).toUpperCase(); }
-
 function proximoNumero(){
   let n=parseInt(localStorage.getItem("dg_ultimo_numero")||"0",10)+1;
   localStorage.setItem("dg_ultimo_numero",n);
   return "DG-"+String(n).padStart(4,"0");
 }
-
 function mascararCpf(cpf){
   const limpo=String(cpf||"").replace(/\D/g,"");
   if(limpo.length<3)return "***";
@@ -367,8 +631,61 @@ function atualizarStatusNet(){
 window.addEventListener("online",atualizarStatusNet);
 window.addEventListener("offline",atualizarStatusNet);
 
+/* ========== MODAL RASCUNHOS ========== */
+window.abrirRascunhos=function(){
+  const lista=getRascunhos().sort((a,b)=>{
+    const ta=a.atualizadoEm?new Date(a.atualizadoEm).getTime():0;
+    const tb=b.atualizadoEm?new Date(b.atualizadoEm).getTime():0;
+    return tb-ta;
+  });
+  const box=$("listaRascunhos");
+  if(!lista.length){
+    box.innerHTML=`<div class="sem-rascunho"><i class="fa-solid fa-folder-open" style="font-size:48px;color:#ccc;margin-bottom:14px;display:block;"></i>Nenhum rascunho salvo ainda.</div>`;
+  }else{
+    box.innerHTML=lista.map(r=>{
+      const data=r.atualizadoEm?new Date(r.atualizadoEm).toLocaleString("pt-BR"):"-";
+      const nomeA=r.cacheTimes?.A?.nome||"Time A";
+      const nomeB=r.cacheTimes?.B?.nome||"Time B";
+      const numJog=(r.jogadoresA?.length||0)+(r.jogadoresB?.length||0);
+      return `<div class="rascunho-item" onclick="carregarRascunho('${r.id}')">
+        <div>
+          <strong>${nomeA} x ${nomeB}</strong>
+          <small>${r.campeonato||"Sem campeonato"} ${r.categoria?"• "+r.categoria:""}</small>
+          <small>${numJog} jogador${numJog===1?"":"es"} • ${data}</small>
+        </div>
+        <button class="btn-excluir-rasc" onclick="event.stopPropagation();excluirRascunho('${r.id}')"><i class="fa-solid fa-trash"></i></button>
+      </div>`;
+    }).join("");
+  }
+  $("modalRascunhos").classList.add("on");
+};
+window.fecharRascunhos=function(){ $("modalRascunhos").classList.remove("on"); };
+window.carregarRascunho=function(id){
+  salvarRascunhoLocal();
+  const r=getRascunhos().find(x=>x.id===id);
+  if(!r){ alert("Rascunho não encontrado."); return; }
+  localStorage.setItem(KEY_ATUAL, id);
+  carregarRascunhoNoForm(r);
+  fecharRascunhos();
+  window.scrollTo(0,0);
+};
+window.excluirRascunho=function(id){
+  if(!confirm("Excluir esse rascunho?")) return;
+  const lista=getRascunhos().filter(r=>r.id!==id);
+  setRascunhos(lista);
+  if(localStorage.getItem(KEY_ATUAL)===id) localStorage.removeItem(KEY_ATUAL);
+  abrirRascunhos();
+};
+$("modalRascunhos").addEventListener("click", e=>{
+  if(e.target.id==="modalRascunhos") fecharRascunhos();
+});
+
+/* ========== DADOS ========== */
 function dados(){
+  salvarTimeNoCache(timeAtivo, pegarTimeForm());
   const finalizada=sumulaAtual.finalizada;
+  const A=cacheTimes.A||{nome:"Time A",cidade:"Goiânia - GO",tecnico:"",auxiliar:""};
+  const B=cacheTimes.B||{nome:"Time B",cidade:"Goiânia - GO",tecnico:"",auxiliar:""};
   return{
     id:sumulaAtual.id,
     criadoEmLocal:(sumulaAtual.criadoEm instanceof Date)?sumulaAtual.criadoEm.toISOString():sumulaAtual.criadoEm,
@@ -378,19 +695,19 @@ function dados(){
     data:txt($("data").value),
     hora:txt($("hora").value),
     local:txt($("local").value),
-    timeA:{nome:txt($("timeA").value)||"Time A",cidade:txt($("cidadeA").value)||"Goiânia - GO"},
-    timeB:{nome:txt($("timeB").value)||"Time B",cidade:txt($("cidadeB").value)||"Goiânia - GO"},
-    golsA:Number($("golsA").value||0),
-    golsB:Number($("golsB").value||0),
-    tecnicoA:txt($("tecnicoA").value),
-    tecnicoB:txt($("tecnicoB").value),
-    auxiliarA:txt($("auxiliarA").value),
-    auxiliarB:txt($("auxiliarB").value),
+    timeA:{nome:A.nome||"Time A",cidade:A.cidade||"Goiânia - GO"},
+    timeB:{nome:B.nome||"Time B",cidade:B.cidade||"Goiânia - GO"},
+    tecnicoA:A.tecnico||"",
+    tecnicoB:B.tecnico||"",
+    auxiliarA:A.auxiliar||"",
+    auxiliarB:B.auxiliar||"",
+    golsA:contarGols("A"),
+    golsB:contarGols("B"),
     jogadoresA:jogadores.filter(j=>j.time==="A"),
     jogadoresB:jogadores.filter(j=>j.time==="B"),
     eventos,
-    gols:eventos.filter(e=>e.tipo==="gol"),
-    cartoes:eventos.filter(e=>e.tipo!=="gol"),
+    gols:eventos.filter(e=>e.tipo==="gol"||e.tipo==="gol_contra"),
+    cartoes:eventos.filter(e=>e.tipo!=="gol"&&e.tipo!=="gol_contra"),
     arbitro:txt($("arbitro").value),
     assistente1:txt($("assistente1").value),
     assistente2:txt($("assistente2").value),
@@ -411,19 +728,16 @@ function dados(){
   };
 }
 
-window.novaSumula=function(){
-  sumulaAtual={id:"DG"+Date.now(),criadoEm:new Date().toISOString(),finalizada:false};
-  jogadores=[];eventos=[];
-  ["campeonato","categoria","rodada","data","hora","local","timeA","cidadeA","tecnicoA","auxiliarA","timeB","cidadeB","tecnicoB","auxiliarB","arbitro","assistente1","assistente2","quartoArbitro","observador","melhorDestaque","observacoes"].forEach(id=>$(id).value="");
-  $("golsA").value="0"; $("golsB").value="0";
-  $("numeroSumula").value=proximoNumero();
-  $("codigoPartida").value=gerarCodigoPartida();
-  $("tituloTopo").textContent="Nova Súmula";
-  $("btnExcluirTopo").style.display="none";
-  atualizarTudo();
-  window.scrollTo(0,0);
-};
+function contarGols(time){
+  let total=0;
+  eventos.forEach(e=>{
+    if(e.tipo==="gol" && e.time===time) total++;
+    if(e.tipo==="gol_contra" && e.time!==time) total++; // gol contra do adversário = ponto pro time
+  });
+  return total;
+}
 
+/* ========== JOGADORES ========== */
 window.adicionarJogador=function(){
   const nome=txt($("jogadorNome").value);
   if(!nome)return alert("Digite o nome do jogador.");
@@ -439,64 +753,199 @@ window.adicionarJogador=function(){
   ["jogadorNumero","jogadorNome","jogadorCpf","jogadorNascimento"].forEach(id=>$(id).value="");
   $("jogadorPosicao").value="";
   atualizarTudo();
+  alert("Jogador adicionado! ✓\n\nPra editar, clique no nome dele na súmula.");
 };
 
-window.excluirJogador=function(id){ jogadores=jogadores.filter(j=>j.id!==id); atualizarTudo(); };
+/* ========== MODAL EDITAR JOGADOR ========== */
+window.abrirModalJogador=function(id){
+  const j=jogadores.find(x=>x.id===id);
+  if(!j) return;
+  editandoJogadorId=id;
+  $("editJogNome").value=j.nome||"";
+  $("editJogNumero").value=j.numero||"";
+  $("editJogCpf").value=j.cpf||"";
+  $("editJogNascimento").value=j.nascimento||"";
+  $("editJogPosicao").value=j.posicao||"";
+  $("modalJogador").classList.add("on");
+};
+window.fecharModalJogador=function(){
+  $("modalJogador").classList.remove("on");
+  editandoJogadorId=null;
+};
+window.salvarEditJogador=function(){
+  const j=jogadores.find(x=>x.id===editandoJogadorId);
+  if(!j) return;
+  j.nome=txt($("editJogNome").value);
+  j.numero=txt($("editJogNumero").value);
+  j.cpf=txt($("editJogCpf").value);
+  j.nascimento=txt($("editJogNascimento").value);
+  j.posicao=$("editJogPosicao").value;
+  if(!j.nome){ alert("O nome não pode ficar vazio."); return; }
+  fecharModalJogador();
+  atualizarTudo();
+};
+window.excluirJogadorModal=function(){
+  if(!editandoJogadorId) return;
+  if(!confirm("Excluir esse jogador?")) return;
+  jogadores=jogadores.filter(j=>j.id!==editandoJogadorId);
+  fecharModalJogador();
+  atualizarTudo();
+};
+$("modalJogador").addEventListener("click", e=>{
+  if(e.target.id==="modalJogador") fecharModalJogador();
+});
 
-window.adicionarEvento=function(){
-  const nome=txt($("eventoNome").value);
-  const numero=txt($("eventoNumero").value);
-  if(!nome&&!numero)return alert("Digite pelo menos nome ou número.");
-  eventos.push({
-    id:"e"+Date.now()+Math.random(),
-    tipo:$("eventoTipo").value,
-    time:$("eventoTime").value,
-    minuto:txt($("eventoMinuto").value),
-    numero, nome,
-    observacao:txt($("eventoObs").value)
-  });
-  ["eventoMinuto","eventoNumero","eventoNome","eventoObs"].forEach(id=>$(id).value="");
+/* ========== MODAL EDITAR EVENTO ========== */
+let editandoEventoId=null;
+
+window.abrirModalEvento=function(id){
+  const ev=eventos.find(x=>x.id===id);
+  if(!ev) return;
+
+  const opcTipo=`
+    <option value="gol" ${ev.tipo==='gol'?'selected':''}>Gol</option>
+    <option value="gol_contra" ${ev.tipo==='gol_contra'?'selected':''}>Gol Contra</option>
+    <option value="amarelo" ${ev.tipo==='amarelo'?'selected':''}>Cartão Amarelo</option>
+    <option value="vermelho_direto" ${ev.tipo==='vermelho_direto'?'selected':''}>Vermelho Direto</option>
+    <option value="segundo_amarelo" ${ev.tipo==='segundo_amarelo'?'selected':''}>Vermelho (2º Amarelo)</option>
+  `;
+
+  const nomeA=cacheTimes.A?.nome||"Time A";
+  const nomeB=cacheTimes.B?.nome||"Time B";
+
+  // Monta HTML do modal de evento
+  let modalExistente=document.getElementById("modalEvento");
+  if(!modalExistente){
+    const div=document.createElement("div");
+    div.className="modal-overlay";
+    div.id="modalEvento";
+    div.innerHTML=`
+      <div class="modal-box">
+        <div class="modal-head">
+          <h3><i class="fa-solid fa-pen"></i> Editar Evento</h3>
+          <button onclick="fecharModalEvento()">×</button>
+        </div>
+        <div class="modal-body">
+          <label>Tipo</label><select id="editEvTipo">${opcTipo}</select>
+          <label>Time</label>
+          <select id="editEvTime">
+            <option value="A" ${ev.time==='A'?'selected':''}>${nomeA}</option>
+            <option value="B" ${ev.time==='B'?'selected':''}>${nomeB}</option>
+          </select>
+          <label>Minuto</label><input id="editEvMinuto" type="number">
+          <label>Jogador</label><select id="editEvJogador"></select>
+          <label>Observação</label><input id="editEvObs">
+          <div class="modal-acoes">
+            <button class="btn-cancelar" onclick="fecharModalEvento()">Cancelar</button>
+            <button class="btn-salvar-modal" onclick="salvarEditEvento()">Salvar</button>
+            <button class="btn-excluir-modal" onclick="excluirEventoModal()">Excluir Evento</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(div);
+    div.addEventListener("click", e=>{
+      if(e.target.id==="modalEvento") fecharModalEvento();
+    });
+    // Atualiza jogadores quando troca o time
+    setTimeout(()=>{
+      document.getElementById("editEvTime").addEventListener("change", atualizarJogadoresEditEvento);
+    },100);
+  }
+
+  editandoEventoId=id;
+  $("editEvTipo").value=ev.tipo||"gol";
+  $("editEvTime").value=ev.time||"A";
+  $("editEvMinuto").value=ev.minuto||"";
+  $("editEvObs").value=ev.observacao||"";
+  atualizarJogadoresEditEvento();
+  setTimeout(()=>{ $("editEvJogador").value=ev.nome||""; },50);
+
+  document.getElementById("modalEvento").classList.add("on");
+};
+
+function atualizarJogadoresEditEvento(){
+  const time=document.getElementById("editEvTime").value;
+  const sel=document.getElementById("editEvJogador");
+  const lista=time==="A"?jogadores.filter(j=>j.time==="A"):jogadores.filter(j=>j.time==="B");
+  sel.innerHTML=`<option value="">Selecione o jogador</option>`+
+    lista.map(j=>`<option value="${j.nome}">${j.numero?"Nº "+j.numero+" - ":""}${j.nome}</option>`).join("");
+}
+
+window.fecharModalEvento=function(){
+  const m=document.getElementById("modalEvento");
+  if(m) m.classList.remove("on");
+  editandoEventoId=null;
+};
+window.salvarEditEvento=function(){
+  const ev=eventos.find(x=>x.id===editandoEventoId);
+  if(!ev) return;
+  ev.tipo=$("editEvTipo").value;
+  ev.time=$("editEvTime").value;
+  ev.minuto=txt($("editEvMinuto").value);
+  ev.nome=$("editEvJogador").value;
+  ev.observacao=txt($("editEvObs").value);
+  fecharModalEvento();
+  atualizarTudo();
+};
+window.excluirEventoModal=function(){
+  if(!editandoEventoId) return;
+  if(!confirm("Excluir esse evento?")) return;
+  eventos=eventos.filter(e=>e.id!==editandoEventoId);
+  fecharModalEvento();
   atualizarTudo();
 };
 
-window.excluirEvento=function(id){ eventos=eventos.filter(e=>e.id!==id); atualizarTudo(); };
+/* ========== EVENTOS ========== */
+window.adicionarEvento=function(){
+  const tipo=$("eventoTipo").value;
+  const time=$("eventoTime").value;
+  const jogador=$("eventoJogador").value;
+  const minuto=txt($("eventoMinuto").value);
 
-function renderListaJogadores(){
-  ["A","B"].forEach(time=>{
-    const box=$("listaJogadores"+time);
-    const lista=jogadores.filter(j=>j.time===time);
-    box.innerHTML=lista.length?lista.map(j=>`
-      <div class="item">
-        <div><strong>${j.numero?"Nº "+j.numero+" - ":""}${j.nome}</strong>
-          <small>CPF: ${mascararCpf(j.cpf)} | Nasc.: ${j.nascimento||"-"} | Pos.: ${j.posicao||"-"}</small></div>
-        <button class="icon-btn" onclick="excluirJogador('${j.id}')"><i class="fa-solid fa-trash"></i></button>
-      </div>`).join(""):`<div class="item"><small>Nenhum jogador.</small></div>`;
+  if(!jogador&&tipo!=="gol_contra"){ alert("Selecione o jogador."); return; }
+
+  // Gol contra pode ser sem jogador especificado (jogador do outro time)
+  let nomeFinal=jogador;
+  if(tipo==="gol_contra" && !nomeFinal) nomeFinal="(gol contra)";
+
+  eventos.push({
+    id:"e"+Date.now()+Math.random(),
+    tipo, time, minuto,
+    nome:nomeFinal,
+    observacao:txt($("eventoObs").value)
   });
+
+  ["eventoMinuto","eventoObs"].forEach(id=>$(id).value="");
+  atualizarTudo();
+};
+
+/* ========== TIPO DO EVENTO = MUDA O SELECT DE JOGADORES ========== */
+function atualizarSelectsEvento(){
+  const time=$("eventoTime").value;
+  const lista=time==="A"?jogadores.filter(j=>j.time==="A"):jogadores.filter(j=>j.time==="B");
+  const sel=$("eventoJogador");
+  const atual=sel.value;
+  if(!lista.length){
+    sel.innerHTML=`<option value="">Nenhum jogador cadastrado</option>`;
+    return;
+  }
+  sel.innerHTML=`<option value="">Selecione o jogador</option>`+
+    lista.map(j=>`<option value="${j.nome}">${j.numero?"Nº "+j.numero+" - ":""}${j.nome}</option>`).join("");
+  if(atual)sel.value=atual;
 }
 
-function nomeTipoEvento(t){
-  if(t==="gol")return"Gol";
-  if(t==="amarelo")return"Cartão Amarelo";
-  if(t==="vermelho_direto")return"Vermelho Direto";
-  if(t==="segundo_amarelo")return"Vermelho (2º Amarelo)";
-  return t;
-}
+document.addEventListener("change", e=>{
+  if(e.target.id==="eventoTime"){ atualizarSelectsEvento(); atualizarTudo(); }
+});
 
-function renderListaEventos(){
-  $("listaEventos").innerHTML=eventos.length?eventos.map(e=>`
-    <div class="item">
-      <div><strong>${nomeTipoEvento(e.tipo)} - Time ${e.time} ${e.minuto?"("+e.minuto+"')":""}</strong>
-        <small>${e.numero?"Nº "+e.numero+" - ":""}${e.nome||"-"} ${e.observacao?"| "+e.observacao:""}</small></div>
-      <button class="icon-btn" onclick="excluirEvento('${e.id}')"><i class="fa-solid fa-trash"></i></button>
-    </div>`).join(""):`<div class="item"><small>Nenhum evento.</small></div>`;
-}
-
+/* ========== MELHOR JOGADOR ========== */
 function atualizarSelectsMelhor(){
-  const nomeA=txt($("timeA").value)||"Time A";
-  const nomeB=txt($("timeB").value)||"Time B";
+  const A=cacheTimes.A||{nome:"Time A"};
+  const B=cacheTimes.B||{nome:"Time B"};
   const sel=$("melhorTime");
   const atual=sel.value;
-  sel.innerHTML=`<option value="">Selecione o time</option><option value="A">${nomeA}</option><option value="B">${nomeB}</option>`;
+  sel.innerHTML=`<option value="">Selecione o time</option><option value="A">${A.nome||"Time A"}</option><option value="B">${B.nome||"Time B"}</option>`;
   if(atual)sel.value=atual;
   atualizarJogadoresMelhor();
 }
@@ -523,6 +972,7 @@ document.addEventListener("change",e=>{
   if(e.target.id==="melhorTime"){ atualizarJogadoresMelhor(); atualizarTudo(); }
 });
 
+/* ========== RENDER PREVIEW ========== */
 function dataBR(v){
   if(!v)return"-";
   const d=new Date(v+"T00:00:00");
@@ -538,7 +988,12 @@ function separarEventosPorTime(lista){
 
 function renderJogadores(lista){
   if(!lista.length)return`<tr><td colspan="4" class="line-empty">Nenhum jogador.</td></tr>`;
-  return lista.map(j=>`<tr><td class="num">${j.numero||"-"}</td><td>${j.nome||"-"}</td><td>${mascararCpf(j.cpf)}</td><td class="posicao">${j.posicao||"-"}</td></tr>`).join("");
+  return lista.map(j=>`<tr>
+    <td class="num">${j.numero||"-"}</td>
+    <td><span class="jogador-click" onclick="abrirModalJogador('${j.id}')">${j.nome||"-"}</span></td>
+    <td>${mascararCpf(j.cpf)}</td>
+    <td class="posicao">${j.posicao||"-"}</td>
+  </tr>`).join("");
 }
 
 function listaComissao(d,time){
@@ -555,15 +1010,22 @@ function renderComissao(lista){
 
 function renderGols(lista){
   if(!lista.length)return`<div class="line-empty">Nenhum gol.</div>`;
-  return lista.map(g=>`<div class="event-item"><span class="ball">⚽</span><span class="event-minute">${g.minuto||"-"}'</span><span class="event-name">${g.nome||"-"}</span></div>`).join("");
+  return lista.map(g=>`<button type="button" class="event-item event-item-btn" onclick="abrirModalEvento('${g.id}')">
+    <span class="ball">${g.tipo==='gol_contra'?'⚽🚫':'⚽'}</span>
+    <span class="event-minute">${g.minuto||"-"}'</span>
+    <span class="event-name">${g.nome||"-"}</span>
+  </button>`).join("");
 }
 
 function renderCartoes(lista){
   if(!lista.length)return`<div class="line-empty">Nenhum cartão.</div>`;
   return lista.map(c=>{
     const vermelho=c.tipo!=="amarelo";
-    const extra=vermelho?`<small>${c.tipo==="segundo_amarelo"?"2º amarelo":"vermelho direto"}</small>`:"";
-    return`<div class="event-item"><span class="${vermelho?"red-card":"yellow-card"}"></span><span class="event-minute">${c.minuto||"-"}'</span><span class="event-name">${c.nome||"-"}${extra}${c.observacao?`<br><small><strong>Motivo:</strong> ${c.observacao}</small>`:""}</span></div>`;
+    return`<button type="button" class="event-item event-item-btn" onclick="abrirModalEvento('${c.id}')">
+      <span class="${vermelho?"red-card":"yellow-card"}"></span>
+      <span class="event-minute">${c.minuto||"-"}'</span>
+      <span class="event-name">${c.nome||"-"}${c.observacao?`<br><small><strong>Motivo:</strong> ${c.observacao}</small>`:""}</span>
+    </button>`;
   }).join("");
 }
 
@@ -584,6 +1046,7 @@ function ajustarEscala(){
 }
 
 function renderPreview(){
+  salvarTimeNoCache(timeAtivo, pegarTimeForm());
   const d=dados();
   const nA=d.timeA.nome,nB=d.timeB.nome;
   const g=d.gols||[],c=d.cartoes||[];
@@ -596,6 +1059,10 @@ function renderPreview(){
 
   const posMelhor=$("melhorJogador").selectedOptions[0]?.dataset?.pos||"";
   const nomeTimeMelhor=d.melhorTime==="A"?nA:(d.melhorTime==="B"?nB:"");
+
+  // Contadores (gol contra invertido)
+  const golsA=contarGols("A");
+  const golsB=contarGols("B");
 
   $("previewSumula").innerHTML=`
 <header class="header">
@@ -613,7 +1080,7 @@ function renderPreview(){
 </section>
 <section class="score-card">
   <div class="team-score"><div class="team-name"><h2>${nA}</h2></div></div>
-  <div class="score-center"><div class="score-number">${d.golsA} x ${d.golsB}</div><span>Placar Final</span></div>
+  <div class="score-center"><div class="score-number">${golsA} x ${golsB}</div><span>Placar Final</span></div>
   <div class="team-score"><div class="team-name"><h2>${nB}</h2></div></div>
 </section>
 <section class="match-strip">
@@ -650,7 +1117,7 @@ function renderPreview(){
   </div>
   <div class="panel"><h3>Resumo da Partida</h3>
     <div class="summary-grid">
-      <div class="summary-box"><i class="fa-solid fa-futbol"></i><span>Gols</span><strong>${g.length||(d.golsA+d.golsB)}</strong><div class="summary-detail">(${gp.a.filter(x=>x.tipo==="gol").length} x ${gp.b.filter(x=>x.tipo==="gol").length})</div></div>
+      <div class="summary-box"><i class="fa-solid fa-futbol"></i><span>Gols</span><strong>${golsA+golsB}</strong><div class="summary-detail">(${golsA} x ${golsB})</div></div>
       <div class="summary-box"><div class="summary-card-icon yellow-card"></div><span>Cartões Amarelos</span><strong>${tc.amarelos}</strong><div class="summary-detail">(${cp.a.filter(c=>c.tipo==="amarelo").length} x ${cp.b.filter(c=>c.tipo==="amarelo").length})</div></div>
       <div class="summary-box"><div class="summary-card-icon red-card"></div><span>Cartões Vermelhos</span><strong>${tc.vermelhos}</strong><div class="summary-detail">(${cp.a.filter(c=>c.tipo!=="amarelo").length} x ${cp.b.filter(c=>c.tipo!=="amarelo").length})</div></div>
     </div>
@@ -673,25 +1140,21 @@ function renderPreview(){
 }
 
 window.atualizarTudo=function(){
-  renderListaJogadores();
-  renderListaEventos();
+  atualizarSelectsEvento();
   atualizarSelectsMelhor();
   renderPreview();
+  autoSave();
 };
 
+/* ========== SALVAR / FINALIZAR / EXCLUIR ========== */
 window.salvarSumula=async function(){
-  if(!txt($("timeA").value)||!txt($("timeB").value)){alert("Preencha os dois times.");return;}
-  try{
-    const d=dados();
-    d.atualizadoEm=serverTimestamp();
-    await setDoc(doc(db,"sumulas",d.id),d,{merge:true});
-    alert("Súmula salva! ✓\n\nEla ficará disponível em 'Súmulas' após você clicar em Finalizar.");
-    location.href="sumulas.html";
-  }catch(e){console.error(e);alert("Erro: "+(e.message||e));}
+  salvarRascunhoLocal();
+  alert("Rascunho salvo! ✓");
 };
 
 window.finalizarSumula=async function(){
-  if(!txt($("timeA").value)||!txt($("timeB").value)){alert("Preencha os dois times.");return;}
+  salvarTimeNoCache(timeAtivo, pegarTimeForm());
+  if(!cacheTimes.A?.nome||!cacheTimes.B?.nome){alert("Preencha o nome dos dois times (troque no Time A / Time B).");return;}
   if(!confirm("Finalizar essa súmula? Ela vai aparecer na tela Súmulas."))return;
   try{
     sumulaAtual.finalizada=true;
@@ -699,6 +1162,9 @@ window.finalizarSumula=async function(){
     d.atualizadoEm=serverTimestamp();
     d.publicadaEm=new Date().toLocaleString("pt-BR");
     await setDoc(doc(db,"sumulas",d.id),d,{merge:true});
+    const lista=getRascunhos().filter(r=>r.id!==d.id);
+    setRascunhos(lista);
+    if(localStorage.getItem(KEY_ATUAL)===d.id) localStorage.removeItem(KEY_ATUAL);
     alert("Súmula publicada! ✓");
     location.href="sumulas.html";
   }catch(e){console.error(e);alert("Erro: "+(e.message||e));}
@@ -708,20 +1174,23 @@ window.excluirSumula=async function(){
   if(!confirm("Excluir essa súmula? Não tem como voltar atrás."))return;
   try{
     await deleteDoc(doc(db,"sumulas",sumulaAtual.id));
+    const lista=getRascunhos().filter(r=>r.id!==sumulaAtual.id);
+    setRascunhos(lista);
     alert("Súmula excluída! ✓");
     location.href="sumulas.html";
   }catch(e){console.error(e);alert("Erro ao excluir: "+(e.message||e));}
 };
 
-/* ===== PDF INTEIRO (usa html2pdf) ===== */
+/* ========== PDF ========== */
 window.baixarPDF=function(){
+  salvarTimeNoCache(timeAtivo, pegarTimeForm());
   const sb=document.querySelector(".sumula-scale");
   const escalaSalva=sb ? sb.style.getPropertyValue("--escala-mobile") : "";
   if(sb) sb.style.removeProperty("--escala-mobile");
 
   const elemento=document.getElementById("previewSumula");
-  const nomeA=(txt($("timeA").value)||"A").replace(/\s+/g,"-");
-  const nomeB=(txt($("timeB").value)||"B").replace(/\s+/g,"-");
+  const nomeA=(cacheTimes.A?.nome||"A").replace(/\s+/g,"-");
+  const nomeB=(cacheTimes.B?.nome||"B").replace(/\s+/g,"-");
   const nome=`sumula-${nomeA}-x-${nomeB}.pdf`.toLowerCase();
 
   html2pdf().set({
@@ -737,7 +1206,9 @@ window.baixarPDF=function(){
   });
 };
 
+/* ========== COMPARTILHAR ========== */
 window.enviarWhats=function(){
+  salvarTimeNoCache(timeAtivo, pegarTimeForm());
   const d=dados();
   let t=`*📋 SÚMULA OFICIAL*\n_DG Sistemas_\n\n🏆 ${d.campeonato||"-"}\n📂 ${d.categoria||"-"}\n📅 ${dataBR(d.data)} ${d.hora||""}\n📍 ${d.local||"-"}\n\n⚽ *${d.timeA.nome}* ${d.golsA} x ${d.golsB} *${d.timeB.nome}*\n\n`;
   if(d.arbitro)t+=`👨‍⚖️ ${d.arbitro}\n`;
@@ -755,65 +1226,73 @@ window.copiarLink=async function(){
   try{await navigator.clipboard.writeText(location.href);alert("Link copiado!");}catch(e){alert("Erro ao copiar.");}
 };
 
-window.limparTudo=function(){
-  if(!confirm("Apagar tudo e começar de novo?"))return;
-  novaSumula();
-};
-
+/* ========== AUTO-SAVE ========== */
 document.addEventListener("input",e=>{ if(e.target.closest(".offline-tools")) atualizarTudo(); });
 document.addEventListener("change",e=>{ if(e.target.closest(".offline-tools")) atualizarTudo(); });
 window.addEventListener("resize",ajustarEscala);
+window.addEventListener("beforeunload", ()=>{ salvarRascunhoLocal(); });
 
-async function carregarSeEditando(){
+/* ========== INICIAR ========== */
+async function iniciar(){
+  atualizarStatusNet();
+  atualizarContadorRascunhos();
+
   const idUrl=new URLSearchParams(location.search).get("id");
-  if(!idUrl){ novaSumula(); return; }
-  try{
-    const snap=await getDoc(doc(db,"sumulas",idUrl));
-    if(!snap.exists()){ novaSumula(); return; }
-    const s={id:snap.id,...snap.data()};
-    sumulaAtual={id:s.id,criadoEm:s.criadoEmLocal||new Date().toISOString(),finalizada:s.sumulaFinalizada||false};
-    jogadores=[...(s.jogadoresA||[]).map(x=>({...x,time:"A"})),...(s.jogadoresB||[]).map(x=>({...x,time:"B"}))];
-    eventos=Array.isArray(s.eventos)?s.eventos:[...(s.gols||[]),...(s.cartoes||[])];
-    $("numeroSumula").value=s.numeroSumula||"";
-    $("codigoPartida").value=s.codigoPartida||"";
-    $("campeonato").value=s.campeonato||"";
-    $("categoria").value=s.categoria||"";
-    $("rodada").value=s.rodada||"";
-    $("data").value=s.data||"";
-    $("hora").value=s.hora||"";
-    $("local").value=s.local||"";
-    $("timeA").value=s.timeA?.nome||"";
-    $("cidadeA").value=s.timeA?.cidade||"";
-    $("timeB").value=s.timeB?.nome||"";
-    $("cidadeB").value=s.timeB?.cidade||"";
-    $("golsA").value=s.golsA||0;
-    $("golsB").value=s.golsB||0;
-    $("tecnicoA").value=s.tecnicoA||"";
-    $("tecnicoB").value=s.tecnicoB||"";
-    $("auxiliarA").value=s.auxiliarA||"";
-    $("auxiliarB").value=s.auxiliarB||"";
-    $("arbitro").value=s.arbitro||"";
-    $("assistente1").value=s.assistente1||"";
-    $("assistente2").value=s.assistente2||"";
-    $("quartoArbitro").value=s.quartoArbitro||"";
-    $("observador").value=s.observador||"";
-    $("melhorDestaque").value=s.melhorJogadorDestaque||"";
-    $("observacoes").value=s.observacoes||"";
-    $("tituloTopo").textContent="Editar Súmula";
-    $("btnExcluirTopo").style.display="inline-flex";
-    atualizarTudo();
-    setTimeout(()=>{
-      $("melhorTime").value=s.melhorTime||"";
-      atualizarJogadoresMelhor();
-      $("melhorJogador").value=s.melhorJogador||"";
-      renderPreview();
-    },150);
-    window.scrollTo(0,0);
-  }catch(e){console.error(e);novaSumula();}
+  if(idUrl){
+    try{
+      const snap=await getDoc(doc(db,"sumulas",idUrl));
+      if(snap.exists()){
+        const s={id:snap.id,...snap.data()};
+        sumulaAtual={id:s.id,criadoEm:s.criadoEmLocal||new Date().toISOString(),finalizada:s.sumulaFinalizada||false};
+        jogadores=[...(s.jogadoresA||[]).map(x=>({...x,time:"A"})),...(s.jogadoresB||[]).map(x=>({...x,time:"B"}))];
+        eventos=Array.isArray(s.eventos)?s.eventos:[...(s.gols||[]),...(s.cartoes||[])];
+        cacheTimes={
+          A:{nome:s.timeA?.nome||"",cidade:s.timeA?.cidade||"",tecnico:s.tecnicoA||"",auxiliar:s.auxiliarA||""},
+          B:{nome:s.timeB?.nome||"",cidade:s.timeB?.cidade||"",tecnico:s.tecnicoB||"",auxiliar:s.auxiliarB||""}
+        };
+        timeAtivo="A";
+        $("btnTimeA").classList.add("ativo");
+        $("btnTimeB").classList.remove("ativo");
+        carregarTimeNoForm("A");
+        $("numeroSumula").value=s.numeroSumula||"";
+        $("codigoPartida").value=s.codigoPartida||"";
+        $("campeonato").value=s.campeonato||"";
+        $("categoria").value=s.categoria||"";
+        $("rodada").value=s.rodada||"";
+        $("data").value=s.data||"";
+        $("hora").value=s.hora||"";
+        $("local").value=s.local||"";
+        $("arbitro").value=s.arbitro||"";
+        $("assistente1").value=s.assistente1||"";
+        $("assistente2").value=s.assistente2||"";
+        $("quartoArbitro").value=s.quartoArbitro||"";
+        $("observador").value=s.observador||"";
+        $("melhorDestaque").value=s.melhorJogadorDestaque||"";
+        $("observacoes").value=s.observacoes||"";
+        $("tituloTopo").textContent="Editar Súmula";
+        $("btnExcluirTopo").style.display="inline-flex";
+        atualizarTudo();
+        setTimeout(()=>{
+          $("melhorTime").value=s.melhorTime||"";
+          atualizarJogadoresMelhor();
+          $("melhorJogador").value=s.melhorJogador||"";
+          renderPreview();
+        },150);
+        return;
+      }
+    }catch(e){console.error(e);}
+  }
+
+  const idAtual=localStorage.getItem(KEY_ATUAL);
+  if(idAtual){
+    const r=getRascunhos().find(x=>x.id===idAtual);
+    if(r){ carregarRascunhoNoForm(r); return; }
+  }
+
+  criarNovaSumula();
 }
 
-atualizarStatusNet();
-carregarSeEditando();
+iniciar();
 </script>
 </body>
 </html>
