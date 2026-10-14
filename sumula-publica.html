@@ -375,7 +375,7 @@ window.copiarLink=async function(){
   try{await navigator.clipboard.writeText(location.href);alert("Link copiado!");}catch(e){alert("Erro ao copiar.");}
 };
 
-/* ====== PDF em A4 RETRATO, SEMPRE 2 PÁGINAS, cortadas em borda de seção ====== */
+/* ====== PDF em A4 RETRATO: enche cada página e corta em borda de seção ====== */
 window.baixarPDF=async function(){
   const vp=document.querySelector(".sumula-viewport");
   const sb=document.querySelector(".sumula-scale");
@@ -435,20 +435,38 @@ window.baixarPDF=async function(){
     });
     const cortes=[...marcadores].sort((a,b)=>a-b);
 
-    // FORÇA EXATAMENTE 2 PÁGINAS: corta no marcador mais próximo da metade
-    const meioIdeal=Math.round(alturaReal/2);
-    let corteMeio=meioIdeal;
-    let menorDist=Infinity;
-    for(const c of cortes){
-      if(c===0||c===alturaReal) continue;
-      const d=Math.abs(c-meioIdeal);
-      if(d<menorDist){ menorDist=d; corteMeio=c; }
+    // Quanta altura cabe em UMA página A4 retrato
+    const alturaPaginaPx=Math.floor(larguraReal*(ALT_UTIL_MM/LARG_UTIL_MM));
+    console.log("[PDF] Cada página cabe:", alturaPaginaPx, "px");
+
+    // Enche cada página até o talo, cortando SEMPRE numa borda de seção
+    const fatias=[];
+    let cursor=0;
+    while(cursor < alturaReal - 1){
+      const alvo=Math.min(cursor+alturaPaginaPx, alturaReal);
+
+      // Se já está perto do fim, pega o resto todo de uma vez
+      if(alvo >= alturaReal - 30){
+        fatias.push({de:cursor, ate:alturaReal});
+        break;
+      }
+
+      // Procura a borda de seção mais baixa possível que ainda caiba na página.
+      // Exige que ela esteja pelo menos 60% dentro da página (pra não desperdiçar espaço).
+      const minCorte=cursor + alturaPaginaPx * 0.6;
+      let corte=alvo;
+      for(let i=cortes.length-1; i>=0; i--){
+        if(cortes[i] > cursor && cortes[i] <= alvo && cortes[i] >= minCorte){
+          corte=cortes[i];
+          break;
+        }
+      }
+      if(corte <= cursor) corte=alvo;
+
+      fatias.push({de:cursor, ate:corte});
+      cursor=corte;
     }
-    const fatias=[
-      { de:0, ate:corteMeio },
-      { de:corteMeio, ate:alturaReal }
-    ];
-    console.log("[PDF] Total:", alturaReal, "px. Corte no meio em:", corteMeio, "px");
+    console.log("[PDF] Total:", alturaReal, "px →", fatias.length, "página(s)");
     console.log("[PDF] Fatias:", fatias);
 
     // Monta o PDF A4 retrato
