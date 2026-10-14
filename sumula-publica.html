@@ -157,7 +157,7 @@ img{display:block;max-width:100%}
   .header-title h1{font-size:52px;white-space:nowrap}
 }
 @media print{
-  @page{size:A4 landscape;margin:5mm}
+  @page{size:A4 portrait;margin:5mm}
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
   body{background:#fff!important}
   .topo-nav,.aviso-autenticada,.topo-acoes{display:none!important}
@@ -375,52 +375,138 @@ window.copiarLink=async function(){
   try{await navigator.clipboard.writeText(location.href);alert("Link copiado!");}catch(e){alert("Erro ao copiar.");}
 };
 
+/* ====== PDF em A4 RETRATO, dividido em várias páginas sem cortar seções ====== */
 window.baixarPDF=async function(){
   const vp=document.querySelector(".sumula-viewport");
   const sb=document.querySelector(".sumula-scale");
   const pg=document.getElementById("paginaSumula");
   if(!vp||!sb||!pg){alert("Súmula ainda não carregou.");return;}
 
-  const eVp={overflow:vp.style.overflow,height:vp.style.height,padding:vp.style.padding,display:vp.style.display,justifyContent:vp.style.justifyContent};
-  const eSb={transform:sb.style.transform,transformOrigin:sb.style.transformOrigin,width:sb.style.width,maxWidth:sb.style.maxWidth};
-  const ePg={width:pg.style.width,maxWidth:pg.style.maxWidth,overflow:pg.style.overflow};
+  const eVp=vp.getAttribute("style")||"";
+  const eSb=sb.getAttribute("style")||"";
+  const ePg=pg.getAttribute("style")||"";
 
-  vp.style.cssText="display:block;overflow:visible;height:auto;padding:0";
-  sb.style.cssText="transform:none;transform-origin:top left;width:1120px;max-width:1120px";
-  pg.style.cssText="width:1120px;max-width:1120px;overflow:visible";
+  // Neutraliza tudo que corta/escala
+  vp.style.cssText="display:block!important;overflow:visible!important;height:auto!important;width:auto!important;padding:0!important;margin:0!important";
+  sb.style.cssText="transform:none!important;transform-origin:top left!important;width:1120px!important;max-width:none!important;overflow:visible!important";
+  pg.style.cssText="width:1120px!important;max-width:none!important;overflow:visible!important;margin:0!important";
 
-  await new Promise(r=>setTimeout(r,600));
+  // Espera todas as imagens carregarem (QR, logo, patrocínio)
+  const imgs=Array.from(pg.querySelectorAll("img"));
+  await Promise.all(imgs.map(img=>{
+    if(img.complete&&img.naturalWidth>0) return Promise.resolve();
+    return new Promise(res=>{ img.onload=()=>res(); img.onerror=()=>res(); setTimeout(res,4000); });
+  }));
+  await new Promise(r=>setTimeout(r,700));
 
+  void pg.offsetWidth;
   const larguraReal=1120;
-  const alturaReal=pg.scrollHeight||pg.offsetHeight;
+  const alturaReal=Math.ceil(pg.getBoundingClientRect().height)||pg.scrollHeight;
+  console.log("[PDF] Conteúdo:", larguraReal, "x", alturaReal);
 
-  const h2s=document.querySelectorAll(".team-name h2");
+  const h2s=pg.querySelectorAll(".team-name h2");
   const nA=(h2s[0]?.textContent||"A").trim().replace(/\s+/g,"-");
   const nB=(h2s[1]?.textContent||"B").trim().replace(/\s+/g,"-");
   const nome=`sumula-${nA}-x-${nB}.pdf`.toLowerCase();
 
   try{
+    // Captura tudo num único canvas
     const canvas=await html2canvas(pg,{
       scale:2,useCORS:true,allowTaint:false,backgroundColor:"#ffffff",
+      logging:false,
       width:larguraReal,height:alturaReal,
       windowWidth:larguraReal,windowHeight:alturaReal,
       scrollX:0,scrollY:0
     });
-    const imgData=canvas.toDataURL("image/jpeg",0.98);
+    console.log("[PDF] Canvas:", canvas.width, "x", canvas.height);
+
+    // -------- MODO RETRATO A4 --------
+    // A4 retrato: 210 x 297 mm. Margem 5mm → útil 200 x 287mm.
+    // 1120px de largura → 200mm  →  5.6 px/mm
+    // 287mm de altura útil → 287 * (1120/200) = 1607px
+    const LARG_UTIL_MM=200;
+    const ALT_UTIL_MM=287;
+    const alturaPaginaPx=Math.floor(larguraReal*(ALT_UTIL_MM/LARG_UTIL_MM));
+    console.log("[PDF] Cada página cabe:", alturaPaginaPx, "px de altura");
+
+    // Marcadores de "zonas seguras" (topo/fim de cada seção direta da página)
+    const pageRect=pg.getBoundingClientRect();
+    const marcadores=new Set([0, alturaReal]);
+    pg.querySelectorAll(":scope > section, :scope > header, :scope > footer").forEach(el=>{
+      const r=el.getBoundingClientRect();
+      const t=Math.round(r.top-pageRect.top);
+      const b=Math.round(r.bottom-pageRect.top);
+      if(t>0&&t<alturaReal) marcadores.add(t);
+      if(b>0&&b<alturaReal) marcadores.add(b);
+    });
+    const cortes=[...marcadores].sort((a,b)=>a-b);
+
+    // Divide em fatias, preferindo cortar em borda de seção
+    const fatias=[];
+    let cursor=0;
+    while(cursor < alturaReal-1){
+      const alvo=Math.min(cursor+alturaPaginaPx, alturaReal);
+      let corte=alvo;
+      if(alvo < alturaReal){
+        // procura o maior marcador <= alvo e >= cursor+50% da página
+        for(let i=cortes.length-1;i>=0;i--){
+          if(cortes[i]<=alvo && cortes[i]>=cursor+alturaPaginaPx*0.5){
+            corte=cortes[i]; break;
+          }
+        }
+      }
+      fatias.push({de:cursor, ate:corte});
+      cursor=corte;
+    }
+    console.log("[PDF] Fatias:", fatias);
+
+    // Monta o PDF A4 retrato
     const {jsPDF}=window.jspdf;
-    const larguraMM=297;
-    const alturaMM=(alturaReal/larguraReal)*larguraMM;
-    const orient=alturaMM>larguraMM?"portrait":"landscape";
-    const pdf=new jsPDF({orientation:orient,unit:"mm",format:[larguraMM,alturaMM]});
-    pdf.addImage(imgData,"JPEG",0,0,larguraMM,alturaMM);
+    const pdf=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
+    const margem=5;
+    const scaleCanvas=canvas.width/larguraReal; // normalmente = 2
+
+    for(let i=0;i<fatias.length;i++){
+      if(i>0) pdf.addPage();
+      const {de,ate}=fatias[i];
+      const hPx=ate-de;
+      if(hPx<=0) continue;
+
+      // Recorta a fatia num canvas temporário
+      const tmp=document.createElement("canvas");
+      tmp.width=canvas.width;
+      tmp.height=Math.round(hPx*scaleCanvas);
+      const ctx=tmp.getContext("2d");
+      ctx.fillStyle="#ffffff";
+      ctx.fillRect(0,0,tmp.width,tmp.height);
+      ctx.drawImage(
+        canvas,
+        0, Math.round(de*scaleCanvas),
+        canvas.width, Math.round(hPx*scaleCanvas),
+        0,0,
+        tmp.width, tmp.height
+      );
+
+      const imgData=tmp.toDataURL("image/jpeg",0.95);
+
+      // Ajusta para a página retrato
+      let w=LARG_UTIL_MM;
+      let h=(tmp.height/tmp.width)*LARG_UTIL_MM;
+      if(h>ALT_UTIL_MM){ h=ALT_UTIL_MM; w=(tmp.width/tmp.height)*ALT_UTIL_MM; }
+      const x=margem+(LARG_UTIL_MM-w)/2;
+      const y=margem;
+      pdf.addImage(imgData,"JPEG",x,y,w,h);
+      console.log(`[PDF] Página ${i+1}: fatia ${de}-${ate}px (${hPx}px)`);
+    }
+
     pdf.save(nome);
   }catch(e){
     console.error(e);
     alert("Erro ao gerar PDF: "+(e.message||e));
   }finally{
-    vp.style.overflow=eVp.overflow;vp.style.height=eVp.height;vp.style.padding=eVp.padding;vp.style.display=eVp.display;vp.style.justifyContent=eVp.justifyContent;
-    sb.style.transform=eSb.transform;sb.style.transformOrigin=eSb.transformOrigin;sb.style.width=eSb.width;sb.style.maxWidth=eSb.maxWidth;
-    pg.style.width=ePg.width;pg.style.maxWidth=ePg.maxWidth;pg.style.overflow=ePg.overflow;
+    vp.setAttribute("style",eVp);
+    sb.setAttribute("style",eSb);
+    pg.setAttribute("style",ePg);
     setTimeout(ajustarEscala,100);
   }
 };
