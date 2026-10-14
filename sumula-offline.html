@@ -1127,30 +1127,61 @@ window.excluirSumula=async function(){
   }catch(e){console.error(e);alert("Erro ao excluir: "+(e.message||e));}
 };
 
-/* ===== PDF EM A4 PAISAGEM (não corta) ===== */
-window.baixarPDF=function(){
+/* ===== PDF — CLONE FORA DA TELA, TAMANHO EXATO ===== */
+window.baixarPDF=async function(){
   salvarTimeNoCache(timeAtivo, pegarTimeForm());
 
-  const sb=document.querySelector(".sumula-scale");
-  const escalaSalva=sb ? sb.style.getPropertyValue("--escala-mobile") : "";
-  if(sb) sb.style.removeProperty("--escala-mobile");
+  const elementoOriginal=document.getElementById("previewSumula");
 
-  const elemento=document.getElementById("previewSumula");
+  const wrapper=document.createElement("div");
+  wrapper.style.cssText="position:fixed;left:-99999px;top:0;width:1120px;background:#fff;z-index:-1;overflow:visible;";
+  const clone=elementoOriginal.cloneNode(true);
+  clone.style.cssText="width:1120px;max-width:1120px;transform:none;overflow:visible;margin:0;";
+  wrapper.appendChild(clone);
+  document.body.appendChild(wrapper);
+
+  const imgs=clone.querySelectorAll("img");
+  await Promise.all([...imgs].map(img=>{
+    if(img.complete) return Promise.resolve();
+    return new Promise(res=>{ img.onload=res; img.onerror=res; setTimeout(res,3000); });
+  }));
+
+  await new Promise(r=>setTimeout(r,300));
+
+  const alturaReal=clone.scrollHeight||clone.offsetHeight;
   const nomeA=(cacheTimes.A?.nome||"A").replace(/\s+/g,"-");
   const nomeB=(cacheTimes.B?.nome||"B").replace(/\s+/g,"-");
   const nome=`sumula-${nomeA}-x-${nomeB}.pdf`.toLowerCase();
 
-  html2pdf().set({
-    margin: [3,3,3,3],
-    filename: nome,
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, backgroundColor: "#ffffff", windowWidth: 1200, scrollY: 0 },
-    jsPDF: { unit: "mm", format: "a4", orientation: "landscape" },
-    pagebreak: { mode: ["css", "legacy"] }
-  }).from(elemento).save().then(()=>{
-    if(sb && escalaSalva) sb.style.setProperty("--escala-mobile", escalaSalva);
-    setTimeout(ajustarEscala,200);
-  });
+  const larguraMM=297;
+  const alturaMM=(alturaReal/1120)*larguraMM;
+
+  try{
+    await html2pdf().set({
+      margin: 0,
+      filename: nome,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: "#ffffff",
+        width: 1120,
+        height: alturaReal,
+        windowWidth: 1120,
+        windowHeight: alturaReal,
+        scrollX: 0,
+        scrollY: 0
+      },
+      jsPDF: { unit: "mm", format: [larguraMM, alturaMM], orientation: "portrait" },
+      pagebreak: { mode: ["css", "legacy"] }
+    }).from(clone).save();
+  }catch(e){
+    console.error(e);
+    alert("Erro ao gerar PDF: "+(e.message||e));
+  }finally{
+    if(wrapper.parentNode) document.body.removeChild(wrapper);
+  }
 };
 
 window.enviarWhats=function(){
