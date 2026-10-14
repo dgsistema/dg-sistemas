@@ -6,6 +6,8 @@
 <title>Súmula Oficial - DG Sistemas</title>
 <link rel="icon" href="logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{--azul:#061d44;--azul2:#08285c;--verde:#069447;--dourado:#f7c600;--linha:#cfd7e3;--texto:#071833;--muted:#4b5563;--bg:#dfe6ef}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -15,58 +17,32 @@ button{font-family:inherit;cursor:pointer;border:none;transition:.2s}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 
-.topo-nav{
-  background:linear-gradient(135deg,var(--azul),var(--azul2));
-  border-bottom:4px solid var(--dourado);
-  padding:12px 18px;position:sticky;top:0;z-index:100;
-  box-shadow:0 4px 20px rgba(0,0,0,.3);
-}
-.topo-inner{
-  max-width:1120px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  gap:14px;flex-wrap:wrap;
-}
+.topo-nav{background:linear-gradient(135deg,var(--azul),var(--azul2));border-bottom:4px solid var(--dourado);padding:12px 18px;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.topo-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .topo-marca{display:flex;align-items:center;gap:12px}
 .topo-marca img{width:46px;height:46px;object-fit:contain}
 .topo-marca strong{color:var(--dourado);font-size:16px;font-weight:900;letter-spacing:1.2px;display:block}
 .topo-marca span{color:#cbd6ea;font-size:11px;display:block;margin-top:2px}
-
 .topo-acoes{display:flex;gap:8px;flex-wrap:wrap}
-.btn-top{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:10px 14px;border-radius:9px;font-weight:900;font-size:13px;
-}
+.btn-top{display:inline-flex;align-items:center;gap:7px;padding:10px 14px;border-radius:9px;font-weight:900;font-size:13px}
 .btn-top-voltar{background:rgba(255,255,255,.15);color:#fff}
 .btn-top-voltar:hover{background:rgba(255,255,255,.25)}
 .btn-top-pdf{background:#dc2626;color:#fff}
 .btn-top-pdf:hover{background:#b91c1c}
 .btn-top-wpp{background:#25d366;color:#fff}
 .btn-top-wpp:hover{background:#1ebe5b}
-
-.aviso-autenticada{
-  background:linear-gradient(135deg,var(--verde),#0aa956);
-  color:#fff;text-align:center;padding:14px 20px;
-  border-bottom:4px solid var(--dourado);
-}
+.aviso-autenticada{background:linear-gradient(135deg,var(--verde),#0aa956);color:#fff;text-align:center;padding:14px 20px;border-bottom:4px solid var(--dourado)}
 .aviso-autenticada i{font-size:20px;margin-right:8px}
 .aviso-autenticada strong{font-size:16px;font-weight:900;letter-spacing:.5px}
 .aviso-autenticada p{font-size:12px;margin-top:4px;opacity:.95}
-
-.loading,.erro{
-  max-width:600px;margin:80px auto;text-align:center;
-  background:#fff;border-radius:16px;padding:40px 20px;
-  box-shadow:0 12px 30px rgba(0,0,0,.15);
-}
+.loading,.erro{max-width:600px;margin:80px auto;text-align:center;background:#fff;border-radius:16px;padding:40px 20px;box-shadow:0 12px 30px rgba(0,0,0,.15)}
 .loading i,.erro i{font-size:48px;color:var(--azul);margin-bottom:14px;display:block}
 .erro i{color:#dc2626}
 .loading p,.erro p{color:var(--muted);font-size:15px;font-weight:900}
 .erro h2{color:#dc2626;font-size:20px;font-weight:900;margin-bottom:8px}
-
-/* SÚMULA */
 .sumula-viewport{width:100%;overflow:hidden;display:flex;justify-content:center;padding:14px 8px}
 .sumula-scale{width:1120px;max-width:1120px;transform-origin:top center}
 .sumula-page{width:1120px;max-width:1120px;margin:0 auto;background:#fff;border:1px solid #b9c4d4;border-radius:7px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.16)}
-
 .header{display:grid;grid-template-columns:145px 1.35fr 145px 260px;align-items:center;gap:14px;padding:16px 22px 18px;background:radial-gradient(circle at top left,rgba(255,255,255,.10),transparent 32%),linear-gradient(135deg,#041b40 0%,#06265a 55%,#061d44 100%);color:#fff;border-bottom:4px solid var(--dourado);position:relative;overflow:hidden}
 .header:after{content:"";position:absolute;right:-70px;bottom:-28px;width:310px;height:70px;border-top:5px solid var(--dourado);transform:rotate(-12deg);opacity:.95}
 .header-logo,.header-campeonato-logo{display:flex;justify-content:center;align-items:center;position:relative;z-index:1}
@@ -79,17 +55,14 @@ img{display:block;max-width:100%}
 .header-right{text-align:left;color:#fff;font-weight:900;line-height:1.12;text-transform:uppercase;position:relative;z-index:1}
 .header-right .liga-nome{font-size:20px}
 .header-right .liga-slogan{margin-top:8px;color:var(--dourado);font-size:16px;font-weight:900}
-
 .info-strip{margin:10px 16px 12px;display:grid;grid-template-columns:1.1fr 1.45fr .86fr .72fr 1.05fr;border:1px solid var(--linha);border-radius:5px;overflow:hidden}
 .info-box{min-height:70px;display:flex;align-items:center;gap:12px;padding:9px 12px;border-right:1px solid var(--linha);background:#fff}
 .info-box:last-child{border-right:none}
 .info-box i{width:36px;color:var(--azul);font-size:30px;text-align:center;flex-shrink:0}
 .info-box small{display:block;font-size:12px;font-weight:900;text-transform:uppercase;color:#111;margin-bottom:4px}
 .info-box strong{display:block;color:var(--azul);font-size:17px;font-weight:900}
-
 .status-finalizado{display:inline-flex!important;align-items:center;justify-content:center;gap:7px;background:var(--verde);color:#fff!important;padding:8px 15px;border-radius:8px;font-size:15px!important;font-weight:900}
 .status-finalizado i{color:#fff!important;font-size:18px!important;width:auto!important}
-
 .score-card{margin:0 16px 12px;display:grid;grid-template-columns:1fr 250px 1fr;min-height:132px;border:1px solid var(--linha);border-radius:5px;overflow:hidden}
 .team-score{display:flex;align-items:center;justify-content:center;gap:18px;padding:13px;background:#fff}
 .team-score.away{flex-direction:row-reverse}
@@ -98,14 +71,12 @@ img{display:block;max-width:100%}
 .score-center{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;border-left:1px solid var(--linha);border-right:1px solid var(--linha)}
 .score-number{font-size:74px;font-weight:900;letter-spacing:5px;line-height:1}
 .score-center span{margin-top:8px;text-transform:uppercase;font-size:14px;font-weight:900}
-
 .match-strip{margin:0 16px 12px;display:grid;grid-template-columns:1fr 1fr 1.35fr 1.1fr;border:1px solid var(--linha);border-radius:5px;overflow:hidden}
 .match-box{display:flex;align-items:center;gap:12px;min-height:64px;padding:10px 12px;border-right:1px solid var(--linha);background:#fff}
 .match-box:last-child{border-right:none}
 .match-box i{width:34px;color:var(--azul);font-size:30px;text-align:center}
 .match-box small{display:block;color:var(--azul);text-transform:uppercase;font-weight:900;font-size:12px;margin-bottom:3px}
 .match-box strong{display:block;color:#111;font-size:15px;font-weight:900}
-
 .section-title{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;text-align:center;padding:8px 10px;font-size:20px;font-weight:900;text-transform:uppercase;border-radius:5px 5px 0 0}
 .line-empty{color:#777;font-size:13px;text-align:center;padding:12px}
 .lineups,.comissao{margin:0 16px 12px}
@@ -118,7 +89,6 @@ img{display:block;max-width:100%}
 .table tr:last-child td{border-bottom:none}
 .table .num{width:48px;text-align:center}
 .table .posicao{width:160px}
-
 .comissao-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--linha);border-top:none;border-radius:0 0 5px 5px;overflow:hidden;background:#fff}
 .comissao-card{padding:12px;border-right:1px solid var(--linha)}
 .comissao-card:last-child{border-right:none}
@@ -129,7 +99,6 @@ img{display:block;max-width:100%}
 .comissao-info small{display:block;color:var(--azul);font-size:10px;font-weight:900;text-transform:uppercase;margin-bottom:4px}
 .comissao-info strong{display:block;color:#111;font-size:13px;line-height:1.25}
 .comissao-vazio{grid-column:1/-1;color:#777;font-size:13px;text-align:center;padding:12px}
-
 .events-grid{margin:0 16px 12px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .team-events{border:1px solid var(--linha);border-radius:5px;overflow:hidden;background:#fff}
 .team-events h3{color:#fff;background:linear-gradient(135deg,var(--azul),var(--azul2));text-align:center;padding:8px;font-size:20px;font-weight:900;text-transform:uppercase}
@@ -144,7 +113,6 @@ img{display:block;max-width:100%}
 .yellow-card,.red-card{width:14px;height:19px;border-radius:3px;display:inline-block;flex:0 0 auto}
 .yellow-card{background:#f7c600}
 .red-card{background:#e30613}
-
 .lower-grid{margin:0 16px 12px;display:grid;grid-template-columns:.8fr 1.35fr;gap:24px}
 .panel{border:1px solid var(--linha);border-radius:5px;overflow:hidden;background:#fff}
 .panel h3{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;text-align:center;padding:8px;font-size:18px;font-weight:900;text-transform:uppercase}
@@ -165,7 +133,6 @@ img{display:block;max-width:100%}
 .best-player strong{display:block;color:#111;font-size:18px;font-weight:900}
 .best-player span{display:block;color:var(--azul);font-size:13px;margin-top:4px}
 .trophy{text-align:center;font-size:58px}
-
 .footer-grid{margin:0 16px;display:grid;grid-template-columns:.8fr 1.35fr;gap:24px}
 .auth-box{display:grid;grid-template-columns:110px 1fr;gap:12px;align-items:center;padding:12px}
 .auth-box img{width:98px;height:98px}
@@ -182,7 +149,6 @@ img{display:block;max-width:100%}
 .final-footer{margin-top:12px;background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;text-align:center;padding:9px;font-size:13px;line-height:1.35}
 .patrocinio-sumula{width:100%;background:#061d44;margin:0;padding:10px 16px;border-top:4px solid var(--dourado)}
 .patrocinio-sumula img{width:100%;max-height:150px;object-fit:contain;margin:0 auto}
-
 @media(max-width:900px){
   .topo-marca span{display:none}
   .sumula-viewport{justify-content:flex-start;align-items:flex-start;padding:8px 0}
@@ -191,11 +157,13 @@ img{display:block;max-width:100%}
   .header-title h1{font-size:52px;white-space:nowrap}
 }
 @media print{
-  @page{size:A4 portrait;margin:5mm}
+  @page{size:A4 landscape;margin:5mm}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
   body{background:#fff!important}
   .topo-nav,.aviso-autenticada,.topo-acoes{display:none!important}
-  .sumula-viewport{display:block;padding:0}
-  .sumula-scale{transform:none!important;width:100%!important}
+  .sumula-viewport{display:block!important;padding:0!important;overflow:visible!important}
+  .sumula-scale{transform:none!important;width:100%!important;max-width:100%!important}
+  .sumula-page{width:100%!important;max-width:100%!important;border:none!important;box-shadow:none!important;overflow:visible!important}
 }
 </style>
 </head>
@@ -230,7 +198,6 @@ img{display:block;max-width:100%}
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script type="module">
 import { db } from "./firebase.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
@@ -245,35 +212,29 @@ function mascararCpf(cpf){
   if(limpo.length<3)return "***";
   return "***.***."+limpo.slice(-3);
 }
-
 function dataBR(v){
   if(!v)return"-";
   const d=new Date(v+"T00:00:00");
   if(!isNaN(d.getTime()))return d.toLocaleDateString("pt-BR");
   return String(v);
 }
-
 function separarEventosPorTime(lista){
   const a=[],b=[];
   (lista||[]).forEach(item=>{ const t=normalizar(item.time||""); if(t==="b")b.push(item);else a.push(item); });
   return{a,b};
 }
-
 function renderJogadores(lista){
   if(!Array.isArray(lista)||!lista.length)return`<tr><td colspan="4" class="line-empty">Nenhum jogador.</td></tr>`;
   return lista.map(j=>`<tr><td class="num">${j.numero||"-"}</td><td>${j.nome||"-"}</td><td>${mascararCpf(j.cpf)}</td><td class="posicao">${j.posicao||"-"}</td></tr>`).join("");
 }
-
 function renderComissao(lista){
   if(!Array.isArray(lista)||!lista.length)return`<div class="comissao-vazio">Nenhum.</div>`;
   return lista.map(t=>`<div class="comissao-item"><div class="comissao-icone"><i class="fa-solid fa-user-tie"></i></div><div class="comissao-info"><small>${t.funcao||"Comissão"}</small><strong>${t.nome||"-"}</strong></div></div>`).join("");
 }
-
 function renderGols(lista){
   if(!lista.length)return`<div class="line-empty">Nenhum gol.</div>`;
   return lista.map(g=>`<div class="event-item"><span class="ball">⚽</span><span class="event-minute">${g.minuto||"-"}'</span><span class="event-name">${g.nome||"-"}</span></div>`).join("");
 }
-
 function renderCartoes(lista){
   if(!lista.length)return`<div class="line-empty">Nenhum cartão.</div>`;
   return lista.map(c=>{
@@ -282,16 +243,13 @@ function renderCartoes(lista){
     return`<div class="event-item"><span class="${vermelho?"red-card":"yellow-card"}"></span><span class="event-minute">${c.minuto||"-"}'</span><span class="event-name">${c.nome||"-"}${extra}${c.observacao?`<br><small><strong>Motivo:</strong> ${c.observacao}</small>`:""}</span></div>`;
   }).join("");
 }
-
 function contarCartoes(lista){
   let a=0,v=0;(lista||[]).forEach(c=>{if(c.tipo==="amarelo")a++;else v++;});
   return{amarelos:a,vermelhos:v};
 }
-
 function qrUrl(){
   return`https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=${encodeURIComponent(location.href)}`;
 }
-
 function ajustarEscala(){
   const sb=document.querySelector(".sumula-scale"),vp=document.querySelector(".sumula-viewport"),pg=document.querySelector(".sumula-page");
   if(!sb||!vp||!pg)return;
@@ -314,7 +272,6 @@ function renderSumula(s){
   <div class="sumula-viewport">
     <div class="sumula-scale">
       <div class="sumula-page" id="paginaSumula">
-
         <header class="header">
           <div class="header-logo"><img src="logo.png" alt="DG Sistemas"></div>
           <div class="header-title"><h1>SÚMULA OFICIAL</h1><p>DG Sistemas</p><span>Onde o talento encontra o futuro</span></div>
@@ -324,7 +281,6 @@ function renderSumula(s){
             <div class="liga-slogan">${s.categoria||""}</div>
           </div>
         </header>
-
         <section class="info-strip">
           <div class="info-box"><i class="fa-regular fa-file-lines"></i><div><small>Súmula Nº</small><strong>${s.numeroSumula||"-"}</strong></div></div>
           <div class="info-box"><i class="fa-solid fa-barcode"></i><div><small>Código</small><strong>${s.codigoPartida||"-"}</strong></div></div>
@@ -332,20 +288,17 @@ function renderSumula(s){
           <div class="info-box"><i class="fa-solid fa-calendar"></i><div><small>Data</small><strong>${dataBR(s.data)}</strong></div></div>
           <div class="info-box"><div><small>Status</small><strong class="status-finalizado"><i class="fa-solid fa-check"></i> FINALIZADO</strong></div></div>
         </section>
-
         <section class="score-card">
           <div class="team-score"><div class="team-name"><h2>${nA}</h2></div></div>
           <div class="score-center"><div class="score-number">${golsA} x ${golsB}</div><span>Placar Final</span></div>
           <div class="team-score away"><div class="team-name"><h2>${nB}</h2></div></div>
         </section>
-
         <section class="match-strip">
           <div class="match-box"><i class="fa-regular fa-calendar-days"></i><div><small>Data</small><strong>${dataBR(s.data)}</strong></div></div>
           <div class="match-box"><i class="fa-regular fa-clock"></i><div><small>Horário</small><strong>${s.hora||"-"}</strong></div></div>
           <div class="match-box"><i class="fa-solid fa-diamond"></i><div><small>Campo</small><strong>${s.local||"-"}</strong></div></div>
           <div class="match-box"><i class="fa-solid fa-whistle"></i><div><small>Árbitro</small><strong>${s.arbitro||"-"}</strong></div></div>
         </section>
-
         <section class="lineups">
           <div class="section-title">Escalações</div>
           <div class="lineups-grid">
@@ -353,7 +306,6 @@ function renderSumula(s){
             <div class="lineup-card"><div class="lineup-head">${nB}</div><table class="table"><thead><tr><th class="num">Nº</th><th>Jogador</th><th>CPF</th><th class="posicao">Posição</th></tr></thead><tbody>${renderJogadores(s.jogadoresB)}</tbody></table></div>
           </div>
         </section>
-
         <section class="comissao">
           <div class="section-title">Comissão Técnica</div>
           <div class="comissao-grid">
@@ -367,12 +319,10 @@ function renderSumula(s){
             ])}</div></div>
           </div>
         </section>
-
         <section class="events-grid">
           <div class="team-events"><h3>${nA}</h3><div class="events-columns"><div class="event-col"><h4>Gols</h4>${renderGols(gp.a)}</div><div class="event-col"><h4>Cartões</h4>${renderCartoes(cp.a)}</div></div></div>
           <div class="team-events"><h3>${nB}</h3><div class="events-columns"><div class="event-col"><h4>Gols</h4>${renderGols(gp.b)}</div><div class="event-col"><h4>Cartões</h4>${renderCartoes(cp.b)}</div></div></div>
         </section>
-
         <section class="lower-grid">
           <div class="panel"><h3>Arbitragem</h3>
             <div class="official-row"><div class="official-label"><i class="fa-solid fa-user-tie"></i> Árbitro</div><div class="official-value">${s.arbitro||"-"}</div></div>
@@ -390,13 +340,11 @@ function renderSumula(s){
             <div class="best-player"><div class="trophy">🏆</div><div><h4>Melhor jogador da partida</h4><strong>${s.melhorJogador||"-"}</strong><span>${s.melhorJogadorDestaque||"Destaque da partida"}</span></div></div>
           </div>
         </section>
-
         ${s.observacoes?`
         <section class="comissao">
           <div class="section-title">Observações</div>
           <div style="background:#fff;border:1px solid var(--linha);border-top:none;border-radius:0 0 5px 5px;padding:14px;color:#111;font-size:13px;line-height:1.6;">${s.observacoes}</div>
         </section>`:""}
-
         <section class="footer-grid">
           <div class="panel"><h3>Autenticação</h3><div class="auth-box"><img src="${qrUrl()}" alt="QR"><div class="auth-text"><strong>SÚMULA OFICIAL</strong><p>${s.publicadaEm||new Date().toLocaleString("pt-BR")}</p><p>Código de verificação</p><div class="auth-code">${s.codigo||s.codigoPartida||"---"}</div><p>Escaneie o QR Code para verificar a autenticidade.</p></div></div></div>
           <div class="panel"><h3>Compartilhar</h3><div class="buttons">
@@ -406,7 +354,6 @@ function renderSumula(s){
             <button class="btn btn-pdf" onclick="baixarPDF()"><i class="fa-solid fa-file-pdf"></i> PDF</button>
           </div></div>
         </section>
-
         <section class="patrocinio-sumula"><img src="patrocinio.png" alt="Patrocínio"></section>
         <footer class="final-footer"><div>Documento oficial gerado pelo sistema DG Sistemas</div><div>© 2026 DG Sistemas — Todos os direitos reservados</div></footer>
       </div>
@@ -419,20 +366,62 @@ window.compartilharWpp=function(){
   const texto=`📋 *SÚMULA OFICIAL - DG Sistemas*\n\n${location.href}`;
   window.open("https://wa.me/?text="+encodeURIComponent(texto),"_blank");
 };
-
 window.enviarEmail=function(){
   const assunto=encodeURIComponent("Súmula Oficial - DG Sistemas");
   const corpo=encodeURIComponent("Segue o link da súmula:\n\n"+location.href);
   location.href=`mailto:?subject=${assunto}&body=${corpo}`;
 };
-
 window.copiarLink=async function(){
   try{await navigator.clipboard.writeText(location.href);alert("Link copiado!");}catch(e){alert("Erro ao copiar.");}
 };
 
-window.baixarPDF=function(){
-  ajustarEscala();
-  setTimeout(()=>window.print(),300);
+window.baixarPDF=async function(){
+  const vp=document.querySelector(".sumula-viewport");
+  const sb=document.querySelector(".sumula-scale");
+  const pg=document.getElementById("paginaSumula");
+  if(!vp||!sb||!pg){alert("Súmula ainda não carregou.");return;}
+
+  const eVp={overflow:vp.style.overflow,height:vp.style.height,padding:vp.style.padding,display:vp.style.display,justifyContent:vp.style.justifyContent};
+  const eSb={transform:sb.style.transform,transformOrigin:sb.style.transformOrigin,width:sb.style.width,maxWidth:sb.style.maxWidth};
+  const ePg={width:pg.style.width,maxWidth:pg.style.maxWidth,overflow:pg.style.overflow};
+
+  vp.style.cssText="display:block;overflow:visible;height:auto;padding:0";
+  sb.style.cssText="transform:none;transform-origin:top left;width:1120px;max-width:1120px";
+  pg.style.cssText="width:1120px;max-width:1120px;overflow:visible";
+
+  await new Promise(r=>setTimeout(r,600));
+
+  const larguraReal=1120;
+  const alturaReal=pg.scrollHeight||pg.offsetHeight;
+
+  const h2s=document.querySelectorAll(".team-name h2");
+  const nA=(h2s[0]?.textContent||"A").trim().replace(/\s+/g,"-");
+  const nB=(h2s[1]?.textContent||"B").trim().replace(/\s+/g,"-");
+  const nome=`sumula-${nA}-x-${nB}.pdf`.toLowerCase();
+
+  try{
+    const canvas=await html2canvas(pg,{
+      scale:2,useCORS:true,allowTaint:false,backgroundColor:"#ffffff",
+      width:larguraReal,height:alturaReal,
+      windowWidth:larguraReal,windowHeight:alturaReal,
+      scrollX:0,scrollY:0
+    });
+    const imgData=canvas.toDataURL("image/jpeg",0.98);
+    const {jsPDF}=window.jspdf;
+    const larguraMM=297;
+    const alturaMM=(alturaReal/larguraReal)*larguraMM;
+    const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[larguraMM,alturaMM]});
+    pdf.addImage(imgData,"JPEG",0,0,larguraMM,alturaMM);
+    pdf.save(nome);
+  }catch(e){
+    console.error(e);
+    alert("Erro ao gerar PDF: "+(e.message||e));
+  }finally{
+    vp.style.overflow=eVp.overflow;vp.style.height=eVp.height;vp.style.padding=eVp.padding;vp.style.display=eVp.display;vp.style.justifyContent=eVp.justifyContent;
+    sb.style.transform=eSb.transform;sb.style.transformOrigin=eSb.transformOrigin;sb.style.width=eSb.width;sb.style.maxWidth=eSb.maxWidth;
+    pg.style.width=ePg.width;pg.style.maxWidth=ePg.maxWidth;pg.style.overflow=ePg.overflow;
+    setTimeout(ajustarEscala,100);
+  }
 };
 
 async function carregar(){
