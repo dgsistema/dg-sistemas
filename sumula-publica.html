@@ -410,7 +410,8 @@ window.baixarPDF=async function(){
     const {jsPDF}=window.jspdf;
     const larguraMM=297;
     const alturaMM=(alturaReal/larguraReal)*larguraMM;
-    const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:[larguraMM,alturaMM]});
+    const orient=alturaMM>larguraMM?"portrait":"landscape";
+    const pdf=new jsPDF({orientation:orient,unit:"mm",format:[larguraMM,alturaMM]});
     pdf.addImage(imgData,"JPEG",0,0,larguraMM,alturaMM);
     pdf.save(nome);
   }catch(e){
