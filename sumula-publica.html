@@ -147,8 +147,8 @@ img{display:block;max-width:100%}
 .btn-link{background:#4b5563}
 .btn-pdf{background:#dc2626}
 .final-footer{margin-top:12px;background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;text-align:center;padding:9px;font-size:13px;line-height:1.35}
-.patrocinio-sumula{width:100%;background:#061d44;margin:0;padding:10px 16px;border-top:4px solid var(--dourado)}
-.patrocinio-sumula img{width:100%;max-height:150px;object-fit:contain;margin:0 auto}
+.patrocinio-sumula{width:100%;background:#061d44;margin:0;padding:10px 16px;border-top:4px solid var(--dourado);text-align:center}
+.patrocinio-sumula img{max-width:100%;max-height:150px;width:auto;height:auto;display:inline-block;vertical-align:middle}
 @media(max-width:900px){
   .topo-marca span{display:none}
   .sumula-viewport{justify-content:flex-start;align-items:flex-start;padding:8px 0}
@@ -375,7 +375,7 @@ window.copiarLink=async function(){
   try{await navigator.clipboard.writeText(location.href);alert("Link copiado!");}catch(e){alert("Erro ao copiar.");}
 };
 
-/* ====== PDF em A4 RETRATO, dividido em várias páginas sem cortar seções ====== */
+/* ====== PDF em A4 RETRATO, SEMPRE 2 PÁGINAS, cortadas em borda de seção ====== */
 window.baixarPDF=async function(){
   const vp=document.querySelector(".sumula-viewport");
   const sb=document.querySelector(".sumula-scale");
@@ -386,7 +386,6 @@ window.baixarPDF=async function(){
   const eSb=sb.getAttribute("style")||"";
   const ePg=pg.getAttribute("style")||"";
 
-  // Neutraliza tudo que corta/escala
   vp.style.cssText="display:block!important;overflow:visible!important;height:auto!important;width:auto!important;padding:0!important;margin:0!important";
   sb.style.cssText="transform:none!important;transform-origin:top left!important;width:1120px!important;max-width:none!important;overflow:visible!important";
   pg.style.cssText="width:1120px!important;max-width:none!important;overflow:visible!important;margin:0!important";
@@ -410,7 +409,7 @@ window.baixarPDF=async function(){
   const nome=`sumula-${nA}-x-${nB}.pdf`.toLowerCase();
 
   try{
-    // Captura tudo num único canvas
+    // Captura tudo num canvas só
     const canvas=await html2canvas(pg,{
       scale:2,useCORS:true,allowTaint:false,backgroundColor:"#ffffff",
       logging:false,
@@ -420,16 +419,11 @@ window.baixarPDF=async function(){
     });
     console.log("[PDF] Canvas:", canvas.width, "x", canvas.height);
 
-    // -------- MODO RETRATO A4 --------
-    // A4 retrato: 210 x 297 mm. Margem 5mm → útil 200 x 287mm.
-    // 1120px de largura → 200mm  →  5.6 px/mm
-    // 287mm de altura útil → 287 * (1120/200) = 1607px
-    const LARG_UTIL_MM=200;
-    const ALT_UTIL_MM=287;
-    const alturaPaginaPx=Math.floor(larguraReal*(ALT_UTIL_MM/LARG_UTIL_MM));
-    console.log("[PDF] Cada página cabe:", alturaPaginaPx, "px de altura");
+    // -------- MODO RETRATO A4 (210 x 297 mm) --------
+    const LARG_UTIL_MM=200;   // 210 - 2*margem(5)
+    const ALT_UTIL_MM=287;    // 297 - 2*margem(5)
 
-    // Marcadores de "zonas seguras" (topo/fim de cada seção direta da página)
+    // Marcadores de "zonas seguras" (borda superior/inferior de cada seção)
     const pageRect=pg.getBoundingClientRect();
     const marcadores=new Set([0, alturaReal]);
     pg.querySelectorAll(":scope > section, :scope > header, :scope > footer").forEach(el=>{
@@ -441,23 +435,20 @@ window.baixarPDF=async function(){
     });
     const cortes=[...marcadores].sort((a,b)=>a-b);
 
-    // Divide em fatias, preferindo cortar em borda de seção
-    const fatias=[];
-    let cursor=0;
-    while(cursor < alturaReal-1){
-      const alvo=Math.min(cursor+alturaPaginaPx, alturaReal);
-      let corte=alvo;
-      if(alvo < alturaReal){
-        // procura o maior marcador <= alvo e >= cursor+50% da página
-        for(let i=cortes.length-1;i>=0;i--){
-          if(cortes[i]<=alvo && cortes[i]>=cursor+alturaPaginaPx*0.5){
-            corte=cortes[i]; break;
-          }
-        }
-      }
-      fatias.push({de:cursor, ate:corte});
-      cursor=corte;
+    // FORÇA EXATAMENTE 2 PÁGINAS: corta no marcador mais próximo da metade
+    const meioIdeal=Math.round(alturaReal/2);
+    let corteMeio=meioIdeal;
+    let menorDist=Infinity;
+    for(const c of cortes){
+      if(c===0||c===alturaReal) continue;
+      const d=Math.abs(c-meioIdeal);
+      if(d<menorDist){ menorDist=d; corteMeio=c; }
     }
+    const fatias=[
+      { de:0, ate:corteMeio },
+      { de:corteMeio, ate:alturaReal }
+    ];
+    console.log("[PDF] Total:", alturaReal, "px. Corte no meio em:", corteMeio, "px");
     console.log("[PDF] Fatias:", fatias);
 
     // Monta o PDF A4 retrato
@@ -472,7 +463,7 @@ window.baixarPDF=async function(){
       const hPx=ate-de;
       if(hPx<=0) continue;
 
-      // Recorta a fatia num canvas temporário
+      // Recorta a fatia para um canvas temporário
       const tmp=document.createElement("canvas");
       tmp.width=canvas.width;
       tmp.height=Math.round(hPx*scaleCanvas);
@@ -489,7 +480,7 @@ window.baixarPDF=async function(){
 
       const imgData=tmp.toDataURL("image/jpeg",0.95);
 
-      // Ajusta para a página retrato
+      // Ajusta para a página retrato mantendo proporção
       let w=LARG_UTIL_MM;
       let h=(tmp.height/tmp.width)*LARG_UTIL_MM;
       if(h>ALT_UTIL_MM){ h=ALT_UTIL_MM; w=(tmp.width/tmp.height)*ALT_UTIL_MM; }
