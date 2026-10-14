@@ -6,7 +6,8 @@
 <title>Nova Súmula - DG Sistemas</title>
 <link rel="icon" href="logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{--azul:#061d44;--azul2:#08285c;--verde:#069447;--dourado:#f7c600;--linha:#cfd7e3;--texto:#071833;--muted:#4b5563;--bg:#dfe6ef}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -1127,60 +1128,111 @@ window.excluirSumula=async function(){
   }catch(e){console.error(e);alert("Erro ao excluir: "+(e.message||e));}
 };
 
-/* ===== PDF — CLONE FORA DA TELA, TAMANHO EXATO ===== */
+/* ============ PDF — html2canvas + jsPDF DIRETO ============ */
 window.baixarPDF=async function(){
   salvarTimeNoCache(timeAtivo, pegarTimeForm());
 
-  const elementoOriginal=document.getElementById("previewSumula");
+  const vp=document.querySelector(".sumula-viewport");
+  const sb=document.querySelector(".sumula-scale");
+  const pg=document.getElementById("previewSumula");
 
-  const wrapper=document.createElement("div");
-  wrapper.style.cssText="position:fixed;left:-99999px;top:0;width:1120px;background:#fff;z-index:-1;overflow:visible;";
-  const clone=elementoOriginal.cloneNode(true);
-  clone.style.cssText="width:1120px;max-width:1120px;transform:none;overflow:visible;margin:0;";
-  wrapper.appendChild(clone);
-  document.body.appendChild(wrapper);
+  /* Guarda o estado atual pra restaurar depois */
+  const estadoVp={
+    overflow:vp.style.overflow,
+    height:vp.style.height,
+    padding:vp.style.padding,
+    display:vp.style.display,
+    justifyContent:vp.style.justifyContent
+  };
+  const estadoSb={
+    transform:sb.style.transform,
+    transformOrigin:sb.style.transformOrigin,
+    width:sb.style.width,
+    maxWidth:sb.style.maxWidth
+  };
+  const estadoPg={
+    width:pg.style.width,
+    maxWidth:pg.style.maxWidth,
+    overflow:pg.style.overflow
+  };
 
-  const imgs=clone.querySelectorAll("img");
-  await Promise.all([...imgs].map(img=>{
-    if(img.complete) return Promise.resolve();
-    return new Promise(res=>{ img.onload=res; img.onerror=res; setTimeout(res,3000); });
-  }));
+  /* Remove TUDO que possa cortar/esconder */
+  vp.style.overflow="visible";
+  vp.style.height="auto";
+  vp.style.padding="0";
+  vp.style.display="block";
+  vp.style.justifyContent="flex-start";
 
-  await new Promise(r=>setTimeout(r,300));
+  sb.style.transform="none";
+  sb.style.transformOrigin="top left";
+  sb.style.width="1120px";
+  sb.style.maxWidth="1120px";
 
-  const alturaReal=clone.scrollHeight||clone.offsetHeight;
+  pg.style.width="1120px";
+  pg.style.maxWidth="1120px";
+  pg.style.overflow="visible";
+
+  /* Espera o layout + imagens carregarem */
+  await new Promise(r=>setTimeout(r,500));
+
+  const larguraReal=1120;
+  const alturaReal=pg.scrollHeight||pg.offsetHeight;
+
   const nomeA=(cacheTimes.A?.nome||"A").replace(/\s+/g,"-");
   const nomeB=(cacheTimes.B?.nome||"B").replace(/\s+/g,"-");
   const nome=`sumula-${nomeA}-x-${nomeB}.pdf`.toLowerCase();
 
-  const larguraMM=297;
-  const alturaMM=(alturaReal/1120)*larguraMM;
-
   try{
-    await html2pdf().set({
-      margin: 0,
-      filename: nome,
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: {
-        scale: 2,
-        useCORS: true,
-        allowTaint: false,
-        backgroundColor: "#ffffff",
-        width: 1120,
-        height: alturaReal,
-        windowWidth: 1120,
-        windowHeight: alturaReal,
-        scrollX: 0,
-        scrollY: 0
-      },
-      jsPDF: { unit: "mm", format: [larguraMM, alturaMM], orientation: "portrait" },
-      pagebreak: { mode: ["css", "legacy"] }
-    }).from(clone).save();
+    /* Captura o elemento em PNG com resolução alta */
+    const canvas=await html2canvas(pg,{
+      scale: 2,
+      useCORS: true,
+      allowTaint: false,
+      backgroundColor: "#ffffff",
+      width: larguraReal,
+      height: alturaReal,
+      windowWidth: larguraReal,
+      windowHeight: alturaReal,
+      scrollX: 0,
+      scrollY: 0
+    });
+
+    const imgData=canvas.toDataURL("image/jpeg", 0.98);
+
+    /* Cria o PDF com a MESMA proporção do conteúdo */
+    const { jsPDF }=window.jspdf;
+    const larguraMM=297;  /* A4 paisagem = 297mm */
+    const alturaMM=(alturaReal/larguraReal)*larguraMM;
+
+    const pdf=new jsPDF({
+      orientation: "landscape",
+      unit: "mm",
+      format: [larguraMM, alturaMM]
+    });
+
+    pdf.addImage(imgData, "JPEG", 0, 0, larguraMM, alturaMM);
+    pdf.save(nome);
   }catch(e){
     console.error(e);
     alert("Erro ao gerar PDF: "+(e.message||e));
   }finally{
-    if(wrapper.parentNode) document.body.removeChild(wrapper);
+    /* Restaura o estado original */
+    vp.style.overflow=estadoVp.overflow;
+    vp.style.height=estadoVp.height;
+    vp.style.padding=estadoVp.padding;
+    vp.style.display=estadoVp.display;
+    vp.style.justifyContent=estadoVp.justifyContent;
+
+    sb.style.transform=estadoSb.transform;
+    sb.style.transformOrigin=estadoSb.transformOrigin;
+    sb.style.width=estadoSb.width;
+    sb.style.maxWidth=estadoSb.maxWidth;
+
+    pg.style.width=estadoPg.width;
+    pg.style.maxWidth=estadoPg.maxWidth;
+    pg.style.overflow=estadoPg.overflow;
+
+    setTimeout(ajustarEscala,100);
   }
 };
 
