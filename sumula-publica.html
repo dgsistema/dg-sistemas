@@ -6,8 +6,6 @@
 <title>Súmula Oficial - DG Sistemas</title>
 <link rel="icon" href="logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{--azul:#061d44;--azul2:#08285c;--verde:#069447;--dourado:#f7c600;--linha:#cfd7e3;--texto:#071833;--muted:#4b5563;--bg:#dfe6ef}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -43,6 +41,7 @@ img{display:block;max-width:100%}
 .sumula-viewport{width:100%;overflow:hidden;display:flex;justify-content:center;padding:14px 8px}
 .sumula-scale{width:1120px;max-width:1120px;transform-origin:top center}
 .sumula-page{width:1120px;max-width:1120px;margin:0 auto;background:#fff;border:1px solid #b9c4d4;border-radius:7px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+
 .header{display:grid;grid-template-columns:145px 1.35fr 145px 260px;align-items:center;gap:14px;padding:16px 22px 18px;background:radial-gradient(circle at top left,rgba(255,255,255,.10),transparent 32%),linear-gradient(135deg,#041b40 0%,#06265a 55%,#061d44 100%);color:#fff;border-bottom:4px solid var(--dourado);position:relative;overflow:hidden}
 .header:after{content:"";position:absolute;right:-70px;bottom:-28px;width:310px;height:70px;border-top:5px solid var(--dourado);transform:rotate(-12deg);opacity:.95}
 .header-logo,.header-campeonato-logo{display:flex;justify-content:center;align-items:center;position:relative;z-index:1}
@@ -149,6 +148,7 @@ img{display:block;max-width:100%}
 .final-footer{margin-top:12px;background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;text-align:center;padding:9px;font-size:13px;line-height:1.35}
 .patrocinio-sumula{width:100%;background:#061d44;margin:0;padding:10px 16px;border-top:4px solid var(--dourado);text-align:center}
 .patrocinio-sumula img{max-width:100%;max-height:150px;width:auto;height:auto;display:inline-block;vertical-align:middle}
+
 @media(max-width:900px){
   .topo-marca span{display:none}
   .sumula-viewport{justify-content:flex-start;align-items:flex-start;padding:8px 0}
@@ -156,14 +156,127 @@ img{display:block;max-width:100%}
   .sumula-page{border-radius:0;box-shadow:none}
   .header-title h1{font-size:52px;white-space:nowrap}
 }
+
+/* ==========================================================================
+   IMPRESSÃO — PADRÃO AGF
+   Tudo encolhe pra caber em A4 retrato. Nada é cortado ao meio.
+   ========================================================================== */
 @media print{
   @page{size:A4 portrait;margin:5mm}
-  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  body{background:#fff!important}
-  .topo-nav,.aviso-autenticada,.topo-acoes{display:none!important}
-  .sumula-viewport{display:block!important;padding:0!important;overflow:visible!important}
-  .sumula-scale{transform:none!important;width:100%!important;max-width:100%!important}
-  .sumula-page{width:100%!important;max-width:100%!important;border:none!important;box-shadow:none!important;overflow:visible!important}
+
+  html,body{
+    width:210mm;
+    min-height:297mm;
+    background:#fff!important;
+    overflow:visible!important;
+  }
+  body{
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+
+  /* Esconde interface */
+  .topo-nav,.aviso-autenticada,.topo-acoes,.buttons{display:none!important}
+
+  /* Neutraliza escala */
+  .sumula-viewport{display:block;width:100%;padding:0;overflow:visible}
+  .sumula-scale{width:100%;max-width:none;transform:none!important}
+  .sumula-page{width:100%;max-width:none;margin:0;border:1px solid #b9c4d4;border-radius:0;box-shadow:none;overflow:visible}
+
+  /* Header encolhido */
+  .header{grid-template-columns:85px 1fr 80px 150px;padding:8px 10px 6px}
+  .header-logo img,.header-campeonato-logo img{width:70px;height:70px}
+  .header-title h1{font-size:38px}
+  .header-title p{font-size:15px}
+  .header-title span{font-size:10px}
+  .header-right .liga-nome{font-size:14px}
+  .header-right .liga-slogan{font-size:11px}
+
+  /* Info strip */
+  .info-strip{margin:7px 10px 8px}
+  .info-box{min-height:56px;padding:6px 8px}
+  .info-box i{font-size:24px;width:28px}
+  .info-box strong{font-size:13px}
+  .info-box small{font-size:10px}
+
+  /* Blocos com margem lateral menor */
+  .score-card,.match-strip,.lineups,.comissao,.events-grid,.lower-grid,.footer-grid{
+    margin-left:10px;margin-right:10px;
+  }
+
+  /* Score */
+  .score-card{grid-template-columns:1fr 180px 1fr;min-height:96px}
+  .team-score{gap:10px;padding:8px}
+  .team-name h2{font-size:20px}
+  .score-number{font-size:48px}
+  .score-center span{font-size:12px}
+
+  /* Match strip */
+  .match-strip{grid-template-columns:1fr 1fr 1.35fr 1.1fr}
+  .match-box{min-height:48px;padding:6px 8px}
+  .match-box i{font-size:22px}
+  .match-box small{font-size:10px}
+  .match-box strong{font-size:12px}
+
+  /* Títulos e tabelas */
+  .section-title,.team-events h3,.panel h3{font-size:15px;padding:5px}
+  .lineup-head{height:30px;font-size:15px}
+  .table th{font-size:9px;padding:3px 5px}
+  .table td{font-size:9.5px;padding:2.6px 5px}
+
+  /* Eventos */
+  .events-grid,.lower-grid,.footer-grid{gap:12px}
+  .event-col{min-height:85px;padding:7px}
+  .event-col h4{font-size:12px;margin-bottom:6px}
+  .event-item{font-size:10px;margin-bottom:5px}
+  .event-minute{width:34px}
+
+  /* Comissão */
+  .comissao-lista{grid-template-columns:repeat(2,1fr);gap:5px}
+  .comissao-item{min-height:44px;grid-template-columns:24px 1fr;gap:5px;padding:5px}
+  .comissao-icone{width:22px;height:22px;font-size:11px}
+  .comissao-info small{font-size:7px;margin-bottom:1px}
+  .comissao-info strong{font-size:8px}
+
+  /* Arbitragem */
+  .official-row{min-height:31px;grid-template-columns:130px 1fr}
+  .official-label,.official-value{font-size:10px;padding:6px 8px}
+  .official-label i{font-size:12px}
+
+  /* Resumo */
+  .summary-box{padding:8px 6px}
+  .summary-box strong{font-size:22px}
+  .summary-box span{font-size:10px}
+
+  /* Melhor jogador */
+  .best-player{grid-template-columns:75px 1fr 60px;padding:7px}
+  .best-player h4{font-size:11px}
+  .best-player strong{font-size:13px}
+  .best-player span{font-size:10px}
+  .trophy{font-size:36px}
+
+  /* Autenticação */
+  .auth-box{grid-template-columns:76px 1fr;padding:7px}
+  .auth-box img{width:70px;height:70px}
+
+  /* Footer e patrocínio */
+  .final-footer{margin-top:8px;padding:6px;font-size:10px}
+  .patrocinio-sumula{padding:6px 10px}
+  .patrocinio-sumula img{max-height:80px}
+
+  /* --- O MAIS IMPORTANTE: não quebrar bloco no meio --- */
+  .header,.info-strip,.score-card,.match-strip,.lineup-card,.comissao-card,
+  .team-events,.panel,.lower-grid,.footer-grid,.patrocinio-sumula,.final-footer,
+  .section-title,.lineups-grid,.events-grid{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+
+  /* Linhas de tabela nunca se quebram */
+  .table tr,.event-item,.official-row,.comissao-item{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
 }
 </style>
 </head>
@@ -375,149 +488,10 @@ window.copiarLink=async function(){
   try{await navigator.clipboard.writeText(location.href);alert("Link copiado!");}catch(e){alert("Erro ao copiar.");}
 };
 
-/* ====== PDF em A4 RETRATO: enche cada página e corta em borda de seção ====== */
-window.baixarPDF=async function(){
-  const vp=document.querySelector(".sumula-viewport");
-  const sb=document.querySelector(".sumula-scale");
-  const pg=document.getElementById("paginaSumula");
-  if(!vp||!sb||!pg){alert("Súmula ainda não carregou.");return;}
-
-  const eVp=vp.getAttribute("style")||"";
-  const eSb=sb.getAttribute("style")||"";
-  const ePg=pg.getAttribute("style")||"";
-
-  vp.style.cssText="display:block!important;overflow:visible!important;height:auto!important;width:auto!important;padding:0!important;margin:0!important";
-  sb.style.cssText="transform:none!important;transform-origin:top left!important;width:1120px!important;max-width:none!important;overflow:visible!important";
-  pg.style.cssText="width:1120px!important;max-width:none!important;overflow:visible!important;margin:0!important";
-
-  // Espera todas as imagens carregarem (QR, logo, patrocínio)
-  const imgs=Array.from(pg.querySelectorAll("img"));
-  await Promise.all(imgs.map(img=>{
-    if(img.complete&&img.naturalWidth>0) return Promise.resolve();
-    return new Promise(res=>{ img.onload=()=>res(); img.onerror=()=>res(); setTimeout(res,4000); });
-  }));
-  await new Promise(r=>setTimeout(r,700));
-
-  void pg.offsetWidth;
-  const larguraReal=1120;
-  const alturaReal=Math.ceil(pg.getBoundingClientRect().height)||pg.scrollHeight;
-  console.log("[PDF] Conteúdo:", larguraReal, "x", alturaReal);
-
-  const h2s=pg.querySelectorAll(".team-name h2");
-  const nA=(h2s[0]?.textContent||"A").trim().replace(/\s+/g,"-");
-  const nB=(h2s[1]?.textContent||"B").trim().replace(/\s+/g,"-");
-  const nome=`sumula-${nA}-x-${nB}.pdf`.toLowerCase();
-
-  try{
-    // Captura tudo num canvas só
-    const canvas=await html2canvas(pg,{
-      scale:2,useCORS:true,allowTaint:false,backgroundColor:"#ffffff",
-      logging:false,
-      width:larguraReal,height:alturaReal,
-      windowWidth:larguraReal,windowHeight:alturaReal,
-      scrollX:0,scrollY:0
-    });
-    console.log("[PDF] Canvas:", canvas.width, "x", canvas.height);
-
-    // -------- MODO RETRATO A4 (210 x 297 mm) --------
-    const LARG_UTIL_MM=200;   // 210 - 2*margem(5)
-    const ALT_UTIL_MM=287;    // 297 - 2*margem(5)
-
-    // Marcadores de "zonas seguras" (borda superior/inferior de cada seção)
-    const pageRect=pg.getBoundingClientRect();
-    const marcadores=new Set([0, alturaReal]);
-    pg.querySelectorAll(":scope > section, :scope > header, :scope > footer").forEach(el=>{
-      const r=el.getBoundingClientRect();
-      const t=Math.round(r.top-pageRect.top);
-      const b=Math.round(r.bottom-pageRect.top);
-      if(t>0&&t<alturaReal) marcadores.add(t);
-      if(b>0&&b<alturaReal) marcadores.add(b);
-    });
-    const cortes=[...marcadores].sort((a,b)=>a-b);
-
-    // Quanta altura cabe em UMA página A4 retrato
-    const alturaPaginaPx=Math.floor(larguraReal*(ALT_UTIL_MM/LARG_UTIL_MM));
-    console.log("[PDF] Cada página cabe:", alturaPaginaPx, "px");
-
-    // Enche cada página até o talo, cortando SEMPRE numa borda de seção
-    const fatias=[];
-    let cursor=0;
-    while(cursor < alturaReal - 1){
-      const alvo=Math.min(cursor+alturaPaginaPx, alturaReal);
-
-      // Se já está perto do fim, pega o resto todo de uma vez
-      if(alvo >= alturaReal - 30){
-        fatias.push({de:cursor, ate:alturaReal});
-        break;
-      }
-
-      // Procura a borda de seção mais baixa possível que ainda caiba na página.
-      // Exige que ela esteja pelo menos 60% dentro da página (pra não desperdiçar espaço).
-      const minCorte=cursor + alturaPaginaPx * 0.6;
-      let corte=alvo;
-      for(let i=cortes.length-1; i>=0; i--){
-        if(cortes[i] > cursor && cortes[i] <= alvo && cortes[i] >= minCorte){
-          corte=cortes[i];
-          break;
-        }
-      }
-      if(corte <= cursor) corte=alvo;
-
-      fatias.push({de:cursor, ate:corte});
-      cursor=corte;
-    }
-    console.log("[PDF] Total:", alturaReal, "px →", fatias.length, "página(s)");
-    console.log("[PDF] Fatias:", fatias);
-
-    // Monta o PDF A4 retrato
-    const {jsPDF}=window.jspdf;
-    const pdf=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
-    const margem=5;
-    const scaleCanvas=canvas.width/larguraReal; // normalmente = 2
-
-    for(let i=0;i<fatias.length;i++){
-      if(i>0) pdf.addPage();
-      const {de,ate}=fatias[i];
-      const hPx=ate-de;
-      if(hPx<=0) continue;
-
-      // Recorta a fatia para um canvas temporário
-      const tmp=document.createElement("canvas");
-      tmp.width=canvas.width;
-      tmp.height=Math.round(hPx*scaleCanvas);
-      const ctx=tmp.getContext("2d");
-      ctx.fillStyle="#ffffff";
-      ctx.fillRect(0,0,tmp.width,tmp.height);
-      ctx.drawImage(
-        canvas,
-        0, Math.round(de*scaleCanvas),
-        canvas.width, Math.round(hPx*scaleCanvas),
-        0,0,
-        tmp.width, tmp.height
-      );
-
-      const imgData=tmp.toDataURL("image/jpeg",0.95);
-
-      // Ajusta para a página retrato mantendo proporção
-      let w=LARG_UTIL_MM;
-      let h=(tmp.height/tmp.width)*LARG_UTIL_MM;
-      if(h>ALT_UTIL_MM){ h=ALT_UTIL_MM; w=(tmp.width/tmp.height)*ALT_UTIL_MM; }
-      const x=margem+(LARG_UTIL_MM-w)/2;
-      const y=margem;
-      pdf.addImage(imgData,"JPEG",x,y,w,h);
-      console.log(`[PDF] Página ${i+1}: fatia ${de}-${ate}px (${hPx}px)`);
-    }
-
-    pdf.save(nome);
-  }catch(e){
-    console.error(e);
-    alert("Erro ao gerar PDF: "+(e.message||e));
-  }finally{
-    vp.setAttribute("style",eVp);
-    sb.setAttribute("style",eSb);
-    pg.setAttribute("style",ePg);
-    setTimeout(ajustarEscala,100);
-  }
+/* PDF: estratégia da AGF — window.print() com CSS print otimizado */
+window.baixarPDF=function(){
+  ajustarEscala();
+  setTimeout(()=>window.print(),300);
 };
 
 async function carregar(){
