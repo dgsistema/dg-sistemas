@@ -159,7 +159,6 @@ img{display:block;max-width:100%}
 
 /* ==========================================================================
    IMPRESSÃO — PADRÃO AGF
-   Tudo encolhe pra caber em A4 retrato. Nada é cortado ao meio.
    ========================================================================== */
 @media print{
   @page{size:A4 portrait;margin:5mm}
@@ -175,15 +174,12 @@ img{display:block;max-width:100%}
     print-color-adjust:exact!important;
   }
 
-  /* Esconde interface */
   .topo-nav,.aviso-autenticada,.topo-acoes,.buttons{display:none!important}
 
-  /* Neutraliza escala */
   .sumula-viewport{display:block;width:100%;padding:0;overflow:visible}
   .sumula-scale{width:100%;max-width:none;transform:none!important}
   .sumula-page{width:100%;max-width:none;margin:0;border:1px solid #b9c4d4;border-radius:0;box-shadow:none;overflow:visible}
 
-  /* Header encolhido */
   .header{grid-template-columns:85px 1fr 80px 150px;padding:8px 10px 6px}
   .header-logo img,.header-campeonato-logo img{width:70px;height:70px}
   .header-title h1{font-size:38px}
@@ -192,79 +188,66 @@ img{display:block;max-width:100%}
   .header-right .liga-nome{font-size:14px}
   .header-right .liga-slogan{font-size:11px}
 
-  /* Info strip */
   .info-strip{margin:7px 10px 8px}
   .info-box{min-height:56px;padding:6px 8px}
   .info-box i{font-size:24px;width:28px}
   .info-box strong{font-size:13px}
   .info-box small{font-size:10px}
 
-  /* Blocos com margem lateral menor */
   .score-card,.match-strip,.lineups,.comissao,.events-grid,.lower-grid,.footer-grid{
     margin-left:10px;margin-right:10px;
   }
 
-  /* Score */
   .score-card{grid-template-columns:1fr 180px 1fr;min-height:96px}
   .team-score{gap:10px;padding:8px}
   .team-name h2{font-size:20px}
   .score-number{font-size:48px}
   .score-center span{font-size:12px}
 
-  /* Match strip */
   .match-strip{grid-template-columns:1fr 1fr 1.35fr 1.1fr}
   .match-box{min-height:48px;padding:6px 8px}
   .match-box i{font-size:22px}
   .match-box small{font-size:10px}
   .match-box strong{font-size:12px}
 
-  /* Títulos e tabelas */
   .section-title,.team-events h3,.panel h3{font-size:15px;padding:5px}
   .lineup-head{height:30px;font-size:15px}
   .table th{font-size:9px;padding:3px 5px}
   .table td{font-size:9.5px;padding:2.6px 5px}
 
-  /* Eventos */
   .events-grid,.lower-grid,.footer-grid{gap:12px}
   .event-col{min-height:85px;padding:7px}
   .event-col h4{font-size:12px;margin-bottom:6px}
   .event-item{font-size:10px;margin-bottom:5px}
   .event-minute{width:34px}
 
-  /* Comissão */
   .comissao-lista{grid-template-columns:repeat(2,1fr);gap:5px}
   .comissao-item{min-height:44px;grid-template-columns:24px 1fr;gap:5px;padding:5px}
   .comissao-icone{width:22px;height:22px;font-size:11px}
   .comissao-info small{font-size:7px;margin-bottom:1px}
   .comissao-info strong{font-size:8px}
 
-  /* Arbitragem */
   .official-row{min-height:31px;grid-template-columns:130px 1fr}
   .official-label,.official-value{font-size:10px;padding:6px 8px}
   .official-label i{font-size:12px}
 
-  /* Resumo */
   .summary-box{padding:8px 6px}
   .summary-box strong{font-size:22px}
   .summary-box span{font-size:10px}
 
-  /* Melhor jogador */
   .best-player{grid-template-columns:75px 1fr 60px;padding:7px}
   .best-player h4{font-size:11px}
   .best-player strong{font-size:13px}
   .best-player span{font-size:10px}
   .trophy{font-size:36px}
 
-  /* Autenticação */
   .auth-box{grid-template-columns:76px 1fr;padding:7px}
   .auth-box img{width:70px;height:70px}
 
-  /* Footer e patrocínio */
   .final-footer{margin-top:8px;padding:6px;font-size:10px}
   .patrocinio-sumula{padding:6px 10px}
   .patrocinio-sumula img{max-height:80px}
 
-  /* --- O MAIS IMPORTANTE: não quebrar bloco no meio --- */
   .header,.info-strip,.score-card,.match-strip,.lineup-card,.comissao-card,
   .team-events,.panel,.lower-grid,.footer-grid,.patrocinio-sumula,.final-footer,
   .section-title,.lineups-grid,.events-grid{
@@ -272,7 +255,6 @@ img{display:block;max-width:100%}
     page-break-inside:avoid;
   }
 
-  /* Linhas de tabela nunca se quebram */
   .table tr,.event-item,.official-row,.comissao-item{
     break-inside:avoid;
     page-break-inside:avoid;
@@ -325,12 +307,16 @@ function mascararCpf(cpf){
   if(limpo.length<3)return "***";
   return "***.***."+limpo.slice(-3);
 }
+
+/* === MUDANÇA: aceita DD/MM/AAAA e AAAA-MM-DD === */
 function dataBR(v){
-  if(!v)return"-";
-  const d=new Date(v+"T00:00:00");
-  if(!isNaN(d.getTime()))return d.toLocaleDateString("pt-BR");
+  if(!v) return "-";
+  if(typeof v === "string" && v.match(/^\d{2}\/\d{2}\/\d{4}$/)) return v;
+  const d = new Date(v + "T00:00:00");
+  if(!isNaN(d.getTime())) return d.toLocaleDateString("pt-BR");
   return String(v);
 }
+
 function separarEventosPorTime(lista){
   const a=[],b=[];
   (lista||[]).forEach(item=>{ const t=normalizar(item.time||""); if(t==="b")b.push(item);else a.push(item); });
@@ -488,7 +474,7 @@ window.copiarLink=async function(){
   try{await navigator.clipboard.writeText(location.href);alert("Link copiado!");}catch(e){alert("Erro ao copiar.");}
 };
 
-/* PDF: estratégia da AGF — window.print() com CSS print otimizado */
+/* PDF: window.print() com CSS print otimizado */
 window.baixarPDF=function(){
   ajustarEscala();
   setTimeout(()=>window.print(),300);
