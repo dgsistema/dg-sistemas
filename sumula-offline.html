@@ -55,7 +55,7 @@ a{text-decoration:none;color:inherit}
 .form-grid.duas{grid-template-columns:1fr 1fr}
 .campo.full{grid-column:1/-1}
 label{display:block;color:var(--azul);font-size:11px;font-weight:900;text-transform:uppercase;margin-bottom:4px}
-input,select,textarea{width:100%;padding:9px;border:1px solid var(--linha);border-radius:8px;background:#f9fbff;color:#111;font-size:13px}
+input,select,textarea{width:100%;padding:9px;border:1px solid var(--linha);border-radius:8px;background:#f9fbff;color:#111;font-size:13px;transition:border-color .2s, background-color .2s}
 textarea{min-height:70px;resize:vertical}
 input:focus,select:focus,textarea:focus{border-color:var(--dourado);box-shadow:0 0 0 3px rgba(247,198,0,.15)}
 input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
@@ -263,7 +263,8 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
             <div><label>Súmula Nº</label><input id="numeroSumula" readonly></div>
             <div><label>Código</label><input id="codigoPartida" readonly></div>
             <div><label>Campeonato</label><input id="campeonato" placeholder="Ex: Copa União"></div>
-            <div><label>Categoria</label><input id="categoria" placeholder="Sub-17"></div>
+            <!-- Categoria com onchange para validar idade caso mude depois -->
+            <div><label>Categoria</label><input id="categoria" placeholder="Sub-17" onchange="validarIdadeInput('jogadorNascimento', 'feedbackIdade')"></div>
             <div><label>Rodada/Fase</label><input id="rodada" placeholder="1ª Rodada"></div>
             <div><label>Local/Campo</label><input id="local" placeholder="Estádio"></div>
             <div><label>Data</label><input id="data" type="date"></div>
@@ -296,7 +297,14 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
             <div><label>Número</label><input id="jogadorNumero" type="number"></div>
             <div><label>Nome</label><input id="jogadorNome" placeholder="Nome do jogador"></div>
             <div><label>CPF</label><input id="jogadorCpf" placeholder="CPF"></div>
-            <div><label>Nascimento</label><input id="jogadorNascimento" type="date"></div>
+            <!-- Mudança 1 e 2: Input text com máscara e feedback visual -->
+            <div>
+              <label>Nascimento (DD/MM/AAAA)</label>
+              <div style="display:flex;align-items:center;gap:8px">
+                <input id="jogadorNascimento" type="text" placeholder="DD/MM/AAAA" maxlength="10" oninput="mascaraData(this, 'feedbackIdade')" style="flex:1">
+                <span id="feedbackIdade" style="font-size:11px;font-weight:900;white-space:nowrap"></span>
+              </div>
+            </div>
             <div><label>Posição</label><select id="jogadorPosicao"><option value="">Selecione</option><option value="Goleiro">Goleiro</option><option value="Zagueiro">Zagueiro</option><option value="Lateral Direito">Lateral Direito</option><option value="Lateral Esquerdo">Lateral Esquerdo</option><option value="Volante">Volante</option><option value="Meia">Meia</option><option value="Atacante">Atacante</option></select></div>
           </div>
           <div class="botoes">
@@ -363,7 +371,11 @@ input[readonly]{background:#f0f0f0;color:#666;cursor:not-allowed}
       <label>Nome</label><input id="editJogNome">
       <label>Número</label><input id="editJogNumero" type="number">
       <label>CPF</label><input id="editJogCpf">
-      <label>Nascimento</label><input id="editJogNascimento" type="date">
+      <label>Nascimento (DD/MM/AAAA)</label>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <input id="editJogNascimento" type="text" placeholder="DD/MM/AAAA" maxlength="10" oninput="mascaraData(this, 'feedbackIdadeEdit')" style="flex:1">
+        <span id="feedbackIdadeEdit" style="font-size:11px;font-weight:900;white-space:nowrap"></span>
+      </div>
       <label>Posição</label>
       <select id="editJogPosicao">
         <option value="">Selecione</option>
@@ -411,6 +423,87 @@ let cacheTimes={
   A:{nome:"",cidade:"",tecnico:"",auxiliar:""},
   B:{nome:"",cidade:"",tecnico:"",auxiliar:""}
 };
+
+/* ==========================================================
+   MUDANÇA 1 e 2: MÁSCARA DE DATA E VALIDAÇÃO DE IDADE
+   ========================================================== */
+window.mascaraData = function(input, idFeedback) {
+  let v = input.value.replace(/\D/g, "");
+  if (v.length > 8) v = v.slice(0, 8);
+  
+  if (v.length >= 5) {
+    input.value = v.slice(0, 2) + "/" + v.slice(2, 4) + "/" + v.slice(4);
+  } else if (v.length >= 3) {
+    input.value = v.slice(0, 2) + "/" + v.slice(2);
+  } else {
+    input.value = v;
+  }
+  
+  validarIdadeInput(input.id, idFeedback);
+};
+
+window.validarIdadeInput = function(idInput, idFeedback) {
+  const input = $(idInput);
+  const feedback = $(idFeedback);
+  const dataStr = input.value;
+  const categoriaStr = txt($("categoria").value);
+
+  // Limpa estilos
+  input.style.borderColor = "";
+  input.style.backgroundColor = "";
+  if (feedback) feedback.innerText = "";
+
+  if (dataStr.length !== 10) return; // Data incompleta
+  if (!categoriaStr) return; // Sem categoria definida
+
+  const partes = dataStr.split("/");
+  const dia = parseInt(partes[0], 10);
+  const mes = parseInt(partes[1], 10);
+  const ano = parseInt(partes[2], 10);
+
+  if (!dia || !mes || !ano || ano < 1900) return;
+
+  const dataNasc = new Date(ano, mes - 1, dia);
+  const hoje = new Date();
+  
+  let idade = hoje.getFullYear() - dataNasc.getFullYear();
+  const m = hoje.getMonth() - dataNasc.getMonth();
+  if (m < 0 || (m === 0 && hoje.getDate() < dataNasc.getDate())) {
+    idade--;
+  }
+
+  // Extrai o número da categoria (ex: "Sub-17" -> 17, "SUB 15" -> 15)
+  const match = categoriaStr.match(/(\d+)/);
+  if (!match) return; // Se não tem número na categoria, não valida
+
+  const limiteIdade = parseInt(match[1], 10);
+
+  if (idade <= limiteIdade) {
+    // DENTRO DA IDADE
+    input.style.borderColor = "#069447";
+    input.style.backgroundColor = "#e6f6ec";
+    if (feedback) {
+      feedback.innerText = `✓ ${idade} anos`;
+      feedback.style.color = "#069447";
+    }
+  } else {
+    // FORA DA IDADE
+    input.style.borderColor = "#dc2626";
+    input.style.backgroundColor = "#fee2e2";
+    if (feedback) {
+      feedback.innerText = `✗ ${idade} anos`;
+      feedback.style.color = "#dc2626";
+    }
+  }
+};
+
+// Revalidar quando a categoria mudar no formulário principal
+document.addEventListener("change", e => {
+  if (e.target.id === "categoria") {
+    validarIdadeInput("jogadorNascimento", "feedbackIdade");
+  }
+});
+/* ========================================================== */
 
 window.trocarTime=function(time){
   const dadosAnteriores=pegarTimeForm();
@@ -686,17 +779,30 @@ function contarGols(time){
 window.adicionarJogador=function(){
   const nome=txt($("jogadorNome").value);
   if(!nome)return alert("Digite o nome do jogador.");
+  
+  // Trata a data que agora está no formato DD/MM/AAAA
+  const nascimento=txt($("jogadorNascimento").value);
+  if(nascimento && nascimento.length !== 10) {
+    alert("Preencha a data de nascimento completa (DD/MM/AAAA) ou deixe em branco.");
+    return;
+  }
+
   jogadores.push({
     id:"j"+Date.now()+Math.random(),
     time:$("jogadorTime").value,
     numero:txt($("jogadorNumero").value),
     nome,
     cpf:txt($("jogadorCpf").value),
-    nascimento:txt($("jogadorNascimento").value),
+    nascimento: nascimento,
     posicao:$("jogadorPosicao").value
   });
+  
   ["jogadorNumero","jogadorNome","jogadorCpf","jogadorNascimento"].forEach(id=>$(id).value="");
   $("jogadorPosicao").value="";
+  $("feedbackIdade").innerText = "";
+  $("jogadorNascimento").style.borderColor = "";
+  $("jogadorNascimento").style.backgroundColor = "";
+  
   atualizarTudo();
   alert("Jogador adicionado! ✓\n\nPra editar, clique no nome dele na súmula.");
 };
@@ -710,6 +816,10 @@ window.abrirModalJogador=function(id){
   $("editJogCpf").value=j.cpf||"";
   $("editJogNascimento").value=j.nascimento||"";
   $("editJogPosicao").value=j.posicao||"";
+  
+  // Revalida idade ao abrir o modal
+  validarIdadeInput("editJogNascimento", "feedbackIdadeEdit");
+  
   $("modalJogador").classList.add("on");
 };
 window.fecharModalJogador=function(){
@@ -815,10 +925,16 @@ document.addEventListener("change",e=>{
   if(e.target.id==="melhorTime"){ atualizarJogadoresMelhor(); atualizarTudo(); }
 });
 
+// NOVO dataBR para aceitar DD/MM/AAAA
 function dataBR(v){
   if(!v)return"-";
+  // Se já for DD/MM/AAAA, retorna direto
+  if(typeof v === "string" && v.match(/^\d{2}\/\d{2}\/\d{4}$/)) return v;
+  
+  // Tenta converter de YYYY-MM-DD
   const d=new Date(v+"T00:00:00");
   if(!isNaN(d.getTime()))return d.toLocaleDateString("pt-BR");
+  
   return String(v);
 }
 
